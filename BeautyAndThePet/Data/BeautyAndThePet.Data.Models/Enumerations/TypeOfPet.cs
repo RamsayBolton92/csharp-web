@@ -4,7 +4,9 @@ using System.Text;
 
 namespace BeautyAndThePet.Data.Models.Enumerations
 {
-    class TypeOfPet
+    public enum TypeOfPet
     {
+        Dog = 1,
+        Cat = 2
     }
 }

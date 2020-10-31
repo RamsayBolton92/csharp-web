@@ -1,12 +1,13 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
-	using System;
+    using BeautyAndThePet.Data.Models.Enumerations;
+    using System;
 
 	public class Pet
-    {
-        public int Id { get; set; }
+	{
+		public int Id { get; set; }
 
-        public string Name { get; set; }
+		public string Name { get; set; }
 
 		public DateTime BirthDate { get; set; }
 
@@ -16,7 +17,7 @@
 
 		public string Description { get; set; }
 
-        public virtual enum TypeOfPet { get; set; }
+		public TypeOfPet TypeOfPet{ get; set; }
 
         public virtual User Owner { get; set; }
 
