@@ -11,6 +11,8 @@
 
         public string Duration => $"{this.Start}-{this.End}";
 
+        public int PetId { get; set; }
+
         public virtual Pet Pet { get; set; }
     }
 }

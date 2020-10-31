@@ -19,10 +19,16 @@
 
 		public TypeOfPet TypeOfPet{ get; set; }
 
+        public int OwnerId { get; set; }
+
         public virtual User Owner { get; set; }
 
-		public virtual Breed Breed { get; set; }
+        public int BreedId { get; set; }
 
-		public virtual SexualStimulus SexualStimulus { get; set; }
+        public virtual Breed Breed { get; set; }
+
+        public int SexualStimulusId { get; set; }
+
+        public virtual SexualStimulus SexualStimulus { get; set; }
 	}
 }
