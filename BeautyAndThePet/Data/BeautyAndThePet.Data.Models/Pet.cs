@@ -2,8 +2,9 @@
 {
     using BeautyAndThePet.Data.Models.Enumerations;
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-	public class Pet
+    public class Pet
 	{
 		public int Id { get; set; }
 
@@ -27,6 +28,7 @@
 
         public virtual Breed Breed { get; set; }
 
+		[ForeignKey("SexualStimulus")]
         public int SexualStimulusId { get; set; }
 
         public virtual SexualStimulus SexualStimulus { get; set; }

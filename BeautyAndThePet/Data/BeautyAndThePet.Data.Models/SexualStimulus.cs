@@ -1,6 +1,7 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class SexualStimulus
     {
@@ -11,6 +12,7 @@
 
         public string Duration => $"{this.Start}-{this.End}";
 
+        [ForeignKey("Pet")]
         public int PetId { get; set; }
 
         public virtual Pet Pet { get; set; }
