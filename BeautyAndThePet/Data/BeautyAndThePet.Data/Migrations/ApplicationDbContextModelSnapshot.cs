@@ -19,6 +19,24 @@ namespace BeautyAndThePet.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.About", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rights")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -95,6 +113,9 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -153,6 +174,8 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
@@ -209,8 +232,11 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sex")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("OwnerId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
 
                     b.Property<int>("SexualStimulusId")
                         .HasColumnType("int");
@@ -222,7 +248,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasIndex("BreedId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("OwnerId1");
 
                     b.HasIndex("SexualStimulusId");
 
@@ -282,35 +308,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("PetId");
 
                     b.ToTable("SexualStimules");
-                });
-
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -417,6 +414,13 @@ namespace BeautyAndThePet.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.Address", null)
+                        .WithMany("Habitants")
+                        .HasForeignKey("AddressId");
+                });
+
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Breed", "Breed")
@@ -425,11 +429,9 @@ namespace BeautyAndThePet.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BeautyAndThePet.Data.Models.User", "Owner")
-                        .WithMany("Pets")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId1");
 
                     b.HasOne("BeautyAndThePet.Data.Models.SexualStimulus", "SexualStimulus")
                         .WithMany()
@@ -443,15 +445,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasOne("BeautyAndThePet.Data.Models.Pet", "Pet")
                         .WithMany()
                         .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.User", b =>
-                {
-                    b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
-                        .WithMany("Habitants")
-                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

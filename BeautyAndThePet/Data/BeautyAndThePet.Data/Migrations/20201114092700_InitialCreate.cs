@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class InitialCreate2 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Abouts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(nullable: true),
+                    Rights = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Abouts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
@@ -43,35 +57,6 @@ namespace BeautyAndThePet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Breeds",
                 columns: table => new
                 {
@@ -104,22 +89,35 @@ namespace BeautyAndThePet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
-                    AddressId = table.Column<int>(nullable: false)
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    AddressId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Addresses_AddressId",
+                        name: "FK_AspNetUsers_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -240,13 +238,14 @@ namespace BeautyAndThePet.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     BirthDate = table.Column<DateTime>(nullable: false),
-                    Sex = table.Column<string>(nullable: true),
                     Avatar = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     TypeOfPet = table.Column<int>(nullable: false),
                     OwnerId = table.Column<int>(nullable: false),
+                    OwnerId1 = table.Column<string>(nullable: true),
                     BreedId = table.Column<int>(nullable: false),
-                    SexualStimulusId = table.Column<int>(nullable: false)
+                    SexualStimulusId = table.Column<int>(nullable: false),
+                    Sex = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,9 +257,9 @@ namespace BeautyAndThePet.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Pets_Users_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Users",
+                        name: "FK_Pets_AspNetUsers_OwnerId1",
+                        column: x => x.OwnerId1,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -319,6 +318,11 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_AddressId",
+                table: "AspNetUsers",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_IsDeleted",
                 table: "AspNetUsers",
                 column: "IsDeleted");
@@ -341,9 +345,9 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "BreedId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_OwnerId",
+                name: "IX_Pets_OwnerId1",
                 table: "Pets",
-                column: "OwnerId");
+                column: "OwnerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_SexualStimulusId",
@@ -360,11 +364,6 @@ namespace BeautyAndThePet.Data.Migrations
                 table: "SexualStimules",
                 column: "PetId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_AddressId",
-                table: "Users",
-                column: "AddressId");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_Pets_SexualStimules_SexualStimulusId",
                 table: "Pets",
@@ -377,16 +376,19 @@ namespace BeautyAndThePet.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Pets_Breeds_BreedId",
+                name: "FK_Pets_AspNetUsers_OwnerId1",
                 table: "Pets");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Pets_Users_OwnerId",
+                name: "FK_Pets_Breeds_BreedId",
                 table: "Pets");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Pets_SexualStimules_SexualStimulusId",
                 table: "Pets");
+
+            migrationBuilder.DropTable(
+                name: "Abouts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -413,13 +415,10 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Breeds");
-
-            migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Breeds");
 
             migrationBuilder.DropTable(
                 name: "SexualStimules");

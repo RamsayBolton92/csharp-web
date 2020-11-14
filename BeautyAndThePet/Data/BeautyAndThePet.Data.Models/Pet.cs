@@ -1,8 +1,9 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
-    using BeautyAndThePet.Data.Models.Enumerations;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using BeautyAndThePet.Data.Models.Enumerations;
 
     public class Pet
 	{
@@ -12,8 +13,6 @@
 
 		public DateTime BirthDate { get; set; }
 
-		public string Sex { get; set; }
-
 		public string Avatar { get; set; }
 
 		public string Description { get; set; }
@@ -22,7 +21,7 @@
 
         public int OwnerId { get; set; }
 
-        public virtual User Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         public int BreedId { get; set; }
 
@@ -32,5 +31,7 @@
         public int SexualStimulusId { get; set; }
 
         public virtual SexualStimulus SexualStimulus { get; set; }
+
+        public virtual Sex Sex { get; set; }
 	}
 }

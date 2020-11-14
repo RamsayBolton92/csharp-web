@@ -10,7 +10,8 @@
 
         public DateTime End { get; set; }
 
-        public string Duration => $"{this.Start}-{this.End}";
+        // In VM
+        // public string Duration => $"{this.Start}-{this.End}";
 
         [ForeignKey("Pet")]
         public int PetId { get; set; }

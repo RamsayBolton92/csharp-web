@@ -26,11 +26,11 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<User> Users { get; set; }
-
         public DbSet<Pet> Pets { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<About> Abouts { get; set; }
 
         public DbSet<Breed> Breeds { get; set; }
 

@@ -6,7 +6,7 @@
     {
         public Address()
         {
-            this.Habitants = new HashSet<User>();
+            this.Habitants = new HashSet<ApplicationUser>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@
 
         public string Number { get; set; }
 
-        public virtual ICollection<User> Habitants { get; set; }
+        public virtual ICollection<ApplicationUser> Habitants { get; set; }
     }
 }

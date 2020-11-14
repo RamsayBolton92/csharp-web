@@ -1,0 +1,61 @@
+Models:
+		*(Finished)
+	public User
+		string Username
+		string Password
+		string Email
+		DateTime CreatedOn
+		
+		virtual Address
+		virtual ICollection<Pet>
+		
+		*(Finished)
+	public class Pet
+		string Name
+		string BirthDate
+		string Sex
+		string Avatar
+		string Describtion
+		
+		enum Type
+		
+		virtual Owner
+		virtual Breed
+		virtual SexualStimulus
+		
+		*(Finished)
+	Breed
+		string Name
+		string Characteristics
+	
+		*(Finished)
+	Address
+		string Country
+		string Town
+		string Neighbourhood
+		string Street
+		int BlockNumber
+	
+		*(Finished)
+	SexualStimulus
+		DateTime Start
+		DateTime End
+		string Duration => $"{Start}-{End}"
+		
+		===============================================================================================================================================
+		
+	Controllers:
+		HomeController => Not Logged Users (button in layout)
+		MyPetsController => Logged Users. Show My Pets. When choose a pet => OtherPetsController
+		UserController
+		OtherPetsController => Logged Users (button in layout) Show pets WHERE Breed = Pet.Breed.Name (Pet.Name, Pet.BirthDate, Pet.Owner.Username) => ChosenPetController
+		ChosenPetController => Logged Users
+		BreedsController => Logged Users (button in layout)
+		
+		When not logged => HomePage (Choose Register or Login). If Registered => Login, else => MyPetsPage
+		When Logged => MyPetsPage (Pets and Breeds buttons in layout)
+		
+		
+		
+		
+
