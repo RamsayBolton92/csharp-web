@@ -1,6 +1,6 @@
 Models:
-		*(Finished)
-	public User
+		NOT DONE *
+	User
 		string Username
 		string Password
 		string Email
@@ -10,7 +10,7 @@ Models:
 		virtual ICollection<Pet>
 		
 		*(Finished)
-	public class Pet
+	Pet
 		string Name
 		string BirthDate
 		string Sex
@@ -41,7 +41,20 @@ Models:
 		DateTime Start
 		DateTime End
 		string Duration => $"{Start}-{End}"
+
+		*(Finished)
+	enum Sex
+		Male
+		Female
+	
+	Message
+		string From
+		string Text
+		DateTime SentOn
 		
+Views:
+	Home: Index
+	Pets: Add, All, create, matched, mine, top ten, Chosen pet
 		===============================================================================================================================================
 		
 	Controllers:
@@ -54,6 +67,13 @@ Models:
 		
 		When not logged => HomePage (Choose Register or Login). If Registered => Login, else => MyPetsPage
 		When Logged => MyPetsPage (Pets and Breeds buttons in layout)
+
+	Form order when adding Pet:
+		1. Type
+		2. Breed
+		2. Sex
+		3. Pet (Name, ...)
+		4. SexualStimulus
 		
 		
 		

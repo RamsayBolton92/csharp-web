@@ -16,7 +16,10 @@ namespace BeautyAndThePet.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Pets = new HashSet<Pet>();
         }
+
+        public int MyProperty { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
@@ -33,5 +36,9 @@ namespace BeautyAndThePet.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; set; }
+
+        public virtual Address Address { get; set; }
     }
 }

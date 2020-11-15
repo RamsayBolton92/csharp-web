@@ -1,30 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BeautyAndThePet.Web.Controllers
 {
-    public class PetsController : Controller
+    public class MessagesController : Controller
     {
-        public IActionResult Create()
+        public IActionResult New()
         {
             return this.View();
         }
 
-        public IActionResult MyPets()
+        public IActionResult AllRecieved()
         {
             return this.View();
         }
 
-        public IActionResult All()
+        public IActionResult Sent()
         {
             return this.View();
         }
 
-        public IActionResult MatchedPets()
-        {
-            return this.View();
-        }
-
-        public IActionResult TopTen()
+        public IActionResult Unread()
         {
             return this.View();
         }

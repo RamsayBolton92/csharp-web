@@ -34,6 +34,8 @@
 
         public DbSet<Breed> Breeds { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<SexualStimulus> SexualStimules { get; set; }
 
 
