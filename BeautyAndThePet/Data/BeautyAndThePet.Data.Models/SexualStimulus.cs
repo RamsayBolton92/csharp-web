@@ -1,9 +1,10 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
+    using BeautyAndThePet.Data.Common.Models;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class SexualStimulus
+    public class SexualStimulus : BaseDeletableModel<int>
     {
         public int Id { get; set; }
         public DateTime Start { get; set; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeautyAndThePet.Data.Models.Enumerations
+﻿namespace BeautyAndThePet.Data.Models.Enumerations
 {
     public enum TypeOfPet
     {

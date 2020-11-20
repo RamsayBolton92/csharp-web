@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using BeautyAndThePet.Data.Models.Enumerations 
+@using BeautyAndThePet.Data.Models
+@model BeautyAndThePet.Web.ViewModels.Pets.CreatePetInputModel
+<h1>Create new pet</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label asp-for="Sex"></label>
+    <select asp-for="Sex" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
+    <span asp-validation-for="Sex" class="text-danger"></span>
+
+    <label asp-for="TypeOfPet"></label>
+    <select asp-for="TypeOfPet" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
+    <span asp-validation-for="TypeOfPet" class="text-danger"></span>
+
+    <label asp-for="Breed"></label>
+    <input asp-for="Breed" />
+    <span asp-validation-for="Breed" class="text-danger"></span>
+
+    <label asp-for="BirthDate"></label>
+    <input asp-for="BirthDate" />
+    <span asp-validation-for="BirthDate" class="text-danger"></span>
+
+
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" />
+</form>
+
+<partial name="_ValidationScriptsPartial" />

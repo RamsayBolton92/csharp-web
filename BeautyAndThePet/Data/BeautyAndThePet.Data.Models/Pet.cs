@@ -2,11 +2,11 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
-
+    using BeautyAndThePet.Data.Common.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
 
-    public class Pet
-	{
+    public class Pet : BaseDeletableModel<int>
+    {
 		public int Id { get; set; }
 
 		public string Name { get; set; }
@@ -17,7 +17,7 @@
 
 		public string Description { get; set; }
 
-		public TypeOfPet TypeOfPet{ get; set; }
+		public virtual TypeOfPet TypeOfPet { get; set; }
 
         public int OwnerId { get; set; }
 

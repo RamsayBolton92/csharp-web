@@ -1,8 +1,9 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
+    using BeautyAndThePet.Data.Common.Models;
     using System.Collections.Generic;
 
-    public class Breed
+    public class Breed : BaseDeletableModel<int>
     {
         public Breed()
         {

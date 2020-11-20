@@ -26,13 +26,27 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Rights")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Abouts");
                 });
@@ -47,6 +61,18 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Neighbourhood")
                         .HasColumnType("nvarchar(max)");
 
@@ -60,6 +86,8 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Addresses");
                 });
@@ -145,6 +173,9 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MyProperty")
+                        .HasColumnType("int");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -199,12 +230,68 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Characteristics")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Breeds");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FromId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SentOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ToId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
@@ -223,8 +310,20 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("BreedId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -247,6 +346,8 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BreedId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId1");
 
@@ -294,7 +395,19 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PetId")
@@ -304,6 +417,8 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("PetId");
 
@@ -416,9 +531,20 @@ namespace BeautyAndThePet.Data.Migrations
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("BeautyAndThePet.Data.Models.Address", null)
+                    b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
                         .WithMany("Habitants")
                         .HasForeignKey("AddressId");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Message", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "From")
+                        .WithMany()
+                        .HasForeignKey("FromId");
+
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "To")
+                        .WithMany()
+                        .HasForeignKey("ToId");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
@@ -430,7 +556,7 @@ namespace BeautyAndThePet.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("Pets")
                         .HasForeignKey("OwnerId1");
 
                     b.HasOne("BeautyAndThePet.Data.Models.SexualStimulus", "SexualStimulus")

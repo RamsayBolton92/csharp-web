@@ -3,22 +3,23 @@
     using System.Diagnostics;
     using System.Linq;
     using BeautyAndThePet.Data;
+    using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels;
     using BeautyAndThePet.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IHomeService homeService;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IHomeService homeService)
         {
-            this.db = db;
+            this.homeService = homeService;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel { AboutUs = this.db.Abouts.First().Description };
+            var viewModel = this.homeService.Index();
 
             return this.View(viewModel);
         }

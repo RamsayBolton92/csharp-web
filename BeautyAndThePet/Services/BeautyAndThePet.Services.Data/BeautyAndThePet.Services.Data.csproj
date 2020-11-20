@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BeautyAndThePet.Data.Common\BeautyAndThePet.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeautyAndThePet.Data.Models\BeautyAndThePet.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\BeautyAndThePet.Web.ViewModels\BeautyAndThePet.Web.ViewModels.csproj" />
     <ProjectReference Include="..\BeautyAndThePet.Services.Mapping\BeautyAndThePet.Services.Mapping.csproj" />
   </ItemGroup>
 
