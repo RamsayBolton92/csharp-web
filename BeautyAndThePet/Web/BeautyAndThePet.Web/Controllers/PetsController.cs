@@ -1,21 +1,33 @@
-﻿using BeautyAndThePet.Web.ViewModels.Pets;
-using Microsoft.AspNetCore.Mvc;
-using BeautyAndThePet.Data.Models;
-using System;
-
-namespace BeautyAndThePet.Web.Controllers
+﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Data.Models.Enumerations;
+    using BeautyAndThePet.Services.Data;
+    using BeautyAndThePet.Web.ViewModels.Pets;
+    using Microsoft.AspNetCore.Mvc;
+
     public class PetsController : Controller
     {
+        private readonly IPetsService petsService;
+
+        public PetsController(IPetsService petsService)
+        {
+            this.petsService = petsService;
+        }
+
+
         public IActionResult Create()
         {
             var viewModel = new CreatePetInputModel
             {
                 Name = "Kapitan Salam",
                 Sex = Sex.Male,
-                TypeOfPet = Data.Models.Enumerations.TypeOfPet.Dog, // ??????????
-                Breed = "Pincher Ninja",
-                BirthDate = DateTime.UtcNow.Date,
+                TypeOfPet = TypeOfPet.Dog, // ??????????
+                Breed = "Pincher ninja",
+                BirthDate = DateTime.UtcNow,
                 Description = "Very Aggressive",
             };
 
@@ -23,14 +35,14 @@ namespace BeautyAndThePet.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create2()
+        public async Task<IActionResult> Create(CreatePetInputModel input)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-
                 return this.View();
             }
 
+            await this.petsService.CreateAsync(input);
             return this.RedirectToAction("MyPets");
         }
 

@@ -1,4 +1,4 @@
-﻿namespace BeautyAndThePet.Data.Models
+﻿namespace BeautyAndThePet.Data.Models.Enumerations
 {
     public enum Sex
     {

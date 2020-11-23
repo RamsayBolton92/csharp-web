@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+
     using BeautyAndThePet.Data.Common.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
 

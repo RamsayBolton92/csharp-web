@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BeautyAndThePet.Common\BeautyAndThePet.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeautyAndThePet.Data.Common\BeautyAndThePet.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeautyAndThePet.Data.Models\BeautyAndThePet.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\BeautyAndThePet.Web.ViewModels\BeautyAndThePet.Web.ViewModels.csproj" />

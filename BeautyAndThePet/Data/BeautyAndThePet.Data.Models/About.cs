@@ -1,7 +1,6 @@
-﻿using BeautyAndThePet.Data.Common.Models;
-
-namespace BeautyAndThePet.Data.Models
+﻿namespace BeautyAndThePet.Data.Models
 {
+    using BeautyAndThePet.Data.Common.Models;
     public class About : BaseDeletableModel<int>
     {
         public int Id { get; set; }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeautyAndThePet.Web.ViewModels.Messages
+﻿namespace BeautyAndThePet.Web.ViewModels.Messages
 {
+    using System;
+
     public class SentMessagesViewModel
     {
         public virtual string To { get; set; }

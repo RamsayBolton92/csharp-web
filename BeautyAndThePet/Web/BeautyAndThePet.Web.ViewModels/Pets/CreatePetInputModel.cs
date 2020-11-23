@@ -1,0 +1,42 @@
+﻿namespace BeautyAndThePet.Web.ViewModels.Pets
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Data.Models.Enumerations;
+
+    public class CreatePetInputModel
+    {
+        /*
+        var viewModel = new CreatePetInputModel
+        {
+            Name = "Kapitan Salam",
+            Sex = Sex.Male,
+            TypeOfPet = Data.Models.Enumerations.TypeOfPet.Dog, // ??????????
+            Breed = "Pincher Ninja",
+            BirthDate = DateTime.UtcNow.Date,
+            Description = "Very Aggressive",
+        };
+        */
+
+        [Required]
+        [MinLength(2)]
+        public string Name { get; set; }
+
+        [Required]
+        public Sex Sex { get; set; }
+
+        [Required]
+        public TypeOfPet TypeOfPet { get; set; }
+
+        // Breeds should show as a list in forms
+        public string Breed { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        public SexualStimulus SexualStimulus { get; set; }
+
+        public string Description { get; set; }
+    }
+}
