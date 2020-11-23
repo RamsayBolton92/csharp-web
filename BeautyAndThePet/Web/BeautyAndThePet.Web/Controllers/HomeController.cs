@@ -1,11 +1,9 @@
 ﻿namespace BeautyAndThePet.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Linq;
-    using BeautyAndThePet.Data;
+
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels;
-    using BeautyAndThePet.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController

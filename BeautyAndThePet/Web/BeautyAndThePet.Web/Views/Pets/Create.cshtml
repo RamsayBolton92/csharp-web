@@ -1,34 +1,64 @@
-﻿@using BeautyAndThePet.Data.Models.Enumerations 
-@using BeautyAndThePet.Data.Models
+﻿@using BeautyAndThePet.Data.Models.Enumerations
 @model BeautyAndThePet.Web.ViewModels.Pets.CreatePetInputModel
-<h1>Create new pet</h1>
+@{
+    this.ViewData["Title"] = "Create new pet";
+}
 
-<form method="post">
+<form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <label asp-for="Name"></label>
-    <input asp-for="Name" />
-    <span asp-validation-for="Name" class="text-danger"></span>
+    <h1>@this.ViewData["Title"]</h1>
 
-    <label asp-for="Sex"></label>
-    <select asp-for="Sex" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
-    <span asp-validation-for="Sex" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
 
-    <label asp-for="TypeOfPet"></label>
-    <select asp-for="TypeOfPet" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
-    <span asp-validation-for="TypeOfPet" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Sex"></label>
+        <select asp-for="Sex" class="form-control" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
+        <span asp-validation-for="Sex" class="text-danger"></span>
+    </div>
 
-    <label asp-for="Breed"></label>
-    <input asp-for="Breed" />
-    <span asp-validation-for="Breed" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="TypeOfPet"></label>
+        <select asp-for="TypeOfPet" class="form-control" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
+        <span asp-validation-for="TypeOfPet" class="text-danger"></span>
+    </div>
 
-    <label asp-for="BirthDate"></label>
-    <input asp-for="BirthDate" />
-    <span asp-validation-for="BirthDate" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="Breed"></label>
+        <input asp-for="Breed" class="form-control" />
+        <span asp-validation-for="Breed" class="text-danger"></span>
+    </div>
 
+    <div class="form-group">
+        <label asp-for="BirthDate.Date"></label>
+        <input asp-for="BirthDate.Date" class="form-control" />
+        <span asp-validation-for="BirthDate.Date" class="text-danger"></span>
+    </div>
 
-    <label asp-for="Description"></label>
-    <textarea asp-for="Description" />
+    <div class="form-group">
+        <label asp-for="SexualStimulus.Start"></label>
+        <input asp-for="SexualStimulus.Start" class="form-control" />
+        <span asp-validation-for="SexualStimulus.Start" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SexualStimulus.End"></label>
+        <input asp-for="SexualStimulus.End" class="form-control" />
+        <span asp-validation-for="SexualStimulus.End" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <input type="submit" class="btn btn-primary" />
+
 </form>
 
-<partial name="_ValidationScriptsPartial" />
+<!--<partial name="_ValidationScriptsPartial" />-->

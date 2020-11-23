@@ -1,8 +1,9 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
-    using BeautyAndThePet.Data.Common.Models;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using BeautyAndThePet.Data.Common.Models;
 
     public class SexualStimulus : BaseDeletableModel<int>
     {
