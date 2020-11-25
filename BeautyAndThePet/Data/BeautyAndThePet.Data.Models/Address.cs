@@ -2,6 +2,7 @@
 {
     using BeautyAndThePet.Data.Common.Models;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Address : BaseDeletableModel<int>
     {
