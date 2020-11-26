@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BeautyAndThePet.Web.ViewModels.Pets.MyPetsViewModel
 @{
+    this.ViewData["Title"] = "My pets";
 }
+
+<div class="text-center">
+    <h1 class="display-4">My pets</h1>
+    <p>Pets dating pets!</p>
+    <p>@Model.Name</p>
+    <p>@Model.TypeOfPet</p>
+    <p>@Model.Breed</p>
+    <p>@Model.Sex</p>
+    <p>@Model.AvailableFrom</p>
+    <p>@Model.AvailableTo</p>
+</div>

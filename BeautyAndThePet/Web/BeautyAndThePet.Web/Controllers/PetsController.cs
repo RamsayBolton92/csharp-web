@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
 
-    using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels.Pets;
@@ -25,7 +24,7 @@
             {
                 Name = "Kapitan Salam",
                 Sex = Sex.Male,
-                TypeOfPet = TypeOfPet.Dog, // ??????????
+                TypeOfPet = TypeOfPet.Dog,
                 Breed = "Pincher ninja",
                 BirthDate = DateTime.UtcNow,
                 Description = "Very Aggressive",
