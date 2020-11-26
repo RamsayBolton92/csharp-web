@@ -3,7 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeautyAndThePet.Data.Models;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -28,6 +29,7 @@
                               new RolesSeeder(),
                               new SettingsSeeder(),
                               new AboutsSeeder(),
+                              new BreedsSeeder(),
                               new UserAdminSeeder(),
                           };
 

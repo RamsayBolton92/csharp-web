@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InCr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -293,7 +293,6 @@ namespace BeautyAndThePet.Data.Migrations
                     OwnerId = table.Column<int>(nullable: false),
                     OwnerId1 = table.Column<string>(nullable: true),
                     BreedId = table.Column<int>(nullable: false),
-                    SexualStimulusId = table.Column<int>(nullable: false),
                     Sex = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -317,22 +316,20 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "SexualStimules",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Start = table.Column<DateTime>(nullable: false),
-                    End = table.Column<DateTime>(nullable: false),
-                    PetId = table.Column<int>(nullable: false)
+                    End = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SexualStimules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SexualStimules_Pets_PetId",
-                        column: x => x.PetId,
+                        name: "FK_SexualStimules_Pets_Id",
+                        column: x => x.Id,
                         principalTable: "Pets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -438,11 +435,6 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "OwnerId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_SexualStimulusId",
-                table: "Pets",
-                column: "SexualStimulusId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
@@ -451,35 +443,10 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "IX_SexualStimules_IsDeleted",
                 table: "SexualStimules",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SexualStimules_PetId",
-                table: "SexualStimules",
-                column: "PetId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Pets_SexualStimules_SexualStimulusId",
-                table: "Pets",
-                column: "SexualStimulusId",
-                principalTable: "SexualStimules",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pets_AspNetUsers_OwnerId1",
-                table: "Pets");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pets_Breeds_BreedId",
-                table: "Pets");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pets_SexualStimules_SexualStimulusId",
-                table: "Pets");
-
             migrationBuilder.DropTable(
                 name: "Abouts");
 
@@ -505,22 +472,22 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
+                name: "SexualStimules");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Pets");
+
+            migrationBuilder.DropTable(
+                name: "Breeds");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Breeds");
-
-            migrationBuilder.DropTable(
-                name: "SexualStimules");
-
-            migrationBuilder.DropTable(
-                name: "Pets");
         }
     }
 }

@@ -27,7 +27,7 @@
                 TypeOfPet = input.TypeOfPet,
                 Breed = this.breedsRepo.All().FirstOrDefault(x => x.Name == input.Breed),
                 BirthDate = input.BirthDate,
-                SexualStimulus = new SexualStimulus() { Start = input.SexualStimulus.Start, End = input.SexualStimulus.End },
+                SexualStimulus = new SexualStimulus() { Start = input.AvailableFrom, End = input.AvailableTo },
                 Description = input.Description,
             };
 

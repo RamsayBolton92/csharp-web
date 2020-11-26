@@ -8,7 +8,8 @@
 
     public class Pet : BaseDeletableModel<int>
     {
-		public int Id { get; set; }
+
+        public int Id { get; set; }
 
 		public string Name { get; set; }
 
@@ -27,9 +28,6 @@
         public int BreedId { get; set; }
 
         public virtual Breed Breed { get; set; }
-
-		[ForeignKey("SexualStimulus")]
-        public int SexualStimulusId { get; set; }
 
         public virtual SexualStimulus SexualStimulus { get; set; }
 

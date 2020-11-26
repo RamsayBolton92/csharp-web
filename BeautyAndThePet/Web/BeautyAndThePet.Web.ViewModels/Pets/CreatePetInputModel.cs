@@ -32,10 +32,16 @@
         // Breeds should show as a list in forms
         public string Breed { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [Required]
-        public SexualStimulus SexualStimulus { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime AvailableFrom { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime AvailableTo { get; set; }
 
         public string Description { get; set; }
     }

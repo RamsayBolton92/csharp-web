@@ -1,24 +1,18 @@
-﻿using BeautyAndThePet.Common;
-using BeautyAndThePet.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Data.Seeding
+﻿namespace BeautyAndThePet.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class UserAdminSeeder : ISeeder
     {
-        private readonly UserManager<ApplicationUser> userManager;
-
         public UserAdminSeeder()
         {
 
-        }
-
-        public UserAdminSeeder(UserManager<ApplicationUser> userManager)
-        {
-            this.userManager = userManager;
         }
 
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
@@ -30,19 +24,19 @@ namespace BeautyAndThePet.Data.Seeding
 
             var user = new ApplicationUser
             {
-                UserName = "RamsayBolton",
+                UserName = "fausts@abv.bg",
                 Email = "fausts@abv.bg",
                 EmailConfirmed = true,
                 PhoneNumber = "0988392245",
                 PhoneNumberConfirmed = true,
                 IsDeleted = false,
-
             };
 
-            await this.userManager.CreateAsync(user, "ramsaybolton");
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await dbContext.Users.AddAsync(new ApplicationUser {UserName = "RamsayBolton"});
-            await dbContext.SaveChangesAsync();
+            await userManager.CreateAsync(user, "ramsaybolton");
+            // var user = await userManager.GetUserAsync(User);
+            // .AddToRole();
         }
     }
 }

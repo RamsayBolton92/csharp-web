@@ -337,9 +337,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
-                    b.Property<int>("SexualStimulusId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TypeOfPet")
                         .HasColumnType("int");
 
@@ -350,8 +347,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId1");
-
-                    b.HasIndex("SexualStimulusId");
 
                     b.ToTable("Pets");
                 });
@@ -391,9 +386,7 @@ namespace BeautyAndThePet.Data.Migrations
             modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -410,17 +403,12 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PetId");
 
                     b.ToTable("SexualStimules");
                 });
@@ -558,19 +546,13 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Owner")
                         .WithMany("Pets")
                         .HasForeignKey("OwnerId1");
-
-                    b.HasOne("BeautyAndThePet.Data.Models.SexualStimulus", "SexualStimulus")
-                        .WithMany()
-                        .HasForeignKey("SexualStimulusId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
+                        .WithOne("SexualStimulus")
+                        .HasForeignKey("BeautyAndThePet.Data.Models.SexualStimulus", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

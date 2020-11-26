@@ -6,7 +6,9 @@
         
         public string Breed { get; set; }
 
-        public string SexualStimulus { get; set; }
+        public string AvailableFrom { get; set; }
+
+        public string AvailableTo { get; set; }
 
         public string Sex { get; set; }
 

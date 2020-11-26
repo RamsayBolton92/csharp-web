@@ -29,11 +29,7 @@
 
     <div class="form-group">
         <label asp-for="Breed"></label>
-<<<<<<< HEAD
-        <input asp-for="Breed" id="myInput" onkeyup="myFunction()" class="form-control" />
-=======
-        <input asp-for="Breed" class="form-control" />
->>>>>>> 24ed453e7e058a80240903382632d7f7a3e96fe0
+        <input asp-for="Breed" class="form-control" /> <!--id="myInput" onkeyup="myFunction()" -->
         <span asp-validation-for="Breed" class="text-danger"></span>
     </div>
 
@@ -44,15 +40,15 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="SexualStimulus.Start"></label>
-        <input asp-for="SexualStimulus.Start" class="form-control" />
-        <span asp-validation-for="SexualStimulus.Start" class="text-danger"></span>
+        <label asp-for="AvailableFrom"></label>
+        <input asp-for="AvailableFrom" class="form-control" />
+        <span asp-validation-for="AvailableFrom" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="SexualStimulus.End"></label>
-        <input asp-for="SexualStimulus.End" class="form-control" />
-        <span asp-validation-for="SexualStimulus.End" class="text-danger"></span>
+        <label asp-for="AvailableTo"></label>
+        <input asp-for="AvailableTo" class="form-control" />
+        <span asp-validation-for="AvailableTo" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -65,8 +61,8 @@
 
 </form>
 
-<<<<<<< HEAD
-<ul id="myUL">
+
+@*<ul id="myUL">
     <li><a href="#">Adele</a></li>
     <li><a href="#">Agnes</a></li>
 
@@ -76,9 +72,9 @@
     <li><a href="#">Calvin</a></li>
     <li><a href="#">Christina</a></li>
     <li><a href="#">Cindy</a></li>
-</ul>
+</ul>*@
 
-@section Scripts {
+@*@section Scripts {
     <script>
         function myFunction() {
             // Declare variables
@@ -100,8 +96,6 @@
             }
         }
     </script>
-}
+}*@
 
-=======
->>>>>>> 24ed453e7e058a80240903382632d7f7a3e96fe0
 <!--<partial name="_ValidationScriptsPartial" />-->
