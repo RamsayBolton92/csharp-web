@@ -1,9 +1,23 @@
-﻿@model BeautyAndThePet.Web.ViewModels.Pets.MyPetsViewModel
+﻿@model BeautyAndThePet.Web.ViewModels.Pets.MyPetInListViewModel
 @{
     this.ViewData["Title"] = "My pets";
 }
 
-<div class="text-center">
+<h1>@this.ViewData["Title"]</h1>
+<div class="media">
+    <img src="..." class="mr-3" alt="...">
+    <div class="media-body">
+        <h5 class="mt-0">@Model.Name</h5>
+        <p>@Model.TypeOfPet</p>
+        <p>@Model.Breed</p>
+        <p>@Model.Sex</p>
+        <p>@Model.AvailableFrom</p>
+        <p>@Model.AvailableTo</p>
+    </div>
+</div>
+
+
+@*<div class="text-center">
     <h1 class="display-4">My pets</h1>
     <p>Pets dating pets!</p>
     <p>@Model.Name</p>
@@ -12,4 +26,4 @@
     <p>@Model.Sex</p>
     <p>@Model.AvailableFrom</p>
     <p>@Model.AvailableTo</p>
-</div>
+</div>*@

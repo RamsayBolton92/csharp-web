@@ -18,7 +18,7 @@
             this.petsRepo = petsRepo;
         }
 
-        public async Task CreateAsync(CreatePetInputModel input)
+        public async Task CreateAsync(CreatePetInputModel input, string userId)
         {
             var pet = new Pet()
             {
@@ -29,6 +29,7 @@
                 BirthDate = input.BirthDate,
                 SexualStimulus = new SexualStimulus() { Start = input.AvailableFrom, End = input.AvailableTo },
                 Description = input.Description,
+                OwnerId = userId,
             };
 
             await this.petsRepo.AddAsync(pet);

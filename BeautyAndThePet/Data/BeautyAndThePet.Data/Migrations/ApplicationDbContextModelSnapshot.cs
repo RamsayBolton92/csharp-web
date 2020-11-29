@@ -328,10 +328,7 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OwnerId1")
+                    b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Sex")
@@ -346,7 +343,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -545,7 +542,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Owner")
                         .WithMany("Pets")
-                        .HasForeignKey("OwnerId1");
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>

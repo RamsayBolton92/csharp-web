@@ -2,19 +2,22 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels.Pets;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class PetsController : Controller
     {
         private readonly IPetsService petsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public PetsController(IPetsService petsService)
+        public PetsController(IPetsService petsService,UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
+            this.userManager = userManager;
         }
 
 
@@ -41,7 +44,9 @@
                 return this.View();
             }
 
-            await this.petsService.CreateAsync(input);
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.petsService.CreateAsync(input, user.Id);
             return this.RedirectToAction("MyPets");
         }
 
@@ -50,7 +55,7 @@
             return this.View();
         }
 
-        public IActionResult All()
+        public IActionResult All(int id)
         {
             return this.View();
         }
