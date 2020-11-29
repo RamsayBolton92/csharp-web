@@ -6,6 +6,6 @@
 
     public interface IPetsService
     {
-        Task CreateAsync(CreatePetInputModel input);
+        Task CreateAsync(CreatePetInputModel input, string userId);
     }
 }

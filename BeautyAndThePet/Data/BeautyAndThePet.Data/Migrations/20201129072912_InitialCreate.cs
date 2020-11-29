@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class InCr : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -290,8 +290,7 @@ namespace BeautyAndThePet.Data.Migrations
                     Avatar = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     TypeOfPet = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: false),
-                    OwnerId1 = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: true),
                     BreedId = table.Column<int>(nullable: false),
                     Sex = table.Column<int>(nullable: false)
                 },
@@ -305,8 +304,8 @@ namespace BeautyAndThePet.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Pets_AspNetUsers_OwnerId1",
-                        column: x => x.OwnerId1,
+                        name: "FK_Pets_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -430,9 +429,9 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_OwnerId1",
+                name: "IX_Pets_OwnerId",
                 table: "Pets",
-                column: "OwnerId1");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",

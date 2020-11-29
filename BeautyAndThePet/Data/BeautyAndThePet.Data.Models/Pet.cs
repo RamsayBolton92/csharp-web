@@ -21,7 +21,7 @@
 
 		public virtual TypeOfPet TypeOfPet { get; set; }
 
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
         public virtual ApplicationUser Owner { get; set; }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201126102303_InCr")]
-    partial class InCr
+    [Migration("20201129072912_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -330,10 +330,7 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OwnerId1")
+                    b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Sex")
@@ -348,7 +345,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -547,7 +544,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Owner")
                         .WithMany("Pets")
-                        .HasForeignKey("OwnerId1");
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>

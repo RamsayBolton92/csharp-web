@@ -8,4 +8,19 @@
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <p>Pets dating pets!</p>
     <p>@Model.AboutUs</p>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Pets" asp-action="Create">Create pet</a>
+        <a asp-controller="Pets" asp-action="MyPets">My pets</a>
+        @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
+
+
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+        @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
+    }
+
 </div>
