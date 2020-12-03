@@ -14,7 +14,7 @@
         private readonly IPetsService petsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PetsController(IPetsService petsService,UserManager<ApplicationUser> userManager)
+        public PetsController(IPetsService petsService, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
             this.userManager = userManager;
@@ -50,14 +50,28 @@
             return this.RedirectToAction("MyPets");
         }
 
-        public IActionResult MyPets()
+        public async Task<IActionResult> MyPets()
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var petsViewModel = new MyPetsListViewModel() { MyPets = this.petsService.GetMyPets(user.Id) };
+
+            return this.View(petsViewModel);
         }
 
         public IActionResult All(int id)
         {
-            return this.View();
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAll(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
         }
 
         public IActionResult MatchedPets()
