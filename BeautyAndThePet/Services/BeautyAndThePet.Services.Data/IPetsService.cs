@@ -7,7 +7,7 @@
 
     public interface IPetsService
     {
-        Task CreateAsync(CreatePetInputModel input, string userId);
+        Task CreateAsync(CreatePetInputModel input, string userId, string imagePath);
 
         IEnumerable<PetInListViewModel> GetAll(int pageId, int petsPerPage = 10);
 

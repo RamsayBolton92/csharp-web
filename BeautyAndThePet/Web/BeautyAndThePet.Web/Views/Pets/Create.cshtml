@@ -4,7 +4,7 @@
     this.ViewData["Title"] = "Create new pet";
 }
 
-<form method="post" class="col-md-6 offset-md-3">
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <h1>@this.ViewData["Title"]</h1>
@@ -49,6 +49,12 @@
         <label asp-for="AvailableTo"></label>
         <input asp-for="AvailableTo" class="form-control" />
         <span asp-validation-for="AvailableTo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
     </div>
 
     <div class="form-group">

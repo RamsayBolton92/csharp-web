@@ -1,6 +1,8 @@
 ﻿namespace BeautyAndThePet.Services.Data
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@
     {
         private readonly IDeletableEntityRepository<Breed> breedsRepo;
         private readonly IDeletableEntityRepository<Pet> petsRepo;
+        private readonly string[] allowedExtensions = new[] { "jpg", "png"};
 
         public PetsService(IDeletableEntityRepository<Breed> breedsRepo, IDeletableEntityRepository<Pet> petsRepo)
         {
@@ -19,7 +22,7 @@
             this.petsRepo = petsRepo;
         }
 
-        public async Task CreateAsync(CreatePetInputModel input, string userId)
+        public async Task CreateAsync(CreatePetInputModel input, string userId, string imagePath)
         {
             var pet = new Pet()
             {
@@ -32,6 +35,31 @@
                 Description = input.Description,
                 OwnerId = userId,
             };
+
+            // /wwwroot/images/recipes/jhdsi-343g3h453-=g34g.jpg
+            Directory.CreateDirectory($"{imagePath}/pets/");
+            foreach (var image in input.Images)
+            {
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"Invalid image extension {extension}");
+                }
+
+                var dbImage = new Image
+                {
+                    AddedByUserId = userId,
+                    Extension = extension,
+                };
+
+                pet.Images.Add(dbImage);
+
+                var physicalPath = $"{imagePath}/pets/{dbImage.Id}.{extension}";
+
+                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                await image.CopyToAsync(fileStream);
+            }
 
             await this.petsRepo.AddAsync(pet);
             await this.petsRepo.SaveChangesAsync();
