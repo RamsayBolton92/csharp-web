@@ -17,6 +17,7 @@ namespace BeautyAndThePet.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Pets = new HashSet<Pet>();
+            this.PetImages = new HashSet<Image>();
         }
 
         public int MyProperty { get; set; }
@@ -38,6 +39,8 @@ namespace BeautyAndThePet.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Pet> Pets { get; set; }
+
+        public virtual ICollection<Image> PetImages { get; set; }
 
         public virtual Address Address { get; set; }
     }

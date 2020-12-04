@@ -1,9 +1,11 @@
 ﻿namespace BeautyAndThePet.Web.ViewModels.Pets
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
+    using Microsoft.AspNetCore.Http;
 
     public class CreatePetInputModel
     {
@@ -44,5 +46,7 @@
         public DateTime AvailableTo { get; set; }
 
         public string Description { get; set; }
+
+        public IEnumerable<IFormFile> Images { get; set; }
     }
 }

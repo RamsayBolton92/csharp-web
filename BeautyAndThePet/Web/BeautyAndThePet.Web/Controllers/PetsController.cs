@@ -6,6 +6,7 @@
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels.Pets;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,13 @@
     {
         private readonly IPetsService petsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IWebHostEnvironment environment;
 
-        public PetsController(IPetsService petsService, UserManager<ApplicationUser> userManager)
+        public PetsController(IPetsService petsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
             this.userManager = userManager;
+            this.environment = environment;
         }
 
 
@@ -41,12 +44,23 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(input);
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.petsService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.petsService.CreateAsync(input, user.Id, $"{this.environment.WebRootPath}/images");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
+
+
+
             return this.RedirectToAction("MyPets");
         }
 

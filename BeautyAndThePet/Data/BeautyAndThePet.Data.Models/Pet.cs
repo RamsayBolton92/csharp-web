@@ -1,6 +1,7 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BeautyAndThePet.Data.Common.Models;
@@ -8,6 +9,10 @@
 
     public class Pet : BaseDeletableModel<int>
     {
+        public Pet()
+        {
+            this.Images = new HashSet<Image>();
+        }
 
         public int Id { get; set; }
 
@@ -32,5 +37,7 @@
         public virtual SexualStimulus SexualStimulus { get; set; }
 
         public virtual Sex Sex { get; set; }
-	}
+
+        public virtual ICollection<Image> Images { get; set; }
+    }
 }
