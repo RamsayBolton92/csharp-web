@@ -8,14 +8,14 @@
 @foreach (var pet in Model.AllPets)
 {
     <div class="media">
-        <img src="..." width="100" class="mr-3" alt="...">
+        <img src="@pet.ImageUrl" width="100" class="mr-3 img-responsive">
         <div class="media-body">
             <h5 class="mt-0">@pet.Name</h5>
             <p>@pet.TypeOfPet</p>
             <p>@pet.Breed</p>
             <p>@pet.Sex</p>
-            <p>@pet.AvailableFrom</p>
-            <p>@pet.AvailableTo</p>
+            <p>@pet.SexualStimulusStart</p>
+            <p>@pet.SexualStimulusEnd</p>
         </div>
     </div>
 }

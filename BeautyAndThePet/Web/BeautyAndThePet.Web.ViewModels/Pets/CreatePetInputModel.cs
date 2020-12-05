@@ -39,11 +39,11 @@
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime AvailableFrom { get; set; }
+        public DateTime Start { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime AvailableTo { get; set; }
+        public DateTime End { get; set; }
 
         public string Description { get; set; }
 

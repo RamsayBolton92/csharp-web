@@ -8,6 +8,7 @@
 
     using BeautyAndThePet.Data.Common.Repositories;
     using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Mapping;
     using BeautyAndThePet.Web.ViewModels.Pets;
 
     public class PetsService : IPetsService
@@ -31,7 +32,7 @@
                 TypeOfPet = input.TypeOfPet,
                 Breed = this.breedsRepo.All().FirstOrDefault(x => x.Name == input.Breed),
                 BirthDate = input.BirthDate,
-                SexualStimulus = new SexualStimulus() { Start = input.AvailableFrom, End = input.AvailableTo },
+                SexualStimulus = new SexualStimulus() { Start = input.Start, End = input.End },
                 Description = input.Description,
                 OwnerId = userId,
             };
@@ -67,20 +68,16 @@
 
         public IEnumerable<PetInListViewModel> GetAll(int pageId, int petsPerPage = 10)
         {
+            //var recipes = this.recipesRepository.AllAsNoTracking()
+            //    .OrderByDescending(x => x.Id)
+            //    .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+            //    .To<T>().ToList();
+            //return recipes;
+
             var pets = this.petsRepo.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
-                .Skip((pageId - 1) * petsPerPage)
-                .Take(petsPerPage)
-                .Select(x => new PetInListViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Breed = x.Breed.Name,
-                    Sex = x.Sex.ToString(),
-                    TypeOfPet = x.TypeOfPet.ToString(),
-                    AvailableFrom = x.SexualStimulus.Start.ToString(),
-                    AvailableTo = x.SexualStimulus.End.ToString(),
-                }).ToList();
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetInListViewModel>().ToList();
 
             return pets;
         }
@@ -90,21 +87,12 @@
             return this.petsRepo.All().Count();
         }
 
-        public IEnumerable<MyPetInListViewModel> GetMyPets(string userId)
+        public IEnumerable<PetInListViewModel> GetMyPets(string userId)
         {
             var pets = this.petsRepo.AllAsNoTracking()
                 .Where(x => x.OwnerId == userId)
                 .OrderByDescending(x => x.Id)
-                .Select(x => new MyPetInListViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Breed = x.Breed.Name,
-                    TypeOfPet = x.TypeOfPet.ToString(),
-                    Sex = x.Sex.ToString(),
-                    AvailableFrom = x.SexualStimulus.Start.ToString(),
-                    AvailableTo = x.SexualStimulus.End.ToString(),
-                }).ToList();
+                .To<PetInListViewModel>().ToList();
 
             return pets;
         }

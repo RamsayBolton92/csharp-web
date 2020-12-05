@@ -11,7 +11,7 @@
 
         IEnumerable<PetInListViewModel> GetAll(int pageId, int petsPerPage = 10);
 
-        IEnumerable<MyPetInListViewModel> GetMyPets(string userId);
+        IEnumerable<PetInListViewModel> GetMyPets(string userId);
 
         int GetCount();
     }

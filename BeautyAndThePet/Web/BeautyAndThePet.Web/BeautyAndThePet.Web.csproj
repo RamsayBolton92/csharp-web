@@ -36,4 +36,14 @@
     <ProjectReference Include="..\BeautyAndThePet.Web.Infrastructure\BeautyAndThePet.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BeautyAndThePet.Web.ViewModels\BeautyAndThePet.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\pets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\pets\8126303f-2c1a-418c-be22-40e9733cb0be.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

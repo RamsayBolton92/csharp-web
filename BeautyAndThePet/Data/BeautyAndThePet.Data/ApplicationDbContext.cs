@@ -38,6 +38,8 @@
 
         public DbSet<SexualStimulus> SexualStimules { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
 
 
         public override int SaveChanges() => this.SaveChanges(true);
