@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201205065535_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201205155612_InCr")]
+    partial class InCr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

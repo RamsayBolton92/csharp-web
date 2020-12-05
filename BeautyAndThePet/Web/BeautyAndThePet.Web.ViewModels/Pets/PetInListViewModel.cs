@@ -29,7 +29,7 @@
             configuration.CreateMap<Pet, PetInListViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x =>
-                        "~/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
         }
     }
 }
