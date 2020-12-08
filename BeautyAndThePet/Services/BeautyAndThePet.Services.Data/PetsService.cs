@@ -15,7 +15,7 @@
     {
         private readonly IDeletableEntityRepository<Breed> breedsRepo;
         private readonly IDeletableEntityRepository<Pet> petsRepo;
-        private readonly string[] allowedExtensions = new[] { "jpg", "png"};
+        private readonly string[] allowedExtensions = new[] { "jpg", "png" };
 
         public PetsService(IDeletableEntityRepository<Breed> breedsRepo, IDeletableEntityRepository<Pet> petsRepo)
         {
@@ -66,7 +66,9 @@
             await this.petsRepo.SaveChangesAsync();
         }
 
-        public IEnumerable<PetInListViewModel> GetAll(int pageId, int petsPerPage = 10)
+
+
+        public IEnumerable<PetViewModel> GetAll(int pageId, int petsPerPage = 10)
         {
             //var recipes = this.recipesRepository.AllAsNoTracking()
             //    .OrderByDescending(x => x.Id)
@@ -77,7 +79,7 @@
             var pets = this.petsRepo.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
-                .To<PetInListViewModel>().ToList();
+                .To<PetViewModel>().ToList();
 
             return pets;
         }
@@ -87,14 +89,55 @@
             return this.petsRepo.All().Count();
         }
 
-        public IEnumerable<PetInListViewModel> GetMyPets(string userId)
+        public IEnumerable<PetViewModel> GetMatchedPets(int id, string userId)
+        {
+            var myPet = this.petsRepo.All().Where(x => x.OwnerId == userId).FirstOrDefault(x => x.Id == id);
+
+            var pets = this.petsRepo.All()
+                .Where(x => x.OwnerId != userId)
+                .To<PetViewModel>().ToList();
+
+            //&& x.TypeOfPet == myPet.TypeOfPet
+            //    && x.Sex != myPet.Sex
+            //&& x.Breed.Name == myPet.Breed.Name;
+            return pets;
+        }
+
+        public IEnumerable<PetViewModel> GetMyPets(string userId)
         {
             var pets = this.petsRepo.AllAsNoTracking()
                 .Where(x => x.OwnerId == userId)
                 .OrderByDescending(x => x.Id)
-                .To<PetInListViewModel>().ToList();
+                .To<PetViewModel>().ToList();
 
             return pets;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var pet = this.petsRepo.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return pet;
+        }
+
+        public async Task UpdateAsync(int id, EditPetInputModel input)
+        {
+            var pet = this.petsRepo.All().FirstOrDefault(x => x.Id == id);
+
+            pet.Name = input.Name;
+            pet.BirthDate = input.BirthDate;
+            pet.TypeOfPet = input.TypeOfPet;
+            pet.Description = input.Description;
+            pet.Sex = input.Sex;
+            pet.SexualStimulus.Start = input.SexualStimulusStart;
+            pet.SexualStimulus.End = input.SexualStimulusEnd;
+
+            //recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
+            //recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
+
+            await this.petsRepo.SaveChangesAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
+
     using BeautyAndThePet.Common;
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Services.Data;

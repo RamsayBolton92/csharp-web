@@ -1,14 +1,11 @@
-﻿using BeautyAndThePet.Common;
-using BeautyAndThePet.Data.Common.Repositories;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Web.ViewModels.Home;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BeautyAndThePet.Services.Data
+﻿namespace BeautyAndThePet.Services.Data
 {
+    using System.Linq;
+
+    using BeautyAndThePet.Data.Common.Repositories;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Web.ViewModels.Home;
+
     public class HomeService : IHomeService
     {
         private readonly IDeletableEntityRepository<About> aboutsRepo;
