@@ -1,11 +1,14 @@
 ﻿namespace BeautyAndThePet.Web.Controllers
 {
     using System;
+    using System.Globalization;
     using System.Threading.Tasks;
+
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels.Pets;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -23,7 +26,6 @@
             this.environment = environment;
         }
 
-
         public IActionResult Create()
         {
             var viewModel = new CreatePetInputModel
@@ -32,8 +34,10 @@
                 Sex = Sex.Male,
                 TypeOfPet = TypeOfPet.Dog,
                 Breed = "Pincher ninja",
-                BirthDate = DateTime.UtcNow,
+                BirthDate = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
                 Description = "Very Aggressive",
+                Start = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
+                End = DateTime.Parse("02.01.2021", CultureInfo.InvariantCulture),
             };
 
             return this.View(viewModel);
@@ -62,6 +66,28 @@
             return this.RedirectToAction("MyPets");
         }
 
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.petsService.GetById<EditPetInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditPetInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.petsService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ViewPetInfo), new { id });
+        }
+
         public async Task<IActionResult> MyPets()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -71,7 +97,7 @@
             return this.View(petsViewModel);
         }
 
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
             const int PetsPerPage = 10;
 
@@ -86,14 +112,25 @@
             return this.View(allPetsViewModel);
         }
 
-        public IActionResult MatchedPets()
+        public async Task<IActionResult> MatchedPets(int id) //may have a problem with IDs
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var pet = this.petsService.GetById<PetViewModel>(id);
+
+            var matchedPetsViewModel = new MatchedPetsListViewModel()
+            {
+               MatchedPets = this.petsService.GetMatchedPets(pet.Id, user.Id),
+            };
+
+            return this.View(matchedPetsViewModel);
         }
 
-        public IActionResult TopTen()
+        public IActionResult ViewPetInfo(int id)
         {
-            return this.View();
+            var chosenPetView = this.petsService.GetById<PetViewModel>(id);
+
+            return this.View(chosenPetView);
         }
     }
 }

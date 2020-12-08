@@ -20,8 +20,6 @@
 
 		public DateTime BirthDate { get; set; }
 
-		public string Avatar { get; set; }
-
 		public string Description { get; set; }
 
 		public virtual TypeOfPet TypeOfPet { get; set; }

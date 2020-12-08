@@ -3,24 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
     using Microsoft.AspNetCore.Http;
 
-    public class CreatePetInputModel
+    public class CreatePetInputModel : IValidatableObject
     {
-        /*
-        var viewModel = new CreatePetInputModel
-        {
-            Name = "Kapitan Salam",
-            Sex = Sex.Male,
-            TypeOfPet = Data.Models.Enumerations.TypeOfPet.Dog, // ??????????
-            Breed = "Pincher Ninja",
-            BirthDate = DateTime.UtcNow.Date,
-            Description = "Very Aggressive",
-        };
-        */
-
         [Required]
         [MinLength(2)]
         public string Name { get; set; }
@@ -48,5 +35,18 @@
         public string Description { get; set; }
 
         public IEnumerable<IFormFile> Images { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.Start > this.End)
+            {
+                yield return new ValidationResult("End date should be later than start date");
+            }
+
+            if (this.Start < this.BirthDate)
+            {
+                yield return new ValidationResult("Start date should be later than birthday");
+            }
+        }
     }
 }

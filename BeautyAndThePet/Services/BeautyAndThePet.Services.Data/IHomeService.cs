@@ -1,10 +1,7 @@
-﻿using BeautyAndThePet.Web.ViewModels.Home;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeautyAndThePet.Services.Data
+﻿namespace BeautyAndThePet.Services.Data
 {
+    using BeautyAndThePet.Web.ViewModels.Home;
+
     public interface IHomeService
     {
         public IndexViewModel Index();

@@ -5,9 +5,9 @@
 }
 
 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
-    <div asp-validation-summary="All" class="text-danger"></div>
 
     <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
         <label asp-for="Name"></label>
@@ -34,9 +34,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="BirthDate.Date"></label>
-        <input asp-for="BirthDate.Date" class="form-control" />
-        <span asp-validation-for="BirthDate.Date" class="text-danger"></span>
+        <label asp-for="BirthDate"></label>
+        <input asp-for="BirthDate" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
     </div>
 
     <div class="form-group">

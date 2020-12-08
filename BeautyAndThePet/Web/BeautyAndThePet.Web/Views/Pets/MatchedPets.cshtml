@@ -1,5 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BeautyAndThePet.Web.ViewModels.Pets.MatchedPetsListViewModel
 @{
+    this.ViewData["Title"] = "Matched pets"; /*page*/
 }
+
+<h1>@this.ViewData["Title"]</h1>
+
+@foreach (var pet in Model.MatchedPets)
+{
+    <div class="media">
+        <img src="@pet.ImageUrl" width="100" class="mr-3 img-responsive">
+        <div class="media-body">
+            <h5 class="mt-0">@pet.Name</h5>
+            <p>@pet.TypeOfPet</p>
+            <p>@pet.Sex</p>
+            <p>@pet.BreedName</p>
+            <p>@pet.SexualStimulusStart</p>
+            <p>@pet.SexualStimulusEnd</p>
+            <p>@pet.BirthDate</p>
+            <p>@pet.OwnerUserName</p>
+            <p>@pet.OwnerAddressTown</p>
+            <p>@pet.Description</p>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id">View</a>
+}
+
+@*Pagination*@
+<hr />
+@*<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
+        </li>
+        @if (Model.HasPrevousPage)
+        {
+            <li class="page-item"><a class="page-link" href="#">@Model.PrevousPageNumber</a></li>
+        }
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.Page
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item"><a class="page-link" href="#">@Model.NextPageNumber</a></li>
+        }
+        <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text>}">
+            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
+        </li>
+    </ul>
+</nav>*@
+
