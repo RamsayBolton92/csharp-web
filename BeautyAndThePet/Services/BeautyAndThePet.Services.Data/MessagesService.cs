@@ -4,6 +4,7 @@
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Web.ViewModels.Messages;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@
             this.receivedMessagesRepo = receivedMessagesRepo;
         }
 
-        public async Task CreateSentMessageAsync(MessageViewModel input, string ownerId)
+        public async Task CreateSentMessageAsync(MessageInputViewModel input, string ownerId)
         {
             var message = new SentMessage
             {
@@ -36,7 +37,7 @@
             await this.sentMessagesRepo.SaveChangesAsync();
         }
 
-        public async Task CreateReceivedMessageAsync(MessageViewModel input, string userId)
+        public async Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId)
         {
             var message = new ReceivedMessage
             {
@@ -48,6 +49,19 @@
 
             await this.receivedMessagesRepo.AddAsync(message);
             await this.receivedMessagesRepo.SaveChangesAsync();
+        }
+
+        public IEnumerable<MessageViewModel> GetReceivedMessages(string userId)
+        {
+            var messages = this.receivedMessagesRepo.All().Where(x => x.ApplicationUserId == userId)
+                .Select(x => new MessageViewModel
+                { 
+                    From = x.From,
+                    Text = x.Text,
+                    SentOn = x.SentOn,
+                }).ToList();
+
+            return messages;
         }
     }
 }

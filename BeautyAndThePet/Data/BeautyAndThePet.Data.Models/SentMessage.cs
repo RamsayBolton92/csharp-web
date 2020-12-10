@@ -12,6 +12,8 @@
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public string To { get; set; }
+
         public string Text { get; set; }
 
         public DateTime SentOn { get; set; }

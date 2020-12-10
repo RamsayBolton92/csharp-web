@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class MessageViewModel
+    public class MessageInputViewModel
     {
         public int Id { get; set; }
 

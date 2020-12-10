@@ -33,14 +33,14 @@
             var petOwner = pet.OwnerUserName;
             var user = this.User.Identity.Name;
 
-            var messageInput = new MessageViewModel { From = user, To = petOwner, SentOn = DateTime.UtcNow };
+            var messageInput = new MessageInputViewModel { From = user, To = petOwner, SentOn = DateTime.UtcNow };
 
             return this.View(messageInput);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> New(int id, MessageViewModel input)
+        public async Task<IActionResult> New(int id, MessageInputViewModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -59,9 +59,13 @@
             return this.Redirect("/Pets/MyPets");
         }
 
-        public IActionResult AllRecieved()
+        public async Task<IActionResult> Recieved()
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var petsViewModel = new MessagesListViewModel() { Messages = this.messagesService.GetReceivedMessages(user.Id) };
+
+            return this.View(petsViewModel);
         }
 
         public IActionResult Sent()
