@@ -18,32 +18,33 @@
         [Required]
         public TypeOfPet TypeOfPet { get; set; }
 
-        // Breeds should show as a list in forms
-        public string Breed { get; set; }
-
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
-        public DateTime Start { get; set; }
+        public DateTime StartOfPeriod { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
-        public DateTime End { get; set; }
+        public DateTime EndOfPeriod { get; set; }
 
         public string Description { get; set; }
-
+        
+        [Required]
         public IEnumerable<IFormFile> Images { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int BreedId { get; set; }
+
+        public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (this.Start > this.End)
+            if (this.StartOfPeriod > this.EndOfPeriod)
             {
                 yield return new ValidationResult("End date should be later than start date");
             }
 
-            if (this.Start < this.BirthDate)
+            if (this.StartOfPeriod < this.BirthDate)
             {
                 yield return new ValidationResult("Start date should be later than birthday");
             }

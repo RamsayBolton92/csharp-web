@@ -2,6 +2,8 @@
 @model BeautyAndThePet.Web.ViewModels.Pets.CreatePetInputModel
 @{
     this.ViewData["Title"] = "Create new pet";
+
+    var breeds = Model.Breeds?.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
@@ -28,9 +30,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Breed"></label>
-        <input asp-for="Breed" class="form-control" /> <!--id="myInput" onkeyup="myFunction()" -->
-        <span asp-validation-for="Breed" class="text-danger"></span>
+        <label asp-for="BreedId"></label>
+        <select asp-for="BreedId" asp-items="breeds" class="form-control"></select> <!--id="myInput" onkeyup="myFunction()" -->
+        <span asp-validation-for="BreedId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -40,15 +42,15 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Start"></label>
-        <input asp-for="Start" class="form-control" />
-        <span asp-validation-for="Start" class="text-danger"></span>
+        <label asp-for="StartOfPeriod"></label>
+        <input asp-for="StartOfPeriod" class="form-control" />
+        <span asp-validation-for="StartOfPeriod" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="End"></label>
-        <input asp-for="End" class="form-control" />
-        <span asp-validation-for="End" class="text-danger"></span>
+        <label asp-for="EndOfPeriod"></label>
+        <input asp-for="EndOfPeriod" class="form-control" />
+        <span asp-validation-for="EndOfPeriod" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -67,41 +69,42 @@
 
 </form>
 
+@*<partial name="_ValidationScriptsPartial" />*@
 
 @*<ul id="myUL">
-    <li><a href="#">Adele</a></li>
-    <li><a href="#">Agnes</a></li>
+        <li><a href="#">Adele</a></li>
+        <li><a href="#">Agnes</a></li>
 
-    <li><a href="#">Billy</a></li>
-    <li><a href="#">Bob</a></li>
+        <li><a href="#">Billy</a></li>
+        <li><a href="#">Bob</a></li>
 
-    <li><a href="#">Calvin</a></li>
-    <li><a href="#">Christina</a></li>
-    <li><a href="#">Cindy</a></li>
-</ul>*@
+        <li><a href="#">Calvin</a></li>
+        <li><a href="#">Christina</a></li>
+        <li><a href="#">Cindy</a></li>
+    </ul>*@
 
 @*@section Scripts {
-    <script>
-        function myFunction() {
-            // Declare variables
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName('li');
+        <script>
+            function myFunction() {
+                // Declare variables
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById('myInput');
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName('li');
 
-            // Loop through all list items, and hide those who don't match the search query
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
+                // Loop through all list items, and hide those who don't match the search query
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
                 }
             }
-        }
-    </script>
-}*@
+        </script>
+    }*@
 
 <!--<partial name="_ValidationScriptsPartial" />-->

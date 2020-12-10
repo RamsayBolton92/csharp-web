@@ -30,52 +30,61 @@
                 Name = input.Name,
                 Sex = input.Sex,
                 TypeOfPet = input.TypeOfPet,
-                Breed = this.breedsRepo.All().FirstOrDefault(x => x.Name == input.Breed),
+                BreedId = input.BreedId,
                 BirthDate = input.BirthDate,
-                SexualStimulus = new SexualStimulus() { Start = input.Start, End = input.End },
+                StartOfPeriod = input.StartOfPeriod,
+                EndOfPeriod = input.EndOfPeriod,
                 Description = input.Description,
                 OwnerId = userId,
             };
 
-            // /wwwroot/images/recipes/jhdsi-343g3h453-=g34g.jpg
-            Directory.CreateDirectory($"{imagePath}/pets/");
-            foreach (var image in input.Images)
+            if (!input.Images.Any())
             {
-                var extension = Path.GetExtension(image.FileName).TrimStart('.');
-
-                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-                {
-                    throw new Exception($"Invalid image extension {extension}");
-                }
-
                 var dbImage = new Image
                 {
-                    AddedByUserId = userId,
-                    Extension = extension,
+                    RemoteImageUrl = "https://toppng.com/uploads/preview/emojis-dog-115498371889fvynkylva.png",
                 };
 
                 pet.Images.Add(dbImage);
+            }
+            else
+            {
+                Directory.CreateDirectory($"{imagePath}/pets/");
+                foreach (var image in input.Images)
+                {
+                    var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
-                var physicalPath = $"{imagePath}/pets/{dbImage.Id}.{extension}";
+                    if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                    {
+                        throw new Exception($"Invalid image extension {extension}");
+                    }
 
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await image.CopyToAsync(fileStream);
+                    var dbImage = new Image
+                    {
+                        AddedByUserId = userId,
+                        Extension = extension,
+                    };
+
+                    pet.Images.Add(dbImage);
+
+                    var physicalPath = $"{imagePath}/pets/{dbImage.Id}.{extension}";
+
+                    using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                    await image.CopyToAsync(fileStream);
+                }
             }
 
             await this.petsRepo.AddAsync(pet);
             await this.petsRepo.SaveChangesAsync();
         }
 
-
-
         public IEnumerable<PetViewModel> GetAll(int pageId, int petsPerPage = 10)
         {
-            //var recipes = this.recipesRepository.AllAsNoTracking()
+            // var recipes = this.recipesRepository.AllAsNoTracking()
             //    .OrderByDescending(x => x.Id)
             //    .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
             //    .To<T>().ToList();
-            //return recipes;
-
+            // return recipes;
             var pets = this.petsRepo.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
@@ -91,15 +100,17 @@
 
         public IEnumerable<PetViewModel> GetMatchedPets(int id, string userId)
         {
-            var myPet = this.petsRepo.All().Where(x => x.OwnerId == userId).FirstOrDefault(x => x.Id == id);
+            var myPet = this.petsRepo.All()
+                .Where(x => x.OwnerId == userId)
+                .FirstOrDefault(x => x.Id == id);
 
             var pets = this.petsRepo.All()
                 .Where(x => x.OwnerId != userId)
                 .To<PetViewModel>().ToList();
 
-            //&& x.TypeOfPet == myPet.TypeOfPet
-            //    && x.Sex != myPet.Sex
-            //&& x.Breed.Name == myPet.Breed.Name;
+            // && x.TypeOfPet == myPet.TypeOfPet
+            // && x.Sex != myPet.Sex
+            // && x.Breed.Name == myPet.Breed.Name;
             return pets;
         }
 
@@ -129,13 +140,11 @@
             pet.Name = input.Name;
             pet.BirthDate = input.BirthDate;
             pet.TypeOfPet = input.TypeOfPet;
+            pet.BreedId = input.BreedId;
             pet.Description = input.Description;
             pet.Sex = input.Sex;
-            pet.SexualStimulus.Start = input.SexualStimulusStart;
-            pet.SexualStimulus.End = input.SexualStimulusEnd;
-
-            //recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
-            //recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
+            pet.StartOfPeriod = input.StartOfPeriod;
+            pet.EndOfPeriod = input.EndOfPeriod;
 
             await this.petsRepo.SaveChangesAsync();
         }

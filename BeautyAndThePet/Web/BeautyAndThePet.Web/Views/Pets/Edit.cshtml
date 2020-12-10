@@ -2,6 +2,9 @@
 @model BeautyAndThePet.Web.ViewModels.Pets.EditPetInputModel
 @{
     ViewData["Title"] = "Edit pet";
+
+
+    var breeds = Model.Breeds.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
 <form method="post" id="editForm" class="col-md-6 offset-md-3 ">
@@ -25,20 +28,27 @@
         <select asp-for="TypeOfPet" class="form-control" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
         <span asp-validation-for="TypeOfPet" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label asp-for="BreedId"></label>
+        <select asp-for="BreedId" class="form-control" asp-items="breeds"></select>
+        <span asp-validation-for="BreedId" class="text-danger"></span>
+    </div>
+
     <div class="form-group">
         <label asp-for="BirthDate"></label>
         <input asp-for="BirthDate" class="form-control" />
         <span asp-validation-for="BirthDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SexualStimulusStart"></label>
-        <input asp-for="SexualStimulusStart" class="form-control" />
-        <span asp-validation-for="SexualStimulusStart" class="text-danger"></span>
+        <label asp-for="StartOfPeriod"></label>
+        <input asp-for="StartOfPeriod" class="form-control" />
+        <span asp-validation-for="StartOfPeriod" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SexualStimulusEnd"></label>
-        <input asp-for="SexualStimulusEnd" class="form-control" />
-        <span asp-validation-for="SexualStimulusEnd" class="text-danger"></span>
+        <label asp-for="EndOfPeriod"></label>
+        <input asp-for="EndOfPeriod" class="form-control" />
+        <span asp-validation-for="EndOfPeriod" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
@@ -54,26 +64,25 @@
 
 
 
-
 <!-- Modal -->
 @*<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm edit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Do you confirm this changes?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm edit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Do you confirm this changes?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
