@@ -4,13 +4,13 @@
 
     using BeautyAndThePet.Data.Common.Models;
 
-    public class Message : BaseDeletableModel<int>
+    public class SentMessage : BaseDeletableModel<int>
     {
         public int Id { get; set; }
 
-        public virtual ApplicationUser From { get; set; }
+        public string ApplicationUserId { get; set; }
 
-        public virtual ApplicationUser To { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string Text { get; set; }
 

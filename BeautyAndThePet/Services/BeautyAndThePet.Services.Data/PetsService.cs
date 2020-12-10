@@ -105,7 +105,7 @@
                 .FirstOrDefault(x => x.Id == id);
 
             var pets = this.petsRepo.All()
-                .Where(x => x.OwnerId != userId)
+                .Where(x => x.OwnerId != userId && x.BreedId == myPet.BreedId)
                 .To<PetViewModel>().ToList();
 
             // && x.TypeOfPet == myPet.TypeOfPet

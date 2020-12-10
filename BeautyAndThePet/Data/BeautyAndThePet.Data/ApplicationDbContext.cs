@@ -34,7 +34,9 @@
 
         public DbSet<Breed> Breeds { get; set; }
 
-        public DbSet<Message> Messages { get; set; }
+        public DbSet<ReceivedMessage> ReceivedMessages { get; set; }
+
+        public DbSet<SentMessage> SentMessages { get; set; }
 
         public DbSet<Image> Images { get; set; }
 

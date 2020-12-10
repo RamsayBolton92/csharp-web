@@ -18,6 +18,8 @@ namespace BeautyAndThePet.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Pets = new HashSet<Pet>();
             this.PetImages = new HashSet<Image>();
+            this.SentMessages = new HashSet<SentMessage>();
+            this.ReceivedMessages = new HashSet<ReceivedMessage>();
         }
 
         public int MyProperty { get; set; }
@@ -41,6 +43,10 @@ namespace BeautyAndThePet.Data.Models
         public virtual ICollection<Pet> Pets { get; set; }
 
         public virtual ICollection<Image> PetImages { get; set; }
+
+        public virtual ICollection<ReceivedMessage> ReceivedMessages { get; set; }
+
+        public virtual ICollection<SentMessage> SentMessages { get; set; }
 
         public virtual Address Address { get; set; }
     }

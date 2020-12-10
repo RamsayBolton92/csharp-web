@@ -25,6 +25,11 @@
 
     <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
 }
+else
+{
+
+    <a asp-controller="Messages" asp-action="New" asp-route-id="@Model.Id" class="btn btn-secondary">Message</a>
+}
 
 
 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))@*Or is owner*@

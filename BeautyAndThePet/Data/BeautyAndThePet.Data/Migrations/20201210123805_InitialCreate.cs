@@ -245,38 +245,6 @@ namespace BeautyAndThePet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FromId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ToId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SentOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Messages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Messages_AspNetUsers_FromId",
-                        column: x => x.FromId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Messages_AspNetUsers_ToId",
-                        column: x => x.ToId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pets",
                 columns: table => new
                 {
@@ -309,6 +277,56 @@ namespace BeautyAndThePet.Data.Migrations
                         name: "FK_Pets_Breeds_BreedId",
                         column: x => x.BreedId,
                         principalTable: "Breeds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReceivedMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SentOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReceivedMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReceivedMessages_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SentMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SentOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SentMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SentMessages_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -422,21 +440,6 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "PetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_FromId",
-                table: "Messages",
-                column: "FromId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_IsDeleted",
-                table: "Messages",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_ToId",
-                table: "Messages",
-                column: "ToId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pets_BreedId",
                 table: "Pets",
                 column: "BreedId");
@@ -450,6 +453,26 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "IX_Pets_OwnerId",
                 table: "Pets",
                 column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceivedMessages_ApplicationUserId",
+                table: "ReceivedMessages",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceivedMessages_IsDeleted",
+                table: "ReceivedMessages",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SentMessages_ApplicationUserId",
+                table: "SentMessages",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SentMessages_IsDeleted",
+                table: "SentMessages",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
@@ -481,7 +504,10 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "ReceivedMessages");
+
+            migrationBuilder.DropTable(
+                name: "SentMessages");
 
             migrationBuilder.DropTable(
                 name: "Settings");

@@ -44,6 +44,11 @@
                 yield return new ValidationResult("End date should be later than start date");
             }
 
+            if (this.StartOfPeriod > this.EndOfPeriod)
+            {
+                yield return new ValidationResult("End date should be later than start date");
+            }
+
             if (this.StartOfPeriod < this.BirthDate)
             {
                 yield return new ValidationResult("Start date should be later than birthday");
