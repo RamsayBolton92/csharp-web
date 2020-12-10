@@ -11,32 +11,38 @@
         <p>@Model.TypeOfPet</p>
         <p>@Model.BreedName</p>
         <p>@Model.Sex</p>
-        <p>@Model.SexualStimulusStart</p>
-        <p>@Model.SexualStimulusEnd</p>
+        <p>@Model.Start</p>
+        <p>@Model.End</p>
         <p>@Model.BirthDate</p>
         <p>@Model.Description</p>
         <p>@Model.OwnerUserName</p>
 
     </div>
 </div>
-@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName)) @*Or is owner*@
+
+@if (this.User.Identity.Name == Model.OwnerUserName)
 {
-    <li class="single-meta">
-        <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-    </li>
+
+    <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+}
+
+
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))@*Or is owner*@
+{
+
     @*<li class="single-meta">
-        <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
-        </form>
-        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-    </li>
-    <li class="single-meta">
-        <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
-            <button class="btn btn-warning">Send to my email</button>
-        </form>
-    </li>
-    <li class="single-meta">
-        <button class="btn btn-warning" onclick="window.print()">Print</button>
-    </li>*@
+            <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+            </form>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </li>
+        <li class="single-meta">
+            <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
+                <button class="btn btn-warning">Send to my email</button>
+            </form>
+        </li>
+        <li class="single-meta">
+            <button class="btn btn-warning" onclick="window.print()">Print</button>
+        </li>*@
 }
 
 

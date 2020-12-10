@@ -8,15 +8,13 @@
     public class SexualStimulus : BaseDeletableModel<int>
     {
         [ForeignKey("Pet")]
-
         public int Id { get; set; }
 
         public DateTime Start { get; set; }
 
+        // IN VIEW MODEL: public string Duration => $"{this.Start}-{this.End}";
         public DateTime End { get; set; }
 
-        // In VM
-        // public string Duration => $"{this.Start}-{this.End}";
 
         public virtual Pet Pet { get; set; }
     }

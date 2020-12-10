@@ -1,5 +1,7 @@
 ﻿namespace BeautyAndThePet.Web.ViewModels.Pets
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using AutoMapper;
@@ -18,11 +20,11 @@
 
         public string Sex { get; set; }
 
-        public string SexualStimulusStart { get; set; }
+        public DateTime Start { get; set; }
 
-        public string SexualStimulusEnd { get; set; }
+        public DateTime End { get; set; }
 
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string Description { get; set; }
 
@@ -38,8 +40,13 @@
         {
             configuration.CreateMap<Pet, PetViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(x =>
-                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                    opt.MapFrom(x => x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                        x.Images.FirstOrDefault().RemoteImageUrl :
+                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+                .ForMember(x => x.Start, opt =>
+                    opt.MapFrom(x => x.SexualStimulus.Start))
+                .ForMember(x => x.End, opt =>
+                    opt.MapFrom(x => x.SexualStimulus.End));
         }
     }
 }

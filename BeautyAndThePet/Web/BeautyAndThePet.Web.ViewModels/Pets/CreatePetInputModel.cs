@@ -18,23 +18,24 @@
         [Required]
         public TypeOfPet TypeOfPet { get; set; }
 
-        // Breeds should show as a list in forms
-        public string Breed { get; set; }
-
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         public DateTime Start { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         public DateTime End { get; set; }
 
         public string Description { get; set; }
-
+        
+        [Required]
         public IEnumerable<IFormFile> Images { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int BreedId { get; set; }
+
+        public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

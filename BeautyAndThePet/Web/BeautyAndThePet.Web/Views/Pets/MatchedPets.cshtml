@@ -14,8 +14,8 @@
             <p>@pet.TypeOfPet</p>
             <p>@pet.Sex</p>
             <p>@pet.BreedName</p>
-            <p>@pet.SexualStimulusStart</p>
-            <p>@pet.SexualStimulusEnd</p>
+            <p>@pet.Start</p>
+            <p>@pet.End</p>
             <p>@pet.BirthDate</p>
             <p>@pet.OwnerUserName</p>
             <p>@pet.OwnerAddressTown</p>
@@ -24,32 +24,33 @@
     </div>
 
     <a class="btn btn-primary" asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id">View</a>
+    <hr />
 }
 
 @*Pagination*@
 <hr />
 @*<nav aria-label="...">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
-        </li>
-        @if (Model.HasPrevousPage)
-        {
-            <li class="page-item"><a class="page-link" href="#">@Model.PrevousPageNumber</a></li>
-        }
-        <li class="page-item active" aria-current="page">
-            <span class="page-link">
-                @Model.Page
-                <span class="sr-only">(current)</span>
-            </span>
-        </li>
-        @if (Model.HasNextPage)
-        {
-            <li class="page-item"><a class="page-link" href="#">@Model.NextPageNumber</a></li>
-        }
-        <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text>}">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
-        </li>
-    </ul>
-</nav>*@
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
+            </li>
+            @if (Model.HasPrevousPage)
+            {
+                <li class="page-item"><a class="page-link" href="#">@Model.PrevousPageNumber</a></li>
+            }
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    @Model.Page
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            @if (Model.HasNextPage)
+            {
+                <li class="page-item"><a class="page-link" href="#">@Model.NextPageNumber</a></li>
+            }
+            <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
+            </li>
+        </ul>
+    </nav>*@
 

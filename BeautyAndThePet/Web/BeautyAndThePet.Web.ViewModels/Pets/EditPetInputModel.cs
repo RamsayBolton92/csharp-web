@@ -1,13 +1,14 @@
-﻿using AutoMapper;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Data.Models.Enumerations;
-using BeautyAndThePet.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace BeautyAndThePet.Web.ViewModels.Pets
+﻿namespace BeautyAndThePet.Web.ViewModels.Pets
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Data.Models.Enumerations;
+    using BeautyAndThePet.Services.Mapping;
+
     public class EditPetInputModel : IMapFrom<Pet>, IHaveCustomMappings, IValidatableObject
     {
         public int Id { get; set; }
@@ -16,45 +17,43 @@ namespace BeautyAndThePet.Web.ViewModels.Pets
 
         public virtual TypeOfPet TypeOfPet { get; set; }
 
+        public int BreedId { get; set; }
+
         public virtual Sex Sex { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
-        public DateTime SexualStimulusStart { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Start { get; set; }
 
-        public DateTime SexualStimulusEnd { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime End { get; set; }
 
         public string Description { get; set; }
+
+        public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Pet, EditPetInputModel>()
-                .ForMember(x => x.SexualStimulusStart, opt =>
+                .ForMember(x => x.Start, opt =>
                     opt.MapFrom(x => x.SexualStimulus.Start))
-                .ForMember(x => x.SexualStimulusEnd, opt =>
+                .ForMember(x => x.End, opt =>
                     opt.MapFrom(x => x.SexualStimulus.End));
         }
 
-        
-
         public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
         {
-            if (this.SexualStimulusStart > this.SexualStimulusEnd)
+            if (this.Start > this.End)
             {
                 yield return new ValidationResult("End date should be later than start date");
             }
 
-            if (this.SexualStimulusStart < this.BirthDate)
+            if (this.Start < this.BirthDate)
             {
                 yield return new ValidationResult("Start date should be later than birthday");
             }
         }
-
-
-        //public int BreedId { get; set; }
-
-        //public virtual Breed Breed { get; set; }
-
-
     }
 }

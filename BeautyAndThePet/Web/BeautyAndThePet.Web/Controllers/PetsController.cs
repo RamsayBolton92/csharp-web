@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeautyAndThePet.Data.Models;
@@ -16,24 +17,28 @@
     public class PetsController : Controller
     {
         private readonly IPetsService petsService;
+        private readonly IBreedsService breedsService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment environment;
 
-        public PetsController(IPetsService petsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
+        public PetsController(IPetsService petsService,IBreedsService breedsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
+            this.breedsService = breedsService;
             this.userManager = userManager;
             this.environment = environment;
         }
 
         public IActionResult Create()
         {
+            var breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
+
             var viewModel = new CreatePetInputModel
             {
                 Name = "Kapitan Salam",
                 Sex = Sex.Male,
                 TypeOfPet = TypeOfPet.Dog,
-                Breed = "Pincher ninja",
+                Breeds = breeds,
                 BirthDate = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
                 Description = "Very Aggressive",
                 Start = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
@@ -48,6 +53,9 @@
         {
             if (!this.ModelState.IsValid)
             {
+                var breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
+                input.Breeds = breeds;
+
                 return this.View(input);
             }
 
@@ -69,7 +77,11 @@
         [Authorize]
         public IActionResult Edit(int id)
         {
+            var breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
+
             var inputModel = this.petsService.GetById<EditPetInputModel>(id);
+            inputModel.Breeds = breeds;
+
 
             return this.View(inputModel);
         }
@@ -80,6 +92,8 @@
         {
             if (!this.ModelState.IsValid)
             {
+                var breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
+                input.Breeds = breeds;
                 return this.View(input);
             }
 

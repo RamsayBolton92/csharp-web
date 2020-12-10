@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201205155612_InCr")]
-    partial class InCr
+    [Migration("20201209081028_IC")]
+    partial class IC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -334,9 +334,6 @@ namespace BeautyAndThePet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");

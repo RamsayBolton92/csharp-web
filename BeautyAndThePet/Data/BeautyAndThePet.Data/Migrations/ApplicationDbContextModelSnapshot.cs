@@ -333,9 +333,6 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 

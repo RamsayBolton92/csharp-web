@@ -10,16 +10,16 @@
     <p>@Model.AboutUs</p>
     @if (this.User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Pets" asp-action="Create">Create pet</a>
-        <a asp-controller="Pets" asp-action="MyPets">My pets</a>
+        <a asp-controller="Pets" asp-action="Create" class="btn btn-primary">Create pet</a>
+        <a asp-controller="Pets" asp-action="MyPets" class="btn btn-primary">My pets</a>
         @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
 
 
     }
     else
     {
-        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <p>To visit us, you must <a asp-area="Identity" asp-page="/Account/Register">register</a>
+           or <a asp-area="Identity" asp-page="/Account/Login">login</a> if you already have an account</p>
         @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
     }
 

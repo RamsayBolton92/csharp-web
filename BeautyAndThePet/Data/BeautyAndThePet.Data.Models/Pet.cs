@@ -16,13 +16,13 @@
 
         public int Id { get; set; }
 
-		public string Name { get; set; }
+        public string Name { get; set; }
 
-		public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		public virtual TypeOfPet TypeOfPet { get; set; }
+        public virtual TypeOfPet TypeOfPet { get; set; }
 
         public string OwnerId { get; set; }
 
@@ -31,6 +31,7 @@
         public int BreedId { get; set; }
 
         public virtual Breed Breed { get; set; }
+
 
         public virtual SexualStimulus SexualStimulus { get; set; }
 

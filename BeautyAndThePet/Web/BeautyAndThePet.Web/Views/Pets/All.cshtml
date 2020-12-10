@@ -14,12 +14,13 @@
             <p>@pet.TypeOfPet</p>
             <p>@pet.BreedName</p>
             <p>@pet.Sex</p>
-            <p>@pet.SexualStimulusStart</p>
-            <p>@pet.SexualStimulusEnd</p>
+            <p>@pet.Start</p>
+            <p>@pet.End</p>
         </div>
     </div>
 
-    <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id">View</a>
+    <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" class="btn btn-primary">View</a>
+    <hr />
 }
 
 @*Pagination*@
