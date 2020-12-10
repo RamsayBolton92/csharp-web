@@ -32,8 +32,9 @@
 
         public virtual Breed Breed { get; set; }
 
+        public virtual DateTime StartOfPeriod { get; set; }
 
-        public virtual SexualStimulus SexualStimulus { get; set; }
+        public virtual DateTime EndOfPeriod { get; set; }
 
         public virtual Sex Sex { get; set; }
 

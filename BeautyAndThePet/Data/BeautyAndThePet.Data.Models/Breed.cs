@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using BeautyAndThePet.Data.Common.Models;
+    using BeautyAndThePet.Data.Models.Enumerations;
 
     public class Breed : BaseDeletableModel<int>
     {
@@ -16,5 +17,7 @@
         public string Characteristics { get; set; }
 
         public virtual ICollection<Pet> Pets { get; set; }
+
+        public virtual TypeOfPet TypeOfPet { get; set; }
     }
 }

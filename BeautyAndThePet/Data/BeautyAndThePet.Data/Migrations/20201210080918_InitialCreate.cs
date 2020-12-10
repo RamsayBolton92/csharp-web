@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class IC : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,7 @@ namespace BeautyAndThePet.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Characteristics = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeOfPet = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -287,6 +288,8 @@ namespace BeautyAndThePet.Data.Migrations
                     TypeOfPet = table.Column<int>(type: "int", nullable: false),
                     OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BreedId = table.Column<int>(type: "int", nullable: false),
+                    StartOfPeriod = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndOfPeriod = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -334,29 +337,6 @@ namespace BeautyAndThePet.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Images_Pets_PetId",
                         column: x => x.PetId,
-                        principalTable: "Pets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SexualStimules",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Start = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    End = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SexualStimules", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SexualStimules_Pets_Id",
-                        column: x => x.Id,
                         principalTable: "Pets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -475,11 +455,6 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SexualStimules_IsDeleted",
-                table: "SexualStimules",
-                column: "IsDeleted");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -510,9 +485,6 @@ namespace BeautyAndThePet.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Settings");
-
-            migrationBuilder.DropTable(
-                name: "SexualStimules");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

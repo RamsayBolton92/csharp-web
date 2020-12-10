@@ -41,8 +41,8 @@
                 Breeds = breeds,
                 BirthDate = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
                 Description = "Very Aggressive",
-                Start = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
-                End = DateTime.Parse("02.01.2021", CultureInfo.InvariantCulture),
+                StartOfPeriod = DateTime.Parse("01.01.2021", CultureInfo.InvariantCulture),
+                EndOfPeriod = DateTime.Parse("02.01.2021", CultureInfo.InvariantCulture),
             };
 
             return this.View(viewModel);

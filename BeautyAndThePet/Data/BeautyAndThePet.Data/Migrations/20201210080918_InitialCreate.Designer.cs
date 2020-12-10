@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201209081028_IC")]
-    partial class IC
+    [Migration("20201210080918_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -247,6 +247,9 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TypeOfPet")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -350,6 +353,9 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndOfPeriod")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -364,6 +370,9 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.Property<int>("Sex")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartOfPeriod")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TypeOfPet")
                         .HasColumnType("int");
@@ -409,36 +418,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("SexualStimules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -603,17 +582,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.SexualStimulus", b =>
-                {
-                    b.HasOne("BeautyAndThePet.Data.Models.Pet", "Pet")
-                        .WithOne("SexualStimulus")
-                        .HasForeignKey("BeautyAndThePet.Data.Models.SexualStimulus", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Pet");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationRole", null)
@@ -691,8 +659,6 @@ namespace BeautyAndThePet.Data.Migrations
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
                 {
                     b.Navigation("Images");
-
-                    b.Navigation("SexualStimulus");
                 });
 #pragma warning restore 612, 618
         }

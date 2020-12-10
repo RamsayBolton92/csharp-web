@@ -9,7 +9,7 @@
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Mapping;
 
-    public class EditPetInputModel : IMapFrom<Pet>, IHaveCustomMappings, IValidatableObject
+    public class EditPetInputModel : IMapFrom<Pet>, IValidatableObject
     {
         public int Id { get; set; }
 
@@ -25,32 +25,23 @@
         public DateTime BirthDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime Start { get; set; }
+        public DateTime StartOfPeriod { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime End { get; set; }
+        public DateTime EndOfPeriod { get; set; }
 
         public string Description { get; set; }
 
         public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration.CreateMap<Pet, EditPetInputModel>()
-                .ForMember(x => x.Start, opt =>
-                    opt.MapFrom(x => x.SexualStimulus.Start))
-                .ForMember(x => x.End, opt =>
-                    opt.MapFrom(x => x.SexualStimulus.End));
-        }
-
         public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
         {
-            if (this.Start > this.End)
+            if (this.StartOfPeriod > this.EndOfPeriod)
             {
                 yield return new ValidationResult("End date should be later than start date");
             }
 
-            if (this.Start < this.BirthDate)
+            if (this.StartOfPeriod < this.BirthDate)
             {
                 yield return new ValidationResult("Start date should be later than birthday");
             }

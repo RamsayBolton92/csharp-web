@@ -20,9 +20,9 @@
 
         public string Sex { get; set; }
 
-        public DateTime Start { get; set; }
+        public DateTime StartOfPeriod { get; set; }
 
-        public DateTime End { get; set; }
+        public DateTime EndOfPeriod { get; set; }
 
         public DateTime BirthDate { get; set; }
 
@@ -42,11 +42,7 @@
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x => x.Images.FirstOrDefault().RemoteImageUrl != null ?
                         x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
-                .ForMember(x => x.Start, opt =>
-                    opt.MapFrom(x => x.SexualStimulus.Start))
-                .ForMember(x => x.End, opt =>
-                    opt.MapFrom(x => x.SexualStimulus.End));
+                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
         }
     }
 }

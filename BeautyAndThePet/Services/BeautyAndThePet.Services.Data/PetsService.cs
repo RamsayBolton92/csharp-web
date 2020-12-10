@@ -32,7 +32,8 @@
                 TypeOfPet = input.TypeOfPet,
                 BreedId = input.BreedId,
                 BirthDate = input.BirthDate,
-                SexualStimulus = new SexualStimulus() { Start = input.Start, End = input.End },
+                StartOfPeriod = input.StartOfPeriod,
+                EndOfPeriod = input.EndOfPeriod,
                 Description = input.Description,
                 OwnerId = userId,
             };
@@ -142,8 +143,8 @@
             pet.BreedId = input.BreedId;
             pet.Description = input.Description;
             pet.Sex = input.Sex;
-            pet.SexualStimulus.Start = input.Start;
-            pet.SexualStimulus.End = input.End;
+            pet.StartOfPeriod = input.StartOfPeriod;
+            pet.EndOfPeriod = input.EndOfPeriod;
 
             await this.petsRepo.SaveChangesAsync();
         }

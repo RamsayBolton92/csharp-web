@@ -22,10 +22,10 @@
         public DateTime BirthDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime Start { get; set; }
+        public DateTime StartOfPeriod { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime End { get; set; }
+        public DateTime EndOfPeriod { get; set; }
 
         public string Description { get; set; }
         
@@ -39,12 +39,12 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (this.Start > this.End)
+            if (this.StartOfPeriod > this.EndOfPeriod)
             {
                 yield return new ValidationResult("End date should be later than start date");
             }
 
-            if (this.Start < this.BirthDate)
+            if (this.StartOfPeriod < this.BirthDate)
             {
                 yield return new ValidationResult("Start date should be later than birthday");
             }
