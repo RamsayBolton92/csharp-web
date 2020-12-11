@@ -59,6 +59,7 @@
             var messages = this.receivedMessagesRepo.All().Where(x => x.ApplicationUserId == userId)
                 .Select(x => new MessageViewModel
                 { 
+                    Id = x.Id,
                     From = x.From,
                     Text = x.Text,
                     SentOn = x.SentOn,
@@ -72,12 +73,48 @@
             var messages = this.sentMessagesRepo.All().Where(x => x.ApplicationUserId == userId)
                 .Select(x => new MessageViewModel
                 {
+                    Id = x.Id,
                     To = x.To,
                     Text = x.Text,
                     SentOn = x.SentOn,
                 }).ToList();
 
             return messages;
+        }
+
+        public MessageViewModel GetSingleSentMessage(int id, string userId)
+        {
+            var message = this.sentMessagesRepo.All()
+                .Where(x => x.Id == id)
+                .Select(x => new MessageViewModel()
+                {
+                    Id = x.Id,
+                    To = x.To,
+                    Text = x.Text,
+                    SentOn = x.SentOn,
+                })
+                .FirstOrDefault();
+
+
+            return message;
+        }
+
+        public MessageViewModel GetSingleReceivedMessage(int id, string userId)
+        {
+
+
+            var message = this.receivedMessagesRepo.All()
+                .Where(x => x.Id == id)
+                .Select(x => new MessageViewModel()
+                {
+                    Id = x.Id,
+                    From = x.From,
+                    Text = x.Text,
+                    SentOn = x.SentOn,
+                })
+                .FirstOrDefault();
+
+            return message;
         }
     }
 }

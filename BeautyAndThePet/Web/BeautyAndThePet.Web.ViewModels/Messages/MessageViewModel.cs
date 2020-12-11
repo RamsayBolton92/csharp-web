@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BeautyAndThePet.Web.ViewModels.Messages
+﻿namespace BeautyAndThePet.Web.ViewModels.Messages
 {
+    using System;
+
     public class MessageViewModel
     {
         public int Id { get; set; }

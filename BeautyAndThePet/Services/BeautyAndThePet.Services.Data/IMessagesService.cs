@@ -14,5 +14,9 @@
         IEnumerable<MessageViewModel> GetReceivedMessages(string userId);
 
         IEnumerable<MessageViewModel> GetSentMessages(string userId);
+
+        MessageViewModel GetSingleSentMessage(int id, string userId);
+
+        MessageViewModel GetSingleReceivedMessage(int id, string userId);
     }
 }

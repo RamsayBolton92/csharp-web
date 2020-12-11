@@ -80,5 +80,23 @@
         {
             return this.View();
         }
+
+        public async Task<IActionResult> ReadSentMessage(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var messageViewModel = this.messagesService.GetSingleSentMessage(id, user.Id);
+
+            return this.View(messageViewModel);
+        }
+
+        public async Task<IActionResult> ReadReceivedMessage(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var messageViewModel = this.messagesService.GetSingleReceivedMessage(id, user.Id);
+
+            return this.View(messageViewModel);
+        }
     }
 }
