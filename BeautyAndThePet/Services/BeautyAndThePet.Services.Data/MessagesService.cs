@@ -1,12 +1,13 @@
 ﻿namespace BeautyAndThePet.Services.Data
 {
-    using BeautyAndThePet.Data.Common.Repositories;
-    using BeautyAndThePet.Data.Models;
-    using BeautyAndThePet.Web.ViewModels.Messages;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Common.Repositories;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Web.ViewModels.Messages;
 
     public class MessagesService : IMessagesService
     {
@@ -59,6 +60,19 @@
                 .Select(x => new MessageViewModel
                 { 
                     From = x.From,
+                    Text = x.Text,
+                    SentOn = x.SentOn,
+                }).ToList();
+
+            return messages;
+        }
+
+        public IEnumerable<MessageViewModel> GetSentMessages(string userId)
+        {
+            var messages = this.sentMessagesRepo.All().Where(x => x.ApplicationUserId == userId)
+                .Select(x => new MessageViewModel
+                {
+                    To = x.To,
                     Text = x.Text,
                     SentOn = x.SentOn,
                 }).ToList();

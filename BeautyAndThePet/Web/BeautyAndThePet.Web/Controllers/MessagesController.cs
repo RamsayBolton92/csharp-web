@@ -1,5 +1,8 @@
 ﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels.Messages;
@@ -7,8 +10,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     public class MessagesController : Controller
     {
@@ -61,14 +62,18 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var petsViewModel = new MessagesListViewModel() { Messages = this.messagesService.GetReceivedMessages(user.Id) };
+            var receivedMessagesViewModel = new MessagesListViewModel() { Messages = this.messagesService.GetReceivedMessages(user.Id) };
 
-            return this.View(petsViewModel);
+            return this.View(receivedMessagesViewModel);
         }
 
-        public IActionResult Sent()
+        public async Task<IActionResult> Sent()
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var sentMessagesViewModel = new MessagesListViewModel() { Messages = this.messagesService.GetSentMessages(user.Id) };
+
+            return this.View(sentMessagesViewModel);
         }
 
         public IActionResult Unread()

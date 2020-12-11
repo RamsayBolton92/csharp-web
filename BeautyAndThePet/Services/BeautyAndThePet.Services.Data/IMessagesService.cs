@@ -12,5 +12,7 @@
         Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId, string ownerId);
 
         IEnumerable<MessageViewModel> GetReceivedMessages(string userId);
+
+        IEnumerable<MessageViewModel> GetSentMessages(string userId);
     }
 }
