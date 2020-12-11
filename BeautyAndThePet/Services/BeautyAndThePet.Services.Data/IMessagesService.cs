@@ -7,9 +7,9 @@
 
     public interface IMessagesService
     {
-        Task CreateSentMessageAsync(MessageInputViewModel input, string ownerId);
+        Task CreateSentMessageAsync(MessageInputViewModel input, string userId,string ownerId);
 
-        Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId);
+        Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId, string ownerId);
 
         IEnumerable<MessageViewModel> GetReceivedMessages(string userId);
     }

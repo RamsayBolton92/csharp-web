@@ -23,12 +23,13 @@
             this.receivedMessagesRepo = receivedMessagesRepo;
         }
 
-        public async Task CreateSentMessageAsync(MessageInputViewModel input, string ownerId)
+        public async Task CreateSentMessageAsync(MessageInputViewModel input, string userId, string ownerId)
         {
             var message = new SentMessage
             {
                 // To
-                ApplicationUserId = ownerId,
+                ApplicationUserId = userId,
+                To = ownerId,
                 Text = input.Text,
                 SentOn = DateTime.UtcNow,
             };
@@ -37,12 +38,13 @@
             await this.sentMessagesRepo.SaveChangesAsync();
         }
 
-        public async Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId)
+        public async Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId, string ownerId)
         {
             var message = new ReceivedMessage
             {
                 // From
-                ApplicationUserId = userId,
+                ApplicationUserId = ownerId,
+                From = userId,
                 Text = input.Text,
                 SentOn = DateTime.UtcNow,
             };

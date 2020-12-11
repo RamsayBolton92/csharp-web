@@ -49,17 +49,15 @@
 
             var pet = this.petsService.GetById<PetViewModel>(id);
             var petOwner = pet.OwnerId;
-
-            await this.messagesService.CreateSentMessageAsync(input, petOwner);
-
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.messagesService.CreateReceivedMessageAsync(input, user.Id);
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, petOwner);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, petOwner);
 
             return this.Redirect("/Pets/MyPets");
         }
 
-        public async Task<IActionResult> Recieved()
+        public async Task<IActionResult> Received()
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
