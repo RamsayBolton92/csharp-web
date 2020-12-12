@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201212113217_User.DateOfBirth")]
-    partial class UserDateOfBirth
+    [Migration("20201212144408_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,7 +143,7 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -572,7 +572,9 @@ namespace BeautyAndThePet.Data.Migrations
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
                         .WithMany("Habitants")
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });

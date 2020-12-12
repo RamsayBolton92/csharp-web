@@ -48,6 +48,8 @@ namespace BeautyAndThePet.Data.Models
 
         public virtual ICollection<SentMessage> SentMessages { get; set; }
 
+        public int AddressId { get; set; }
+
         public virtual Address Address { get; set; }
 
         public DateTime DateOfBirth { get; set; }
