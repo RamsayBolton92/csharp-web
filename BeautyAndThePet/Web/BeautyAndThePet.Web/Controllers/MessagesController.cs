@@ -18,7 +18,7 @@
         private readonly IMessagesService messagesService;
 
         public MessagesController(IPetsService petsService,
-            UserManager<ApplicationUser> userManager, 
+            UserManager<ApplicationUser> userManager,
             IMessagesService messagesService)
         {
             this.petsService = petsService;
@@ -45,15 +45,16 @@
         {
             if (!this.ModelState.IsValid)
             {
-               return this.View(input);
+                return this.View(input);
             }
 
             var pet = this.petsService.GetById<PetViewModel>(id);
-            var petOwner = pet.OwnerId;
+
+            var owner = await this.userManager.FindByIdAsync(pet.OwnerId);
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.messagesService.CreateSentMessageAsync(input, user.Id, petOwner);
-            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, petOwner);
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, owner.UserName);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.UserName, pet.OwnerId);
 
             return this.Redirect("/Pets/MyPets");
         }
@@ -105,14 +106,23 @@
         }
 
         [Authorize]
-        public IActionResult NewEmpty()
+        public async Task<IActionResult> NewEmpty(string to)
         {
-            
-            var user = this.User.Identity.Name;
+            var user = await this.userManager.GetUserAsync(this.User);
 
-            var messageInput = new MessageInputViewModel { From = user, SentOn = DateTime.UtcNow };
 
-            return this.View(messageInput);
+            if (to != null)
+            {
+                var messageInput = new MessageInputViewModel { From = user.UserName, To = to, SentOn = DateTime.UtcNow };
+
+                return this.View(messageInput);
+            }
+            else
+            {
+                var messageInput = new MessageInputViewModel { From = user.UserName, SentOn = DateTime.UtcNow };
+
+                return this.View(messageInput);
+            }
         }
 
         [HttpPost]
@@ -129,10 +139,10 @@
             var receiverName = input.To;
             var receiver = await this.userManager.FindByNameAsync(receiverName);
 
-            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiver.Id);
-            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, receiver.Id);
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiverName);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.UserName, receiver.Id);
 
-            return this.Redirect("/Messages");
+            return this.Redirect("/Messages/Sent");
         }
     }
 }

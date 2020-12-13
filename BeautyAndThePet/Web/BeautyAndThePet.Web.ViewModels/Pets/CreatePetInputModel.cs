@@ -16,23 +16,28 @@
         public Sex Sex { get; set; }
 
         [Required]
+        [Display(Name = "Animal specie")]
         public TypeOfPet TypeOfPet { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Date of birth")]
         public DateTime BirthDate { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Start of active sexual period")]
         public DateTime StartOfPeriod { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "End of active sexual period")]
         public DateTime EndOfPeriod { get; set; }
 
         public string Description { get; set; }
-        
+
         [Required]
         public IEnumerable<IFormFile> Images { get; set; }
 
         [Range(1, int.MaxValue)]
+        [Display(Name = "Breed")]
         public int BreedId { get; set; }
 
         public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }

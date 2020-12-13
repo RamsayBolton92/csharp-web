@@ -1,6 +1,7 @@
 ﻿namespace BeautyAndThePet.Web.ViewModels.Pets
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
@@ -35,6 +36,8 @@
         public string OwnerAddressTown { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

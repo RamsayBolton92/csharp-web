@@ -11,26 +11,25 @@
 
     public class MessagesService : IMessagesService
     {
-        private readonly IDeletableEntityRepository<ApplicationUser> usersRepo;
         private readonly IDeletableEntityRepository<SentMessage> sentMessagesRepo;
         private readonly IDeletableEntityRepository<ReceivedMessage> receivedMessagesRepo;
 
-        public MessagesService(IDeletableEntityRepository<ApplicationUser> usersRepo,
+        public MessagesService(
             IDeletableEntityRepository<SentMessage> sentMessagesRepo, 
             IDeletableEntityRepository<ReceivedMessage> receivedMessagesRepo)
         {
-            this.usersRepo = usersRepo;
             this.sentMessagesRepo = sentMessagesRepo;
             this.receivedMessagesRepo = receivedMessagesRepo;
         }
 
-        public async Task CreateSentMessageAsync(MessageInputViewModel input, string userId, string ownerId)
+        public async Task CreateSentMessageAsync(MessageInputViewModel input, string userId, string ownerName)
         {
+            
             var message = new SentMessage
             {
                 // To
                 ApplicationUserId = userId,
-                To = ownerId,
+                To = ownerName,
                 Text = input.Text,
                 SentOn = DateTime.UtcNow,
             };
@@ -39,13 +38,13 @@
             await this.sentMessagesRepo.SaveChangesAsync();
         }
 
-        public async Task CreateReceivedMessageAsync(MessageInputViewModel input, string userId, string ownerId)
+        public async Task CreateReceivedMessageAsync(MessageInputViewModel input, string userName, string ownerId)
         {
             var message = new ReceivedMessage
             {
                 // From
                 ApplicationUserId = ownerId,
-                From = userId,
+                From = userName,
                 Text = input.Text,
                 SentOn = DateTime.UtcNow,
             };
@@ -61,7 +60,7 @@
                 { 
                     Id = x.Id,
                     From = x.From,
-                    Text = x.Text,
+                    Text = x.Text.Length > 20 ? x.Text.Substring(0, 20) + "..." : x.Text,
                     SentOn = x.SentOn,
                 }).ToList();
 
@@ -75,7 +74,7 @@
                 {
                     Id = x.Id,
                     To = x.To,
-                    Text = x.Text,
+                    Text = x.Text.Length > 20 ? x.Text.Substring(0, 20) + "..." : x.Text,
                     SentOn = x.SentOn,
                 }).ToList();
 
