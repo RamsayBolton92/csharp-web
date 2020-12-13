@@ -103,5 +103,36 @@
         {
             return this.View();
         }
+
+        [Authorize]
+        public IActionResult NewEmpty()
+        {
+            
+            var user = this.User.Identity.Name;
+
+            var messageInput = new MessageInputViewModel { From = user, SentOn = DateTime.UtcNow };
+
+            return this.View(messageInput);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> NewEmpty(MessageInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var receiverName = input.To;
+            var receiver = await this.userManager.FindByNameAsync(receiverName);
+
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiver.Id);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, receiver.Id);
+
+            return this.Redirect("/Messages");
+        }
     }
 }
