@@ -208,7 +208,8 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.HasIndex("IsDeleted");
 
@@ -569,8 +570,8 @@ namespace BeautyAndThePet.Data.Migrations
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
-                        .WithMany("Habitants")
-                        .HasForeignKey("AddressId")
+                        .WithOne("Habitant")
+                        .HasForeignKey("BeautyAndThePet.Data.Models.ApplicationUser", "AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -682,7 +683,7 @@ namespace BeautyAndThePet.Data.Migrations
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Address", b =>
                 {
-                    b.Navigation("Habitants");
+                    b.Navigation("Habitant");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>

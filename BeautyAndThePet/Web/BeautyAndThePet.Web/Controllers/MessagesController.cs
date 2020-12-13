@@ -98,5 +98,10 @@
 
             return this.View(messageViewModel);
         }
+
+        public IActionResult MessagesNav()
+        {
+            return this.View();
+        }
     }
 }

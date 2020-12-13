@@ -414,7 +414,8 @@ namespace BeautyAndThePet.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_AddressId",
                 table: "AspNetUsers",
-                column: "AddressId");
+                column: "AddressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_IsDeleted",

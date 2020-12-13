@@ -6,14 +6,15 @@
 
 @foreach (var message in Model.Messages)
 {
-    <h1>@this.ViewData["Title"]</h1>
     <div>
-        <p>@message.From</p>
-        <p>@message.Text</p>
-        <p>@message.SentOn</p>
+        <h1>@this.ViewData["Title"]</h1>
+        <div>
+            <p>@message.From</p>
+            <p>@message.Text</p>
+            <p>@message.SentOn</p>
+        </div>
+        <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadReceivedMessage" asp-route-id="@message.Id">Read</a>
+        <hr />
     </div>
 
-    <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadReceivedMessage" asp-route-id="@message.Id">Read</a>
-
-    <hr />
 }
