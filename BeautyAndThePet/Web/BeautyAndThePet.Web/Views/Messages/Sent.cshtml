@@ -1,5 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using BeautyAndThePet.Web.ViewModels.Messages
+@model MessagesListViewModel
 @{
+    this.ViewData["Title"] = "Unread messages";
+}
+
+@foreach (var message in Model.Messages)
+{
+    <h1>@this.ViewData["Title"]</h1>
+    <div>
+        <p>@message.To</p>
+        <p>@message.Text</p>
+        <p>@message.SentOn</p>
+    </div>
+
+    <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadSentMessage" asp-route-id="@message.Id">View</a>
+
+    <hr />
 }

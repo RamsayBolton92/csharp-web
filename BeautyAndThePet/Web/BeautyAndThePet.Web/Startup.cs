@@ -67,6 +67,7 @@
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IPetsService, PetsService>();
             services.AddTransient<IBreedsService, BreedsService>();
+            services.AddTransient<IMessagesService, MessagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,6 +29,7 @@
                               new RolesSeeder(),
                               new SettingsSeeder(),
                               new AboutsSeeder(),
+                              new AddressSeeder(),
                               new BreedsSeeder(),
                               new UserAdminSeeder(),
                           };

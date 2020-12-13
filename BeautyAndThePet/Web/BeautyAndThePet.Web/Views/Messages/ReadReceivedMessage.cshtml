@@ -1,0 +1,16 @@
+﻿@using BeautyAndThePet.Web.ViewModels.Messages
+@model MessageViewModel
+@{
+    this.ViewData["Title"] = "View message";
+}
+
+<div>
+    <p>@Model.From</p>
+    <p>@Model.To</p>
+    <p>@Model.Text</p>
+    <p>@Model.SentOn</p>
+</div>
+
+@*<input type="hidden" asp-for="@message.Id" />*@
+
+<a class="btn btn-primary" asp-controller="Messages" asp-action="Received">Back</a>

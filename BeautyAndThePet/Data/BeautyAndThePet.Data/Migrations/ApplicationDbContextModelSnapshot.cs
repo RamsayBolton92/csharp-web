@@ -141,7 +141,7 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -149,6 +149,9 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -205,7 +208,8 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.HasIndex("IsDeleted");
 
@@ -287,48 +291,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FromId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("SentOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FromId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ToId");
-
-                    b.ToTable("Messages");
-                });
-
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
                 {
                     b.Property<int>("Id")
@@ -384,6 +346,89 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.ReceivedMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("From")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SentOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("ReceivedMessages");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.SentMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SentOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("To")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("SentMessages");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Setting", b =>
@@ -525,8 +570,10 @@ namespace BeautyAndThePet.Data.Migrations
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
-                        .WithMany("Habitants")
-                        .HasForeignKey("AddressId");
+                        .WithOne("Habitant")
+                        .HasForeignKey("BeautyAndThePet.Data.Models.ApplicationUser", "AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });
@@ -548,21 +595,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Pet");
                 });
 
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.Message", b =>
-                {
-                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "From")
-                        .WithMany()
-                        .HasForeignKey("FromId");
-
-                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "To")
-                        .WithMany()
-                        .HasForeignKey("ToId");
-
-                    b.Navigation("From");
-
-                    b.Navigation("To");
-                });
-
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Breed", "Breed")
@@ -578,6 +610,24 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Breed");
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.ReceivedMessage", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.SentMessage", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -633,7 +683,7 @@ namespace BeautyAndThePet.Data.Migrations
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Address", b =>
                 {
-                    b.Navigation("Habitants");
+                    b.Navigation("Habitant");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
@@ -646,7 +696,11 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.Navigation("Pets");
 
+                    b.Navigation("ReceivedMessages");
+
                     b.Navigation("Roles");
+
+                    b.Navigation("SentMessages");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Breed", b =>

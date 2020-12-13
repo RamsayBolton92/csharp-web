@@ -1,16 +1,12 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using BeautyAndThePet.Data.Common.Models;
 
     public class Address : BaseDeletableModel<int>
     {
-        public Address()
-        {
-            this.Habitants = new HashSet<ApplicationUser>();
-        }
-
+        [ForeignKey("ApplicationUser")]
         public int Id { get; set; }
 
         public string Country { get; set; }
@@ -23,6 +19,6 @@
 
         public string Number { get; set; }
 
-        public virtual ICollection<ApplicationUser> Habitants { get; set; }
+        public virtual ApplicationUser Habitant { get; set; }
     }
 }

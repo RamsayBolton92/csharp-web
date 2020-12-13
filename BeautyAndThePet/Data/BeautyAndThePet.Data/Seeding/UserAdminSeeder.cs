@@ -30,6 +30,7 @@
                 PhoneNumber = "0988392245",
                 PhoneNumberConfirmed = true,
                 IsDeleted = false,
+                AddressId = 1,
             };
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
