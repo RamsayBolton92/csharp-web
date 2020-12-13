@@ -18,7 +18,7 @@
         private readonly IMessagesService messagesService;
 
         public MessagesController(IPetsService petsService,
-            UserManager<ApplicationUser> userManager, 
+            UserManager<ApplicationUser> userManager,
             IMessagesService messagesService)
         {
             this.petsService = petsService;
@@ -45,15 +45,16 @@
         {
             if (!this.ModelState.IsValid)
             {
-               return this.View(input);
+                return this.View(input);
             }
 
             var pet = this.petsService.GetById<PetViewModel>(id);
-            var petOwner = pet.OwnerId;
+
+            var owner = await this.userManager.FindByIdAsync(pet.OwnerId);
             var user = await this.userManager.GetUserAsync(this.User);
 
-            await this.messagesService.CreateSentMessageAsync(input, user.Id, petOwner);
-            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, petOwner);
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, owner.UserName);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.UserName, pet.OwnerId);
 
             return this.Redirect("/Pets/MyPets");
         }
@@ -102,6 +103,64 @@
         public IActionResult MessagesNav()
         {
             return this.View();
+        }
+
+        [Authorize]
+<<<<<<< HEAD
+        public async Task<IActionResult> NewEmpty(string to)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+
+            if (to != null)
+            {
+                var messageInput = new MessageInputViewModel { From = user.UserName, To = to, SentOn = DateTime.UtcNow };
+
+                return this.View(messageInput);
+            }
+            else
+            {
+                var messageInput = new MessageInputViewModel { From = user.UserName, SentOn = DateTime.UtcNow };
+
+                return this.View(messageInput);
+            }
+=======
+        public IActionResult NewEmpty()
+        {
+            
+            var user = this.User.Identity.Name;
+
+            var messageInput = new MessageInputViewModel { From = user, SentOn = DateTime.UtcNow };
+
+            return this.View(messageInput);
+>>>>>>> 906020f32b7efe426608ed6a917ae0f6cb0a550b
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> NewEmpty(MessageInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var receiverName = input.To;
+            var receiver = await this.userManager.FindByNameAsync(receiverName);
+
+<<<<<<< HEAD
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiverName);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.UserName, receiver.Id);
+
+            return this.Redirect("/Messages/Sent");
+=======
+            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiver.Id);
+            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, receiver.Id);
+
+            return this.Redirect("/Messages");
+>>>>>>> 906020f32b7efe426608ed6a917ae0f6cb0a550b
         }
     }
 }
