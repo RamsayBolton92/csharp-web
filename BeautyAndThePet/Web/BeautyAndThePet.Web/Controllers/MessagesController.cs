@@ -106,7 +106,6 @@
         }
 
         [Authorize]
-<<<<<<< HEAD
         public async Task<IActionResult> NewEmpty(string to)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -124,16 +123,6 @@
 
                 return this.View(messageInput);
             }
-=======
-        public IActionResult NewEmpty()
-        {
-            
-            var user = this.User.Identity.Name;
-
-            var messageInput = new MessageInputViewModel { From = user, SentOn = DateTime.UtcNow };
-
-            return this.View(messageInput);
->>>>>>> 906020f32b7efe426608ed6a917ae0f6cb0a550b
         }
 
         [HttpPost]
@@ -150,17 +139,10 @@
             var receiverName = input.To;
             var receiver = await this.userManager.FindByNameAsync(receiverName);
 
-<<<<<<< HEAD
             await this.messagesService.CreateSentMessageAsync(input, user.Id, receiverName);
             await this.messagesService.CreateReceivedMessageAsync(input, user.UserName, receiver.Id);
 
             return this.Redirect("/Messages/Sent");
-=======
-            await this.messagesService.CreateSentMessageAsync(input, user.Id, receiver.Id);
-            await this.messagesService.CreateReceivedMessageAsync(input, user.Id, receiver.Id);
-
-            return this.Redirect("/Messages");
->>>>>>> 906020f32b7efe426608ed6a917ae0f6cb0a550b
         }
     }
 }
