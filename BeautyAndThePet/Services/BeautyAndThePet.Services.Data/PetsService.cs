@@ -148,5 +148,14 @@
 
             await this.petsRepo.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var pet = this.petsRepo.All().FirstOrDefault(x => x.Id == id);
+
+            pet.IsDeleted = true;
+
+            await this.petsRepo.SaveChangesAsync();
+        }
     }
 }

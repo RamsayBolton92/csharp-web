@@ -34,7 +34,6 @@ namespace BeautyAndThePet.Web.Areas.Identity.Pages.Account.Manage
 
         public static string ChangeAddressNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangeAddress);
 
-
         public static string DownloadPersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, DownloadPersonalData);
 
         public static string DeletePersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, DeletePersonalData);

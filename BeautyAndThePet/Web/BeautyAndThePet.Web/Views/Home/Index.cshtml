@@ -5,8 +5,9 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Pets dating pets!</p>
+    <h1 class="display-4">Welcome to</h1>
+    <h2 class="display-3"><em>@GlobalConstants.SystemName!</em></h2>
+    <h3 class="h5">Pets dating pets!</h3>
     <p>@Model.AboutUs</p>
     @if (this.User.Identity.IsAuthenticated)
     {
@@ -18,8 +19,10 @@
     }
     else
     {
-        <p>To visit us, you must <a asp-area="Identity" asp-page="/Account/Register">register</a>
-           or <a asp-area="Identity" asp-page="/Account/Login">login</a> if you already have an account</p>
+        <p>
+            To visit us, you must <a asp-area="Identity" asp-page="/Account/Register">register</a>
+            or <a asp-area="Identity" asp-page="/Account/Login">login</a> if you already have an account
+        </p>
         @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
     }
 

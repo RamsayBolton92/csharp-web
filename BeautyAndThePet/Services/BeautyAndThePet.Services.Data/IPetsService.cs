@@ -20,5 +20,7 @@
         Task UpdateAsync(int id, EditPetInputModel input);
 
         T GetById<T>(int id);
+
+        Task DeleteAsync(int id);
     }
 }

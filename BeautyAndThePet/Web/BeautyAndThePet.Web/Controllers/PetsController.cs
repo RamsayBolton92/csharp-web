@@ -146,5 +146,14 @@
 
             return this.View(chosenPetView);
         }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            await this.petsService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.MyPets));
+        }
     }
 }
