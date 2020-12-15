@@ -106,11 +106,6 @@
             return this.View(correctMessage);
         }
 
-        public IActionResult MessagesNav()
-        {
-            return this.View();
-        }
-
         [Authorize]
         public async Task<IActionResult> NewEmpty(string to)
         {

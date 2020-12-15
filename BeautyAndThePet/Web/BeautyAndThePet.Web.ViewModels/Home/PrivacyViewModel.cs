@@ -2,5 +2,6 @@
 {
     public class PrivacyViewModel
     {
+        public string Rights { get; set; }
     }
 }
