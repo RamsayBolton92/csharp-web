@@ -77,9 +77,13 @@
             return this.View(sentMessagesViewModel);
         }
 
-        public IActionResult Unread()
+        public async Task<IActionResult> Unread()
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var unreadMessagesViewModel = new MessagesListViewModel() { Messages = this.messagesService.GetUnreadMessages(user.Id) };
+
+            return this.View(unreadMessagesViewModel);
         }
 
         public async Task<IActionResult> ReadSentMessage(int id)
@@ -97,7 +101,9 @@
 
             var messageViewModel = this.messagesService.GetSingleReceivedMessage(id, user.Id);
 
-            return this.View(messageViewModel);
+            var correctMessage = messageViewModel.Result;
+
+            return this.View(correctMessage);
         }
 
         public IActionResult MessagesNav()

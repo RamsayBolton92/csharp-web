@@ -17,6 +17,8 @@
 
         MessageViewModel GetSingleSentMessage(int id, string userId);
 
-        MessageViewModel GetSingleReceivedMessage(int id, string userId);
+        Task<MessageViewModel> GetSingleReceivedMessage(int id, string userId);
+
+        IEnumerable<MessageViewModel> GetUnreadMessages(string userId);
     }
 }

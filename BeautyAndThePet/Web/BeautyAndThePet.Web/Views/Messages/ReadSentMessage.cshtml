@@ -4,11 +4,11 @@
     this.ViewData["Title"] = "View message";
 }
 
-<div>
-    <p>@Model.From</p>
-    <p>@Model.To</p>
-    <p>@Model.Text</p>
-    <p>@Model.SentOn</p>
+<div class="text-center">
+    <p>From: @Model.From</p>
+    <p>To: @Model.To</p>
+    <p>Text: @Model.Text</p>
+    <p>Sent on: @Model.SentOn</p>
 </div>
 
     @*<input type="hidden" asp-for="@message.Id" />*@

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InCr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -5,8 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <link href="~/js/popper.min.js" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/bootstrap/dist/css/style.css" rel="stylesheet" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/d4fc857696.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,7 +25,7 @@
                     <partial name="_LoginPartial" />
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <ul class="navbar-nav flex-grow-1">
+                        <ul class="navbar-nav flex-grow-1 font h5">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
@@ -41,7 +43,7 @@
                     else
                     {
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
+                            <li class="nav-item font">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                         </ul>

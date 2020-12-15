@@ -1,0 +1,86 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+h1, h2, h3, p {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.font-heading {
+    font-family: 'Dancing Script', cursive;
+}
+
+.font {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.btn-primary {
+    color: #000000;
+    background-color: #fff;
+    border-color: #62d9d9;
+    border-radius: 30px;
+    padding: 16px;
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #62d9d9;
+        border-color: #62d9d9;
+        border-radius: 30px;
+        padding: 16px;
+    }
+
+.btn-danger {
+    color: #000000;
+    background-color: #fff;
+    border-color: #fb5454;
+    border-radius: 30px;
+    padding: 16px;
+}
+
+.btn-secondary {
+    color: #000000;
+    background-color: #fff;
+    border-color: #6c757d;
+    border-radius: 30px;
+    padding: 16px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #62d9d9;
+}
+
+a {
+    color: #62d9d9;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #62d9d9;
+    border-color: #62d9d9;
+}
+
+.btn-warning {
+    color: #000000;
+    background-color: #fff;
+    border-color: #ffd043;
+    border-radius: 30px;
+    padding: 16px;
+    
+}
+
+img {
+    border-radius: 20px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+body {
+}

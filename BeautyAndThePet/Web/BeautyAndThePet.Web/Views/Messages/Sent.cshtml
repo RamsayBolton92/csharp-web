@@ -4,13 +4,13 @@
     this.ViewData["Title"] = "Sent messages";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
 @foreach (var message in Model.Messages)
 {
     <div>
-        <p>@message.To</p>
-        <p>@message.Text</p>
-        <p>@message.SentOn</p>
+        <p>To: @message.To</p>
+        <p>Text: @message.Text</p>
+        <p>Sent on: @message.SentOn</p>
     </div>
 
     <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadSentMessage" asp-route-id="@message.Id">View</a>

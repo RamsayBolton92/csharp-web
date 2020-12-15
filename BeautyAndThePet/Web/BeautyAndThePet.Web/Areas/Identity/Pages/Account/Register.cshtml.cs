@@ -63,6 +63,7 @@ namespace BeautyAndThePet.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
             [Required]
