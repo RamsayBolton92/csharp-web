@@ -6,12 +6,19 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to</h1>
-    <h2 class="display-3"><em>@GlobalConstants.SystemName!</em></h2>
-    <h3 class="h5">Pets dating pets!</h3>
-    <p>@Model.AboutUs</p>
+    <h5 class="display-3 font-heading">
+        <i class="fas fa-paw"></i>@GlobalConstants.SystemName!
+    </h5>
+
+    <h3 class="h4 font-heading">Pets dating pets!</h3>
+    <a asp-controller="" asp-action="" class="btn btn-warning"></a>
+    <a asp-controller="" asp-action="" class="btn btn-danger"></a>
+    <a asp-controller="" asp-action="" class="btn btn-primary"></a>
+    <hr />
+    <p class="font h3">@Model.AboutUs</p>
     @if (this.User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Pets" asp-action="Create" class="btn btn-primary">Create pet</a>
+        <a asp-controller="Pets" asp-action="Create" class="btn btn-warning">Create pet</a>
         <a asp-controller="Pets" asp-action="MyPets" class="btn btn-primary">My pets</a>
         @*<a asp-controller="Speaker" asp-action="Index">Donate</a>*@
 

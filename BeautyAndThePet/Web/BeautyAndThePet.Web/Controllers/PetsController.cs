@@ -68,6 +68,8 @@
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
+                input.Breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
+
                 return this.View(input);
             }
 

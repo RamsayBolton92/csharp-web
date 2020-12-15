@@ -6,7 +6,7 @@
     var breeds = Model.Breeds.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
-<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+<form method="post" class="col-md-6 offset-md-3 font h5" enctype="multipart/form-data">
 
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -65,7 +65,7 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
-    <input type="submit" class="btn btn-primary" />
+    <input type="submit" class="btn btn-warning" />
 
 </form>
 

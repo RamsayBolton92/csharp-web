@@ -7,12 +7,15 @@
 @foreach (var message in Model.Messages)
 {
     <div>
-        <p>@message.From</p>
-        <p>@message.Text</p>
-        <p>@message.SentOn</p>
+        <h1>@this.ViewData["Title"]</h1>
+        <div>
+            <p>@message.From</p>
+            <p>@message.Text</p>
+            <p>@message.SentOn</p>
+        </div>
+        <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadReceivedMessage" asp-route-id="@message.Id">Read</a>
+        <a class="btn btn-primary" asp-controller="Messages" asp-action="NewEmpty" asp-route-to="@message.From">Reply</a>
+        <hr />
     </div>
 
-    <input type="hidden" asp-for="@message.Id" />
-
-    <hr />
 }

@@ -3,21 +3,33 @@
     this.ViewData["Title"] = "All pets, page " + Model.Page;
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
 
 @foreach (var pet in Model.AllPets)
 {
-    <div class="media">
-        <img src="@pet.ImageUrl" width="100" class="mr-3 img-responsive">
-        <div class="media-body">
-            <h5 class="mt-0">@pet.Name</h5>
-            <p>@pet.TypeOfPet</p>
-            <p>@pet.BreedName</p>
-            <p>@pet.Sex</p>
-            <p>@pet.StartOfPeriod.ToShortDateString()</p>
-            <p>@pet.EndOfPeriod.ToShortDateString()</p>
+<div class="media font">
+    <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
+    <div class="media-body">
+        <h4 class="mt-0">@pet.Name</h4>
+        <hr />
+        <div class="h5">
+            <p>Specie: @pet.TypeOfPet</p>
+            <hr />
+            <p>Breed: @pet.BreedName</p>
+            <hr />
+            <p>Sex: @pet.Sex</p>
+            <hr />
+            <p>Date of birth: @pet.BirthDate.ToShortDateString()</p>
+            <hr />
+            <p>Start of sexual activity: @pet.StartOfPeriod.ToShortDateString()</p>
+            <hr />
+            <p>End of sexual activity: @pet.EndOfPeriod.ToShortDateString()</p>
+            <hr />
+            <p>Description: @pet.Description</p>
         </div>
+        
     </div>
+</div>
 
     <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" class="btn btn-primary">View</a>
     <hr />

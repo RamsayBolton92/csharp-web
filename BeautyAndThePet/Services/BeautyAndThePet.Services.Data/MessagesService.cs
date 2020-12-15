@@ -98,9 +98,18 @@
             return message;
         }
 
-        public MessageViewModel GetSingleReceivedMessage(int id, string userId)
+        public async Task<MessageViewModel> GetSingleReceivedMessage(int id, string userId)
         {
+            var messageData = this.receivedMessagesRepo.All()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
 
+            if (messageData.IsRead != true)
+            {
+                messageData.IsRead = true;
+            }
+
+            await this.receivedMessagesRepo.SaveChangesAsync();
 
             var message = this.receivedMessagesRepo.All()
                 .Where(x => x.Id == id)
@@ -114,6 +123,21 @@
                 .FirstOrDefault();
 
             return message;
+        }
+
+
+        public IEnumerable<MessageViewModel> GetUnreadMessages(string userId)
+        {
+            var messages = this.receivedMessagesRepo.All().Where(x => x.ApplicationUserId == userId && x.IsRead == false)
+                .Select(x => new MessageViewModel
+                {
+                    Id = x.Id,
+                    From = x.From,
+                    Text = x.Text.Length > 20 ? x.Text.Substring(0, 20) + "..." : x.Text,
+                    SentOn = x.SentOn,
+                }).ToList();
+
+            return messages;
         }
     }
 }

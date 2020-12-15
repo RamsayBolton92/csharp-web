@@ -31,23 +31,48 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div class="col-md-12 text-center font">
+    <h2 class="mt-0">@Model.Name</h2>
+    <hr />
+    <div class="h5">
+        <p>Specie: @Model.TypeOfPet</p>
+        <hr />
+        <p>Breed: @Model.BreedName</p>
+        <hr />
+        <p>Sex: @Model.Sex</p>
+        <hr />
+        <p>Start of Sexual activity: @Model.StartOfPeriod.ToShortDateString()</p>
+        <hr />
+        <p>End of Sexual activity: @Model.EndOfPeriod.ToShortDateString()</p>
+        <hr />
+        <p>Date of birth: @Model.BirthDate.ToShortDateString()</p>
+        <hr />
+        <p>Description: @Model.Description</p>
+        <hr />
+        <p>Owner: @Model.OwnerUserName</p>
+    </div>
 
-<div class="col-md-12 text-center">
-    <h5 class="mt-0">@Model.Name</h5>
-    <p>@Model.TypeOfPet</p>
-    <p>@Model.BreedName</p>
-    <p>@Model.Sex</p>
-    <p>@Model.StartOfPeriod.ToShortDateString()</p>
-    <p>@Model.EndOfPeriod.ToShortDateString()</p>
-    <p>@Model.BirthDate.ToShortDateString()</p>
-    <p>@Model.Description</p>
-    <p>@Model.OwnerUserName</p>
+
 </div>
+@*<div class="text-center">
+        <h5 class="mt-0">@Model.Name</h5>
+        <ul class="list-group col-md-5 text-center">
+            <li class="list-group-item">Specie: @Model.TypeOfPet</li>
+            <li class="list-group-item">Breed: @Model.BreedName</li>
+            <li class="list-group-item">Sex: @Model.Sex</li>
+            <li class="list-group-item">Date of birth: @Model.BirthDate.ToShortDateString()</li>
+            <li class="list-group-item">Start of Sexual activity: @Model.StartOfPeriod.ToShortDateString()</li>
+            <li class="list-group-item">End of Sexual Activity: @Model.EndOfPeriod.ToShortDateString()</li>
+            <li class="list-group-item">Description: @Model.Description</li>
+        </ul>
+    </div>*@
+
+
 
 @if (this.User.Identity.Name == Model.OwnerUserName)
 {
 
-    <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+    <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
     <a asp-controller="Pets" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
 }
 else

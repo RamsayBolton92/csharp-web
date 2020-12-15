@@ -25,6 +25,13 @@
 
         public async Task CreateAsync(CreatePetInputModel input, string userId, string imagePath)
         {
+            var breed = this.breedsRepo.All().FirstOrDefault(x => x.Id == input.BreedId);
+
+            if (input.TypeOfPet != breed.TypeOfPet)
+            {
+                throw new Exception($"Invalid breed! Choose valid {input.TypeOfPet} breed!");
+            }
+
             var pet = new Pet()
             {
                 Name = input.Name,
