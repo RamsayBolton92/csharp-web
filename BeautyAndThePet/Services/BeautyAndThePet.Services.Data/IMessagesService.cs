@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeautyAndThePet.Web.ViewModels.Home;
     using BeautyAndThePet.Web.ViewModels.Messages;
 
     public interface IMessagesService
@@ -20,5 +20,6 @@
         Task<MessageViewModel> GetSingleReceivedMessage(int id, string userId);
 
         IEnumerable<MessageViewModel> GetUnreadMessages(string userId);
+        
     }
 }

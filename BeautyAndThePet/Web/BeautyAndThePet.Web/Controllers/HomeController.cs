@@ -37,7 +37,8 @@
 
         public IActionResult Privacy()
         {
-            return this.View();
+            var viewModel = this.homeService.getPrivacy();
+            return this.View(viewModel);
         }
 
         public IActionResult Actions()

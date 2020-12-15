@@ -71,14 +71,14 @@
 
 @if (this.User.Identity.Name == Model.OwnerUserName)
 {
-
+    <a asp-controller="Pets" asp-action="MyPets" class="btn btn-secondary">Back</a>
     <a asp-controller="Pets" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
     <a asp-controller="Pets" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
 }
 else
 {
-
-    <a asp-controller="Messages" asp-action="New" asp-route-id="@Model.Id" class="btn btn-secondary">Message</a>
+    <a asp-controller="Pets" asp-action="MyPets" class="btn btn-secondary">Back</a>
+    <a asp-controller="Messages" asp-action="New" asp-route-id="@Model.Id" class="btn btn-primary">Message</a>
 }
 
 

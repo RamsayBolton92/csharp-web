@@ -21,5 +21,12 @@
 
             return viewModel;
         }
+
+        public PrivacyViewModel getPrivacy()
+        {
+            var viewModel = new PrivacyViewModel() { Rights = this.aboutsRepo.All().FirstOrDefault().Rights };
+
+            return viewModel;
+        }
     }
 }
