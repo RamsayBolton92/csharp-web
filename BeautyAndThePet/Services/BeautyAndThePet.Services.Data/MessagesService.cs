@@ -24,7 +24,6 @@
 
         public async Task CreateSentMessageAsync(MessageInputViewModel input, string userId, string ownerName)
         {
-            
             var message = new SentMessage
             {
                 // To

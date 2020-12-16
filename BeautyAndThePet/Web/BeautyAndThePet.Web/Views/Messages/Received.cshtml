@@ -14,7 +14,7 @@
         <p>@message.SentOn</p>
     </div>
     <a class="btn btn-primary" asp-controller="Messages" asp-action="ReadReceivedMessage" asp-route-id="@message.Id">Read</a>
-    <a class="btn btn-primary" asp-controller="Messages" asp-action="NewEmpty" asp-route-to="@message.From">Reply</a>
+    <a class="btn btn-warning" asp-controller="Messages" asp-action="NewEmpty" asp-route-to="@message.From">Reply</a>
     <hr />
 </div>
 
