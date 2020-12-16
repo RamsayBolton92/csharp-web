@@ -11,16 +11,12 @@
         <div class="carousel-item active">
             <img class="d-block w-50 rounded mx-auto d-block" src="/images/pets/@(Model.Images.FirstOrDefault().Id).@(Model.Images.FirstOrDefault().Extension)">
         </div>
-
         @for (int i = 1; i < @Model.Images.Count; i++)
         {
             <div class="carousel-item">
                 <img class="d-block w-50 rounded mx-auto d-block" src="/images/pets/@(imageArray[i].Id).@(imageArray[i].Extension)">
             </div>
         }
-        @*<div class="carousel-item active">
-                <img class="d-block w-100" src="/images/pets/ + @Model.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension" alt="First slide">
-            </div>*@
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -54,21 +50,6 @@
 
 
 </div>
-@*<div class="text-center">
-        <h5 class="mt-0">@Model.Name</h5>
-        <ul class="list-group col-md-5 text-center">
-            <li class="list-group-item">Specie: @Model.TypeOfPet</li>
-            <li class="list-group-item">Breed: @Model.BreedName</li>
-            <li class="list-group-item">Sex: @Model.Sex</li>
-            <li class="list-group-item">Date of birth: @Model.BirthDate.ToShortDateString()</li>
-            <li class="list-group-item">Start of Sexual activity: @Model.StartOfPeriod.ToShortDateString()</li>
-            <li class="list-group-item">End of Sexual Activity: @Model.EndOfPeriod.ToShortDateString()</li>
-            <li class="list-group-item">Description: @Model.Description</li>
-        </ul>
-    </div>*@
-
-
-
 @if (this.User.Identity.Name == Model.OwnerUserName)
 {
     <a asp-controller="Pets" asp-action="MyPets" class="btn btn-secondary">Back</a>
@@ -80,37 +61,3 @@ else
     <a asp-controller="Pets" asp-action="MyPets" class="btn btn-secondary">Back</a>
     <a asp-controller="Messages" asp-action="New" asp-route-id="@Model.Id" class="btn btn-primary">Message</a>
 }
-
-
-@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))@*Or is owner*@
-{
-
-    @*<li class="single-meta">
-            <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
-            </form>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        </li>
-        <li class="single-meta">
-            <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
-                <button class="btn btn-warning">Send to my email</button>
-            </form>
-        </li>
-        <li class="single-meta">
-            <button class="btn btn-warning" onclick="window.print()">Print</button>
-        </li>*@
-}
-
-
-
-
-
-
-
-
-
-
-@*<li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
-        <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
-    </li>
-
-    <a asp-controller="Pets" asp-action="Create">Create pet</a>*@

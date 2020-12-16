@@ -4,19 +4,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
-@*<div class="btn-group">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Action
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="NewEmpty">New</a></li>
-            <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Received">Received</a></li>
-            <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Sent">Sent</a></li>
-            <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Unread">Unread</a></li>
-        </ul>
-    </div>*@
-
 <ul class="navbar-nav font h5">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
@@ -29,10 +16,6 @@
                 <li><a asp-controller="Messages" asp-action="Unread">Unread</a></li>
             </ul>
         </li>
-
-        @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="MessagesNav"><i class="fas fa-envelope"></i></a>
-        </li>*@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
         </li>
