@@ -17,9 +17,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IMessagesService messagesService;
 
-        public MessagesController(IPetsService petsService,
-            UserManager<ApplicationUser> userManager,
-            IMessagesService messagesService)
+        public MessagesController(IPetsService petsService, UserManager<ApplicationUser> userManager, IMessagesService messagesService)
         {
             this.petsService = petsService;
             this.userManager = userManager;
@@ -59,6 +57,7 @@
             return this.Redirect("/Pets/MyPets");
         }
 
+        [Authorize]
         public async Task<IActionResult> Received()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -68,6 +67,7 @@
             return this.View(receivedMessagesViewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Sent()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -77,6 +77,7 @@
             return this.View(sentMessagesViewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Unread()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -86,6 +87,7 @@
             return this.View(unreadMessagesViewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> ReadSentMessage(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -95,6 +97,7 @@
             return this.View(messageViewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> ReadReceivedMessage(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -110,7 +113,6 @@
         public async Task<IActionResult> NewEmpty(string to)
         {
             var user = await this.userManager.GetUserAsync(this.User);
-
 
             if (to != null)
             {

@@ -22,7 +22,7 @@
             return viewModel;
         }
 
-        public PrivacyViewModel getPrivacy()
+        public PrivacyViewModel GetPrivacy()
         {
             var viewModel = new PrivacyViewModel() { Rights = this.aboutsRepo.All().FirstOrDefault().Rights };
 

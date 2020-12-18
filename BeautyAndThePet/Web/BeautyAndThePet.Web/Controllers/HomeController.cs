@@ -37,13 +37,8 @@
 
         public IActionResult Privacy()
         {
-            var viewModel = this.homeService.getPrivacy();
+            var viewModel = this.homeService.GetPrivacy();
             return this.View(viewModel);
-        }
-
-        public IActionResult Actions()
-        {
-            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

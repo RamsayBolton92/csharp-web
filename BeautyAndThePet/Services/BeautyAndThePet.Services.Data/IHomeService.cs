@@ -6,6 +6,6 @@
     {
         IndexViewModel Index();
 
-        PrivacyViewModel getPrivacy();
+        PrivacyViewModel GetPrivacy();
     }
 }
