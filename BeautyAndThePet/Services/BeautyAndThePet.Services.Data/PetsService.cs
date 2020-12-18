@@ -45,17 +45,7 @@
                 OwnerId = userId,
             };
 
-            if (!input.Images.Any())
-            {
-                var dbImage = new Image
-                {
-                    RemoteImageUrl = "https://toppng.com/uploads/preview/emojis-dog-115498371889fvynkylva.png",
-                };
-
-                pet.Images.Add(dbImage);
-            }
-            else
-            {
+            
                 Directory.CreateDirectory($"{imagePath}/pets/");
                 foreach (var image in input.Images)
                 {
@@ -79,7 +69,7 @@
                     using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
                     await image.CopyToAsync(fileStream);
                 }
-            }
+            
 
             await this.petsRepo.AddAsync(pet);
             await this.petsRepo.SaveChangesAsync();
@@ -87,11 +77,6 @@
 
         public IEnumerable<PetViewModel> GetAll(int pageId, int petsPerPage = 10)
         {
-            // var recipes = this.recipesRepository.AllAsNoTracking()
-            //    .OrderByDescending(x => x.Id)
-            //    .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
-            //    .To<T>().ToList();
-            // return recipes;
             var pets = this.petsRepo.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)

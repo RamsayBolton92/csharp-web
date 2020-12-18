@@ -7,104 +7,52 @@
 }
 
 <form method="post" class="col-md-6 offset-md-3 font h5" enctype="multipart/form-data">
-
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
-
     <div class="form-group">
         <label asp-for="Name"></label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Sex"></label>
         <select asp-for="Sex" class="form-control" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
         <span asp-validation-for="Sex" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="TypeOfPet"></label>
         <select asp-for="TypeOfPet" class="form-control" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
         <span asp-validation-for="TypeOfPet" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="BreedId"></label>
         <select asp-for="BreedId" asp-items="breeds" class="form-control"></select> <!--id="myInput" onkeyup="myFunction()" -->
         <span asp-validation-for="BreedId" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="BirthDate"></label>
         <input asp-for="BirthDate" class="form-control" />
         <span asp-validation-for="BirthDate" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="StartOfPeriod"></label>
         <input asp-for="StartOfPeriod" class="form-control" />
         <span asp-validation-for="StartOfPeriod" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="EndOfPeriod"></label>
         <input asp-for="EndOfPeriod" class="form-control" />
         <span asp-validation-for="EndOfPeriod" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Images"></label>
         <input asp-for="Images" class="form-control" />
         <span asp-validation-for="Images" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
     <input type="submit" class="btn btn-warning" />
-
 </form>
-
-@*<partial name="_ValidationScriptsPartial" />*@
-
-@*<ul id="myUL">
-        <li><a href="#">Adele</a></li>
-        <li><a href="#">Agnes</a></li>
-
-        <li><a href="#">Billy</a></li>
-        <li><a href="#">Bob</a></li>
-
-        <li><a href="#">Calvin</a></li>
-        <li><a href="#">Christina</a></li>
-        <li><a href="#">Cindy</a></li>
-    </ul>*@
-
-@*@section Scripts {
-        <script>
-            function myFunction() {
-                // Declare variables
-                var input, filter, ul, li, a, i, txtValue;
-                input = document.getElementById('myInput');
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName('li');
-
-                // Loop through all list items, and hide those who don't match the search query
-                for (i = 0; i < li.length; i++) {
-                    a = li[i].getElementsByTagName("a")[0];
-                    txtValue = a.textContent || a.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-                    }
-                }
-            }
-        </script>
-    }*@
-
-<!--<partial name="_ValidationScriptsPartial" />-->

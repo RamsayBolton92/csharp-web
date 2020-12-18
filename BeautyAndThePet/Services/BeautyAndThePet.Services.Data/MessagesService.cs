@@ -15,8 +15,7 @@
         private readonly IDeletableEntityRepository<ReceivedMessage> receivedMessagesRepo;
 
         public MessagesService(
-            IDeletableEntityRepository<SentMessage> sentMessagesRepo, 
-            IDeletableEntityRepository<ReceivedMessage> receivedMessagesRepo)
+            IDeletableEntityRepository<SentMessage> sentMessagesRepo, IDeletableEntityRepository<ReceivedMessage> receivedMessagesRepo)
         {
             this.sentMessagesRepo = sentMessagesRepo;
             this.receivedMessagesRepo = receivedMessagesRepo;
@@ -56,7 +55,7 @@
         {
             var messages = this.receivedMessagesRepo.All().Where(x => x.ApplicationUserId == userId)
                 .Select(x => new MessageViewModel
-                { 
+                {
                     Id = x.Id,
                     From = x.From,
                     Text = x.Text.Length > 20 ? x.Text.Substring(0, 20) + "..." : x.Text,
@@ -93,7 +92,6 @@
                 })
                 .FirstOrDefault();
 
-
             return message;
         }
 
@@ -123,7 +121,6 @@
 
             return message;
         }
-
 
         public IEnumerable<MessageViewModel> GetUnreadMessages(string userId)
         {

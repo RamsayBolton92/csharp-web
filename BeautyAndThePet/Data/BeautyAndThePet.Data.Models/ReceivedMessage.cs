@@ -1,8 +1,9 @@
-﻿using BeautyAndThePet.Data.Common.Models;
-using System;
-
-namespace BeautyAndThePet.Data.Models
+﻿namespace BeautyAndThePet.Data.Models
 {
+    using System;
+
+    using BeautyAndThePet.Data.Common.Models;
+
     public class ReceivedMessage : BaseDeletableModel<int>
     {
         public int Id { get; set; }

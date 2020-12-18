@@ -4,38 +4,35 @@
 }
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
-
 @foreach (var pet in Model.AllPets)
 {
-<div class="media font">
-    <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
-    <div class="media-body">
-        <h4 class="mt-0">@pet.Name</h4>
-        <hr />
-        <div class="h5">
-            <p>Specie: @pet.TypeOfPet</p>
+    <div class="media font">
+        <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
+        <div class="media-body">
+            <h4 class="mt-0">@pet.Name</h4>
             <hr />
-            <p>Breed: @pet.BreedName</p>
-            <hr />
-            <p>Sex: @pet.Sex</p>
-            <hr />
-            <p>Date of birth: @pet.BirthDate.ToShortDateString()</p>
-            <hr />
-            <p>Start of sexual activity: @pet.StartOfPeriod.ToShortDateString()</p>
-            <hr />
-            <p>End of sexual activity: @pet.EndOfPeriod.ToShortDateString()</p>
-            <hr />
-            <p>Description: @pet.Description</p>
+            <div class="h5">
+                <p>Specie: @pet.TypeOfPet</p>
+                <hr />
+                <p>Breed: @pet.BreedName</p>
+                <hr />
+                <p>Sex: @pet.Sex</p>
+                <hr />
+                <p>Town: @pet.OwnerAddressTown</p>
+                <hr />
+                <p>Date of birth: @pet.BirthDate.ToShortDateString()</p>
+                <hr />
+                <p>Start of sexual activity: @pet.StartOfPeriod.ToShortDateString()</p>
+                <hr />
+                <p>End of sexual activity: @pet.EndOfPeriod.ToShortDateString()</p>
+                <hr />
+                <p>Description: @pet.Description</p>
+            </div>
         </div>
-        
     </div>
-</div>
-
     <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" class="btn btn-primary">View</a>
     <hr />
 }
-
-@*Pagination*@
 <hr />
 <nav aria-label="...">
     <ul class="pagination justify-content-center">

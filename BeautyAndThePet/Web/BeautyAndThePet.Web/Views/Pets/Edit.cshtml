@@ -2,16 +2,12 @@
 @model BeautyAndThePet.Web.ViewModels.Pets.EditPetInputModel
 @{
     ViewData["Title"] = "Edit pet";
-
-
     var breeds = Model.Breeds.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
 <form method="post" id="editForm" class="col-md-6 offset-md-3 font">
-
     <h1>@ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
-
     <div class="form-group">
         <label asp-for="Name"></label>
         <input asp-for="Name" class="form-control" />
@@ -22,19 +18,16 @@
         <select asp-for="Sex" class="form-control" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
         <span asp-validation-for="Sex" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="TypeOfPet"></label>
         <select asp-for="TypeOfPet" class="form-control" asp-items="@Html.GetEnumSelectList<TypeOfPet>()"></select>
         <span asp-validation-for="TypeOfPet" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="BreedId"></label>
         <select asp-for="BreedId" class="form-control" asp-items="breeds"></select>
         <span asp-validation-for="BreedId" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="BirthDate"></label>
         <input asp-for="BirthDate" class="form-control" />
@@ -55,11 +48,9 @@
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
     <hr />
     <input type="hidden" asp-for="Id" />
-
-    <button type="submit" class="btn btn-warning" @*data-toggle="modal" data-target="#modalEdit"*@>Save changes</button>
+    <button type="submit" class="btn btn-warning">Save changes</button>
 </form>
 
 

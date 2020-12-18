@@ -2,7 +2,6 @@
 {
     using System;
     using System.Globalization;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using BeautyAndThePet.Data.Models;
@@ -21,7 +20,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment environment;
 
-        public PetsController(IPetsService petsService,IBreedsService breedsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
+        public PetsController(IPetsService petsService, IBreedsService breedsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
             this.breedsService = breedsService;
@@ -29,6 +28,7 @@
             this.environment = environment;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var breeds = this.breedsService.GetAll<BreedDropDownViewModel>();
@@ -49,6 +49,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreatePetInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -84,7 +85,6 @@
             var inputModel = this.petsService.GetById<EditPetInputModel>(id);
             inputModel.Breeds = breeds;
 
-
             return this.View(inputModel);
         }
 
@@ -104,6 +104,7 @@
             return this.RedirectToAction(nameof(this.ViewPetInfo), new { id });
         }
 
+        [Authorize]
         public async Task<IActionResult> MyPets()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -113,6 +114,7 @@
             return this.View(petsViewModel);
         }
 
+        [Authorize]
         public IActionResult All(int id = 1)
         {
             const int PetsPerPage = 10;
@@ -128,7 +130,8 @@
             return this.View(allPetsViewModel);
         }
 
-        public async Task<IActionResult> MatchedPets(int id) //may have a problem with IDs
+        [Authorize]
+        public async Task<IActionResult> MatchedPets(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
@@ -142,6 +145,7 @@
             return this.View(matchedPetsViewModel);
         }
 
+        [Authorize]
         public IActionResult ViewPetInfo(int id)
         {
             var chosenPetView = this.petsService.GetById<PetViewModel>(id);
