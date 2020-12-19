@@ -7,8 +7,10 @@
     {
         public int Id { get; set; }
 
+        [MaxLength(30)]
         public virtual string From { get; set; }
 
+        [MaxLength(30)]
         public virtual string To { get; set; }
 
         [Required]
