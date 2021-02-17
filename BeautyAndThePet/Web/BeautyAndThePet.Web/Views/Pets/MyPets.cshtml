@@ -3,6 +3,11 @@
     this.ViewData["Title"] = "My pets";
 }
 
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 @foreach (var pet in Model.MyPets)
 {

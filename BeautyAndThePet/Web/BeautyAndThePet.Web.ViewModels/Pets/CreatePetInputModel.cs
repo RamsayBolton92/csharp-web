@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BeautyAndThePet.Data.Models.Enumerations;
+    using BeautyAndThePet.Web.Infrastructure;
     using Microsoft.AspNetCore.Http;
 
     public class CreatePetInputModel : IValidatableObject
@@ -42,6 +43,9 @@
         public int BreedId { get; set; }
 
         public IEnumerable<BreedDropDownViewModel> Breeds { get; set; }
+
+        [GoogleReCaptchaValidation]
+        public string RecaptchaValue { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -74,6 +74,8 @@
                 return this.View(input);
             }
 
+            this.TempData["Message"] = "Pet added successfully.";
+
             return this.RedirectToAction("MyPets");
         }
 
