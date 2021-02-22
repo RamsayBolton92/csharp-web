@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using BeautyAndThePet.Data.Models;
 using BeautyAndThePet.Services.Data;
 using BeautyAndThePet.Web.ViewModels.Ads;
+using BeautyAndThePet.Web.ViewModels;
 
 namespace BeautyAndThePet.Web.Controllers
 {
@@ -28,9 +29,47 @@ namespace BeautyAndThePet.Web.Controllers
         {
             var user = this.User.Identity.Name;
 
-            var adInput = new AdInputViewModel { From = user, SentOn = DateTime.UtcNow };
+            var adInput = new AdInputViewModel { ApplicationUser = user, SentOn = DateTime.UtcNow };
 
             return this.View(adInput);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> New(AdInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            try
+            {
+                await this.adsService.CreateAsync(input, user.Id);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+
+                return this.View(input);
+            }
+
+            this.TempData["Message"] = "Ad added successfully.";
+
+            return this.RedirectToAction("MyPets","Pets");
+        }
+
+        [Authorize]
+        public IActionResult All()
+        {
+            var allAds = new AdsListViewModel()
+            {
+                Ads = this.adsService.GetAll(),
+            };
+
+            return this.View(allAds);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BeautyAndThePet.Web.ViewModels.Ads
         public int Id { get; set; }
 
         [MaxLength(30)]
-        public virtual string From { get; set; }
+        public virtual string ApplicationUser { get; set; }
 
         [Required]
         [MinLength(1)]

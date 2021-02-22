@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201214142508_InCr")]
-    partial class InCr
+    [Migration("20210222150945_FromBecomesApplicationUser")]
+    partial class FromBecomesApplicationUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,43 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Abouts");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Ad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SentOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Ads");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Address", b =>
@@ -569,6 +606,15 @@ namespace BeautyAndThePet.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Ad", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Ads")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.Address", "Address")
@@ -690,6 +736,8 @@ namespace BeautyAndThePet.Data.Migrations
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Ads");
+
                     b.Navigation("Claims");
 
                     b.Navigation("Logins");

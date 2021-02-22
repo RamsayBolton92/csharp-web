@@ -1,0 +1,13 @@
+﻿@model BeautyAndThePet.Web.ViewModels.SidebarViewModel
+
+<div class="posts margin-bottom-40">
+    @foreach (var ad in Model.Ads)
+    {
+    <div>
+        <p>@ad.Text</p>
+        <p>From: @ad.ApplicationUser</p>
+        <p>Sent On: @ad.SentOn</p>
+        <hr />
+    </div>
+    }
+</div>

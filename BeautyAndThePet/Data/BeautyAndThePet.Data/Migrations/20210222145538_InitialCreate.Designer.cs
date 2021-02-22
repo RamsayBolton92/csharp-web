@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyAndThePet.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210217130717_InitialCreate")]
+    [Migration("20210222145538_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,14 +60,14 @@ namespace BeautyAndThePet.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FromId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -83,7 +83,7 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("FromId");
 
                     b.HasIndex("IsDeleted");
 
@@ -608,11 +608,11 @@ namespace BeautyAndThePet.Data.Migrations
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Ad", b =>
                 {
-                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "From")
                         .WithMany("Ads")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("FromId");
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("From");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ApplicationUser", b =>
