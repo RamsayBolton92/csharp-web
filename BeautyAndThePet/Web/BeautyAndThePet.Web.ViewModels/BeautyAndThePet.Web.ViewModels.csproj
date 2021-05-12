@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BeautyAndThePet.Data.Models\BeautyAndThePet.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\BeautyAndThePet.Services.Mapping\BeautyAndThePet.Services.Mapping.csproj" />
+    <ProjectReference Include="..\BeautyAndThePet.Web.Infrastructure\BeautyAndThePet.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

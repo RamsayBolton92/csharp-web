@@ -2,6 +2,8 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+
+
 }
 
 
@@ -32,15 +34,27 @@
                 <input asp-for="Input.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            @*<div class="form-group">
                 <label asp-for="Input.Country"></label>
                 <input asp-for="Input.Country" class="form-control" />
                 <span asp-validation-for="Input.Country" class="text-danger"></span>
-            </div><div class="form-group">
+            </div>
+            <div class="form-group">
                 <label asp-for="Input.Town"></label>
                 <input asp-for="Input.Town" class="form-control" />
                 <span asp-validation-for="Input.Town" class="text-danger"></span>
-            </div>
+            </div>*@
+
+            Country: <select asp-for="Input.Country" name="subject" id="subject">
+                <option value="" selected="selected">Select subject</option>
+            </select>
+            <br><br>
+            Town: <select asp-for="Input.Town" name="topic" id="topic">
+                <option value="" selected="selected">Please select subject first</option>
+            </select>
+            <br><br>
+
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
@@ -48,4 +62,28 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        var subjectObject = {
+                "Bulgaria": ["Sofia", "Plovdiv", "Varna", "Burgas"],
+                "Macedonia": ["Skopie", "Pirot", "Shtip", "Prilep"],
+                "Greece": ["Athens", "Solun", "Pirea", "Patra"]
+        }
+        window.onload = function () {
+            var subjectSel = document.getElementById("subject");
+            var topicSel = document.getElementById("topic");
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
+            }
+            subjectSel.onchange = function () {
+                //empty Chapters- and Topics- dropdowns
+                topicSel.length = 1;
+                //display correct values
+                var ft = subjectObject[this.value];
+                for (var y in subjectObject[this.value]) {
+                    topicSel.options[topicSel.options.length] = new Option(ft[y], y);
+                }
+            }
+        }
+    </script>
 }

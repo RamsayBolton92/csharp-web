@@ -1,0 +1,19 @@
+﻿@using BeautyAndThePet.Web.ViewModels
+@model AdsListViewModel
+@{
+    this.ViewData["Title"] = "All Ads";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+@foreach (var ad in Model.Ads)
+{
+    <div>
+        <div>
+            <p>@ad.Text</p>
+            <p>From: @ad.ApplicationUser</p>
+            <p>Sent On: @ad.SentOn</p>
+        </div>
+        <hr />
+    </div>
+}

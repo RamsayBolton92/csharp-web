@@ -66,10 +66,10 @@ namespace BeautyAndThePet.Web.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
-            [Required]
+            //[Required]
             public string Country { get; set; }
 
-            [Required]
+            //[Required]
             public string Town { get; set; }
         }
 
@@ -85,9 +85,12 @@ namespace BeautyAndThePet.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                
+
                 var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email,
                     DateOfBirth = this.Input.DateOfBirth, Address = new Address() { Country = this.Input.Country, Town = this.Input.Town },
                 };
+                ;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
