@@ -26,27 +26,27 @@
                     <partial name="_LoginPartial" />
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                <ul class="navbar-nav flex-grow-1 font h5">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="Create">New pet</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="MyPets">My pets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="All">All pets</a>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Ads" asp-action="New">New</a></li>
-                            <li><a asp-controller="Ads" asp-action="All">All</a></li>
+                        <ul class="navbar-nav flex-grow-1 font h5">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="Create">New pet</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="MyPets">My pets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pets" asp-action="All">All pets</a>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Ads" asp-action="New">New</a></li>
+                                    <li><a asp-controller="Ads" asp-action="All">All</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
                     }
                     else
                     {
@@ -86,23 +86,23 @@
 
 
             @*<div class="container content">
-            @if (this.ViewData.ContainsKey("SkipSidebar"))
-            {
-                @RenderBody()
-            }
-            else
-            {
-                <div class="row">
-                    <div class="col-md-9">
+                    @if (this.ViewData.ContainsKey("SkipSidebar"))
+                    {
                         @RenderBody()
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-9">
+                                @RenderBody()
+                            </div>
 
-                    <aside class="col-md-3 magazine-page">
-                        <vc:sidebar></vc:sidebar>
-                    </aside>
-                </div>
-            }
-        </div>*@
+                            <aside class="col-md-3 magazine-page">
+                                <vc:sidebar></vc:sidebar>
+                            </aside>
+                        </div>
+                    }
+                </div>*@
         </main>
     </div>
 
@@ -116,6 +116,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>

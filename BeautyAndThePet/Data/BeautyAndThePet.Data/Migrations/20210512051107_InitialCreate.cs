@@ -166,7 +166,7 @@ namespace BeautyAndThePet.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SentOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -178,8 +178,8 @@ namespace BeautyAndThePet.Data.Migrations
                 {
                     table.PrimaryKey("PK_Ads", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ads_AspNetUsers_FromId",
-                        column: x => x.FromId,
+                        name: "FK_Ads_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -400,9 +400,9 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ads_FromId",
+                name: "IX_Ads_ApplicationUserId",
                 table: "Ads",
-                column: "FromId");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_IsDeleted",

@@ -38,6 +38,8 @@
 
         public DbSet<SentMessage> SentMessages { get; set; }
 
+        //public DbSet<ChatMessage> ChatMessages { get; set; }
+
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Ad> Ads { get; set; }

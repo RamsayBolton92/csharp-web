@@ -22,6 +22,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using SignalRChat.Hubs;
+    using System;
 
     public class Startup
     {
@@ -52,6 +54,8 @@
                 options.AppId = "244129463892914";
                 options.AppSecret = "e5c18b24bc58a173831472f1b4e4ac32";
             });
+            
+            services.AddSignalR();
             services.AddControllersWithViews(
                 options =>
                     {
@@ -109,12 +113,20 @@
 
             app.UseRouting();
 
+            var webSocketOptions = new WebSocketOptions()
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+            };
+
+            app.UseWebSockets(webSocketOptions);
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
