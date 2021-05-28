@@ -37,15 +37,15 @@
 
         public string ImageUrl { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<PetImage> Images { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Pet, PetViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(x => x.Images.FirstOrDefault().RemoteImageUrl != null ?
-                        x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/pets/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                    opt.MapFrom(x => x.PetImages.FirstOrDefault().RemoteImageUrl != null ?
+                        x.PetImages.FirstOrDefault().RemoteImageUrl :
+                        "/images/pets/" + x.PetImages.FirstOrDefault().Id + "." + x.PetImages.FirstOrDefault().Extension));
         }
     }
 }

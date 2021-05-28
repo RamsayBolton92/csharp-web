@@ -56,13 +56,13 @@
                         throw new Exception($"Invalid image extension {extension}");
                     }
 
-                    var dbImage = new Image
+                    var dbImage = new PetImage
                     {
                         AddedByUserId = userId,
                         Extension = extension,
                     };
 
-                    pet.Images.Add(dbImage);
+                    pet.PetImages.Add(dbImage);
 
                     var physicalPath = $"{imagePath}/pets/{dbImage.Id}.{extension}";
 
