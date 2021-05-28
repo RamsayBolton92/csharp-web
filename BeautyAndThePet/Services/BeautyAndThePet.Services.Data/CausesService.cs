@@ -73,6 +73,34 @@ namespace BeautyAndThePet.Services.Data
 
             return causes;
         }
+
+        public T GetById<T>(int id)
+        {
+            var pet = this.causesRepo.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return pet;
+        }
+
+        public IEnumerable<CauseViewModel> GetMyCauses(string userId)
+        {
+            var causes = this.causesRepo.AllAsNoTracking()
+                .Where(x => x.CreatorId == userId)
+                .OrderByDescending(x => x.Id)
+                .To<CauseViewModel>().ToList();
+
+            return causes;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var cause = this.causesRepo.All().FirstOrDefault(x => x.Id == id);
+
+            cause.IsDeleted = true;
+
+            await this.causesRepo.SaveChangesAsync();
+        }
     }
 }
 

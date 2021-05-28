@@ -34,7 +34,7 @@ namespace BeautyAndThePet.Web.ViewModels.Causes
 
         public string ImageUrl { get; set; }
 
-        public virtual ICollection<CauseImage> Images { get; set; }
+        public virtual ICollection<CauseImage> CauseImages { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

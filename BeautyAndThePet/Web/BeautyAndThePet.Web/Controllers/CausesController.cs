@@ -83,5 +83,32 @@ namespace BeautyAndThePet.Web.Controllers
 
             return this.View(allCausesViewModel);
         }
+
+        [Authorize]
+        public IActionResult ViewCauseInfo(int id)
+        {
+            var chosenCauseView = this.causesService.GetById<CauseViewModel>(id);
+
+            return this.View(chosenCauseView);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyCauses()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var petsViewModel = new MyCausesListViewModel() { MyCauses = this.causesService.GetMyCauses(user.Id) };
+
+            return this.View(petsViewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            await this.causesService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.MyCauses));
+        }
     }
 }
