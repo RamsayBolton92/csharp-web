@@ -1,0 +1,31 @@
+﻿@model BeautyAndThePet.Web.ViewModels.Causes.AllCausesListViewModel
+@{
+    this.ViewData["Title"] = "All causes";
+}
+
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+@foreach (var cause in Model.AllCauses)
+{
+    <div class="media font">
+        <img src="@cause.ImageUrl" width="200" class="mr-3 img-responsive">
+        <div class="media-body">
+            <h4 class="mt-0">@cause.Title</h4>
+            <hr />
+            <div class="h5">
+                <p>@cause.Funds</p>
+                <hr />
+                <p>Description: @cause.StartOfPeriod</p>
+                <hr />
+                <p>Breed: @cause.EndOfPeriod</p>
+                <hr />
+                <p>Start of sexual activity: @cause.StartOfPeriod.ToShortDateString()</p>
+                <hr />
+                <p>End of sexual activity: @cause.EndOfPeriod.ToShortDateString()</p>
+
+
+            </div>
+        </div>
+    </div>
+    <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@cause.Id" class="btn btn-primary">View</a>
+    <hr />
+}

@@ -40,9 +40,13 @@
 
         //public DbSet<ChatMessage> ChatMessages { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<PetImage> PetImages { get; set; }
 
         public DbSet<Ad> Ads { get; set; }
+
+        public DbSet<Cause> Causes { get; set; }
+
+        public DbSet<CauseImage> CauseImages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

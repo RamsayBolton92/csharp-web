@@ -296,13 +296,68 @@ namespace BeautyAndThePet.Data.Migrations
                     b.ToTable("Breeds");
                 });
 
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.Image", b =>
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Cause", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("AccountOwner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndOfPeriod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Funds")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartOfPeriod")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Causes");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.CauseImage", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AddedByUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CauseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -313,9 +368,6 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RemoteImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -323,9 +375,9 @@ namespace BeautyAndThePet.Data.Migrations
 
                     b.HasIndex("AddedByUserId");
 
-                    b.HasIndex("PetId");
+                    b.HasIndex("CauseId");
 
-                    b.ToTable("Images");
+                    b.ToTable("CauseImages");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
@@ -383,6 +435,38 @@ namespace BeautyAndThePet.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.PetImage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("PetImages");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ReceivedMessage", b =>
@@ -624,21 +708,30 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("BeautyAndThePet.Data.Models.Image", b =>
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Cause", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "Creator")
+                        .WithMany("Causes")
+                        .HasForeignKey("CreatorId");
+
+                    b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.CauseImage", b =>
                 {
                     b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "AddedByUser")
-                        .WithMany("PetImages")
+                        .WithMany()
                         .HasForeignKey("AddedByUserId");
 
-                    b.HasOne("BeautyAndThePet.Data.Models.Pet", "Pet")
-                        .WithMany("Images")
-                        .HasForeignKey("PetId")
+                    b.HasOne("BeautyAndThePet.Data.Models.Cause", "Cause")
+                        .WithMany("CauseImages")
+                        .HasForeignKey("CauseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("AddedByUser");
 
-                    b.Navigation("Pet");
+                    b.Navigation("Cause");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
@@ -656,6 +749,23 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Breed");
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.PetImage", b =>
+                {
+                    b.HasOne("BeautyAndThePet.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany("PetImages")
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("BeautyAndThePet.Data.Models.Pet", "Pet")
+                        .WithMany("PetImages")
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AddedByUser");
+
+                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("BeautyAndThePet.Data.Models.ReceivedMessage", b =>
@@ -736,6 +846,8 @@ namespace BeautyAndThePet.Data.Migrations
                 {
                     b.Navigation("Ads");
 
+                    b.Navigation("Causes");
+
                     b.Navigation("Claims");
 
                     b.Navigation("Logins");
@@ -756,9 +868,14 @@ namespace BeautyAndThePet.Data.Migrations
                     b.Navigation("Pets");
                 });
 
+            modelBuilder.Entity("BeautyAndThePet.Data.Models.Cause", b =>
+                {
+                    b.Navigation("CauseImages");
+                });
+
             modelBuilder.Entity("BeautyAndThePet.Data.Models.Pet", b =>
                 {
-                    b.Navigation("Images");
+                    b.Navigation("PetImages");
                 });
 #pragma warning restore 612, 618
         }

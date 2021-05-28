@@ -17,10 +17,11 @@ namespace BeautyAndThePet.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Pets = new HashSet<Pet>();
-            this.PetImages = new HashSet<Image>();
+            this.PetImages = new HashSet<PetImage>();
             this.SentMessages = new HashSet<SentMessage>();
             this.ReceivedMessages = new HashSet<ReceivedMessage>();
             this.Ads = new HashSet<Ad>();
+            this.Causes = new HashSet<Cause>();
         }
 
         public int MyProperty { get; set; }
@@ -43,13 +44,15 @@ namespace BeautyAndThePet.Data.Models
 
         public virtual ICollection<Pet> Pets { get; set; }
 
-        public virtual ICollection<Image> PetImages { get; set; }
+        public virtual ICollection<PetImage> PetImages { get; set; }
 
         public virtual ICollection<ReceivedMessage> ReceivedMessages { get; set; }
 
         public virtual ICollection<SentMessage> SentMessages { get; set; }
 
         public virtual ICollection<Ad> Ads { get; set; }
+
+        public virtual ICollection<Cause> Causes { get; set; }
 
         public int AddressId { get; set; }
 

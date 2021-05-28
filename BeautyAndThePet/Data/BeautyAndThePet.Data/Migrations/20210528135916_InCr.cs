@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BeautyAndThePet.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InCr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -271,6 +271,36 @@ namespace BeautyAndThePet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Causes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Funds = table.Column<double>(type: "float", nullable: false),
+                    BankAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountOwner = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    StartOfPeriod = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndOfPeriod = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Causes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Causes_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pets",
                 columns: table => new
                 {
@@ -361,7 +391,36 @@ namespace BeautyAndThePet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "CauseImages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CauseId = table.Column<int>(type: "int", nullable: false),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RemoteImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CauseImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CauseImages_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CauseImages_Causes_CauseId",
+                        column: x => x.CauseId,
+                        principalTable: "Causes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PetImages",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -374,15 +433,15 @@ namespace BeautyAndThePet.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.PrimaryKey("PK_PetImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_AspNetUsers_AddedByUserId",
+                        name: "FK_PetImages_AspNetUsers_AddedByUserId",
                         column: x => x.AddedByUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Images_Pets_PetId",
+                        name: "FK_PetImages_Pets_PetId",
                         column: x => x.PetId,
                         principalTable: "Pets",
                         principalColumn: "Id",
@@ -470,13 +529,33 @@ namespace BeautyAndThePet.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_AddedByUserId",
-                table: "Images",
+                name: "IX_CauseImages_AddedByUserId",
+                table: "CauseImages",
                 column: "AddedByUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_PetId",
-                table: "Images",
+                name: "IX_CauseImages_CauseId",
+                table: "CauseImages",
+                column: "CauseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Causes_CreatorId",
+                table: "Causes",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Causes_IsDeleted",
+                table: "Causes",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PetImages_AddedByUserId",
+                table: "PetImages",
+                column: "AddedByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PetImages_PetId",
+                table: "PetImages",
                 column: "PetId");
 
             migrationBuilder.CreateIndex(
@@ -544,7 +623,10 @@ namespace BeautyAndThePet.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "CauseImages");
+
+            migrationBuilder.DropTable(
+                name: "PetImages");
 
             migrationBuilder.DropTable(
                 name: "ReceivedMessages");
@@ -557,6 +639,9 @@ namespace BeautyAndThePet.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Causes");
 
             migrationBuilder.DropTable(
                 name: "Pets");

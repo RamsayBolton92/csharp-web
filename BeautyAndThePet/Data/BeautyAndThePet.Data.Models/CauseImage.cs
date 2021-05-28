@@ -4,16 +4,16 @@
 
     using BeautyAndThePet.Data.Common.Models;
 
-    public class Image : BaseModel<string>
+    public class CauseImage : BaseModel<string>
     {
-        public Image()
+        public CauseImage()
         {
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public int PetId { get; set; }
+        public int CauseId { get; set; }
 
-        public virtual Pet Pet { get; set; }
+        public virtual Cause Cause { get; set; }
 
         public string Extension { get; set; }
 
