@@ -9,7 +9,6 @@
     using BeautyAndThePet.Web.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-
     public class HomeController : BaseController
     {
         private readonly IHomeService homeService;
@@ -37,8 +36,7 @@
 
         public IActionResult Privacy()
         {
-            var viewModel = this.homeService.GetPrivacy();
-            return this.View(viewModel);
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

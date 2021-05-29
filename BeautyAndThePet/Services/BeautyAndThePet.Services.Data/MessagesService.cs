@@ -40,7 +40,6 @@
         {
             var message = new ReceivedMessage
             {
-                // From
                 ApplicationUserId = ownerId,
                 From = userName,
                 Text = input.Text,

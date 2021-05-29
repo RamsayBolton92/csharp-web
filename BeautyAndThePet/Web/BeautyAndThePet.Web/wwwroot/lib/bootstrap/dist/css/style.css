@@ -1,8 +1,12 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-h1, h2, h3, p {
+h1, h2, h3, h5, p {
     font-family: 'Architects Daughter', cursive;
+}
+
+.login-or-register {
+    color: #ff0000
 }
 
 .font-heading {

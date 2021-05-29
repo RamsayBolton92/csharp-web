@@ -1,18 +1,17 @@
-﻿using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Data;
-using BeautyAndThePet.Web.ViewModels.Causes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.Controllers
+﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System;
+    using System.Globalization;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Data;
+    using BeautyAndThePet.Web.ViewModels.Causes;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class CausesController : Controller
     {
         private readonly ICausesService causesService;
@@ -82,6 +81,55 @@ namespace BeautyAndThePet.Web.Controllers
             };
 
             return this.View(allCausesViewModel);
+        }
+
+        [Authorize]
+        public IActionResult ViewCauseInfo(int id)
+        {
+            var chosenCauseView = this.causesService.GetById<CauseViewModel>(id);
+
+            return this.View(chosenCauseView);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyCauses()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var petsViewModel = new MyCausesListViewModel() { MyCauses = this.causesService.GetMyCauses(user.Id) };
+
+            return this.View(petsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.causesService.GetById<EditCauseInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditCauseInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.causesService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ViewCauseInfo), new { id });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            await this.causesService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.MyCauses));
         }
     }
 }

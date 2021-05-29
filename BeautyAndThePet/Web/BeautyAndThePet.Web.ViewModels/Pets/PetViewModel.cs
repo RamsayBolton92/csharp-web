@@ -37,7 +37,7 @@
 
         public string ImageUrl { get; set; }
 
-        public virtual ICollection<PetImage> Images { get; set; }
+        public virtual ICollection<PetImage> PetImages { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
