@@ -1,18 +1,17 @@
-﻿using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Data;
-using BeautyAndThePet.Web.ViewModels.Causes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.Controllers
+﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System;
+    using System.Globalization;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Data;
+    using BeautyAndThePet.Web.ViewModels.Causes;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class CausesController : Controller
     {
         private readonly ICausesService causesService;
@@ -100,6 +99,28 @@ namespace BeautyAndThePet.Web.Controllers
             var petsViewModel = new MyCausesListViewModel() { MyCauses = this.causesService.GetMyCauses(user.Id) };
 
             return this.View(petsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.causesService.GetById<EditCauseInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditCauseInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.causesService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ViewCauseInfo), new { id });
         }
 
         [Authorize]

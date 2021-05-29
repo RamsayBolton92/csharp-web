@@ -1,14 +1,12 @@
-﻿using BeautyAndThePet.Web.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.ViewModels.Causes
+﻿namespace BeautyAndThePet.Web.ViewModels.Causes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using BeautyAndThePet.Web.Infrastructure;
+    using Microsoft.AspNetCore.Http;
+
     public class CreateCauseInputModel : IValidatableObject
     {
         [Required]
@@ -44,8 +42,8 @@ namespace BeautyAndThePet.Web.ViewModels.Causes
         [Required]
         public IEnumerable<IFormFile> Images { get; set; }
 
-        //[GoogleReCaptchaValidation]
-        //public string RecaptchaValue { get; set; }
+        [GoogleReCaptchaValidation]
+        public string RecaptchaValue { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

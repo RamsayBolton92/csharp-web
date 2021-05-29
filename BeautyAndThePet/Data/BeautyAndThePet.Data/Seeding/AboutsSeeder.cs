@@ -16,7 +16,7 @@
                 return;
             }
 
-            await dbContext.Abouts.AddAsync(new About { Description = GlobalConstants.AboutUs, Rights = GlobalConstants.Rights });
+            await dbContext.Abouts.AddAsync(new About { Description = GlobalConstants.AboutUs });
             await dbContext.SaveChangesAsync();
         }
     }

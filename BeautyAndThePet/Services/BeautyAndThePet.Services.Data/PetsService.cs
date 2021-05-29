@@ -100,9 +100,6 @@
                 .Where(x => x.OwnerId != userId && x.BreedId == myPet.BreedId)
                 .To<PetViewModel>().ToList();
 
-            // && x.TypeOfPet == myPet.TypeOfPet
-            // && x.Sex != myPet.Sex
-            // && x.Breed.Name == myPet.Breed.Name;
             return pets;
         }
 

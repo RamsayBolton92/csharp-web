@@ -1,7 +1,7 @@
 ﻿namespace BeautyAndThePet.Web
 {
+    using System;
     using System.Reflection;
-    using Stripe;
 
     using BeautyAndThePet.Data;
     using BeautyAndThePet.Data.Common;
@@ -13,7 +13,6 @@
     using BeautyAndThePet.Services.Mapping;
     using BeautyAndThePet.Services.Messaging;
     using BeautyAndThePet.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -22,8 +21,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using SignalRChat.Hubs;
-    using System;
 
     public class Startup
     {
@@ -54,8 +51,6 @@
                 options.AppId = "244129463892914";
                 options.AppSecret = "e5c18b24bc58a173831472f1b4e4ac32";
             });
-            
-            services.AddSignalR();
             services.AddControllersWithViews(
                 options =>
                     {
@@ -85,9 +80,6 @@
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
-            // Should be in appsettings.json
-            StripeConfiguration.SetApiKey("sk_test_51IGgKwEONRugqNd013R8lKCy12GKrld5j18ZybXO3crkZvfcjJUu6lETxk9HrJdlqZf25IpIqAXvFUqd2ZIMZFX000vcvImafz");
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
@@ -127,7 +119,6 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

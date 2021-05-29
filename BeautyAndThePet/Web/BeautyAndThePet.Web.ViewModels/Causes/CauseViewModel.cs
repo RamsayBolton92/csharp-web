@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AutoMapper;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Mapping;
-
-namespace BeautyAndThePet.Web.ViewModels.Causes
+﻿namespace BeautyAndThePet.Web.ViewModels.Causes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using AutoMapper;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Mapping;
+
     public class CauseViewModel : IMapFrom<Cause>, IHaveCustomMappings
     {
         public int Id { get; set; }

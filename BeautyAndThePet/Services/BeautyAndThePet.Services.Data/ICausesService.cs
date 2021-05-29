@@ -1,12 +1,10 @@
-﻿using BeautyAndThePet.Web.ViewModels.Causes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Services.Data
+﻿namespace BeautyAndThePet.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Web.ViewModels.Causes;
+
     public interface ICausesService
     {
         Task CreateAsync(CreateCauseInputModel input, string userId, string imagePath);
@@ -18,5 +16,7 @@ namespace BeautyAndThePet.Services.Data
         IEnumerable<CauseViewModel> GetMyCauses(string userId);
 
         Task DeleteAsync(int id);
+
+        Task UpdateAsync(int id, EditCauseInputModel input);
     }
 }

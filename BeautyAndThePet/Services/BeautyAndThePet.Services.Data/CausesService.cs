@@ -1,16 +1,16 @@
-﻿using BeautyAndThePet.Data.Common.Repositories;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Mapping;
-using BeautyAndThePet.Web.ViewModels.Causes;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Services.Data
+﻿namespace BeautyAndThePet.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Common.Repositories;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Mapping;
+    using BeautyAndThePet.Web.ViewModels.Causes;
+
     public class CausesService : ICausesService
     {
         private readonly IDeletableEntityRepository<Cause> causesRepo;
@@ -35,7 +35,6 @@ namespace BeautyAndThePet.Services.Data
                 EndOfPeriod = input.EndOfPeriod,
             };
 
-
             Directory.CreateDirectory($"{imagePath}/causes/");
             foreach (var image in input.Images)
             {
@@ -59,7 +58,6 @@ namespace BeautyAndThePet.Services.Data
                 using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
                 await image.CopyToAsync(fileStream);
             }
-
 
             await this.causesRepo.AddAsync(cause);
             await this.causesRepo.SaveChangesAsync();
@@ -93,6 +91,21 @@ namespace BeautyAndThePet.Services.Data
             return causes;
         }
 
+        public async Task UpdateAsync(int id, EditCauseInputModel input)
+        {
+            var cause = this.causesRepo.All().FirstOrDefault(x => x.Id == id);
+
+            cause.Title = input.Title;
+            cause.Description = input.Description;
+            cause.Funds = input.Funds;
+            cause.BankAccount = input.BankAccount;
+            cause.AccountOwner = input.AccountOwner;
+            cause.StartOfPeriod = input.StartOfPeriod;
+            cause.EndOfPeriod = input.EndOfPeriod;
+
+            await this.causesRepo.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(int id)
         {
             var cause = this.causesRepo.All().FirstOrDefault(x => x.Id == id);
@@ -103,4 +116,3 @@ namespace BeautyAndThePet.Services.Data
         }
     }
 }
-

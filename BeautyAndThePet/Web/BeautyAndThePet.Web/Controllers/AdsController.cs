@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Data;
-using BeautyAndThePet.Web.ViewModels.Ads;
-using BeautyAndThePet.Web.ViewModels;
-
-namespace BeautyAndThePet.Web.Controllers
+﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Data;
+    using BeautyAndThePet.Web.ViewModels;
+    using BeautyAndThePet.Web.ViewModels.Ads;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class AdsController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

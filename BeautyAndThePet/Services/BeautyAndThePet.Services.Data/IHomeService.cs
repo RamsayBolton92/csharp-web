@@ -5,7 +5,5 @@
     public interface IHomeService
     {
         IndexViewModel Index();
-
-        PrivacyViewModel GetPrivacy();
     }
 }
