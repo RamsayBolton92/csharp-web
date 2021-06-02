@@ -69,7 +69,7 @@
 
             this.TempData["Message"] = "Cause added successfully.";
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction("MyCauses");
         }
 
         [Authorize]
@@ -96,9 +96,9 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var petsViewModel = new MyCausesListViewModel() { MyCauses = this.causesService.GetMyCauses(user.Id) };
+            var causesViewModel = new MyCausesListViewModel() { MyCauses = this.causesService.GetMyCauses(user.Id) };
 
-            return this.View(petsViewModel);
+            return this.View(causesViewModel);
         }
 
         [Authorize]
