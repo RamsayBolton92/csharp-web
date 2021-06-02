@@ -1,0 +1,48 @@
+﻿@using BeautyAndThePet.Data.Models.Enumerations
+@model BeautyAndThePet.Web.ViewModels.Causes.EditCauseInputModel
+@{
+    ViewData["Title"] = "Edit cause";
+}
+
+<form method="post" id="editForm" class="col-md-6 offset-md-3 font">
+    <h1>@ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Funds"></label>
+        <input asp-for="Funds" class="form-control" />
+        <span asp-validation-for="Funds" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BankAccount"></label>
+        <input asp-for="BankAccount" class="form-control" />
+        <span asp-validation-for="BankAccount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AccountOwner"></label>
+        <input asp-for="AccountOwner" class="form-control" />
+        <span asp-validation-for="AccountOwner" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartOfPeriod"></label>
+        <input asp-for="StartOfPeriod" class="form-control" />
+        <span asp-validation-for="StartOfPeriod" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndOfPeriod"></label>
+        <input asp-for="EndOfPeriod" class="form-control" />
+        <span asp-validation-for="EndOfPeriod" class="text-danger"></span>
+    </div>
+    <hr />
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-warning">Save changes</button>
+</form>

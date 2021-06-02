@@ -1,0 +1,30 @@
+﻿@model BeautyAndThePet.Web.ViewModels.Causes.MyCausesListViewModel
+@{
+    this.ViewData["Title"] = "My causes";
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+@foreach (var cause in Model.MyCauses)
+{
+    <div class="media font">
+        <img src="@cause.ImageUrl" width="200" class="mr-3 img-responsive">
+        <div class="media-body">
+            <h4 class="mt-0">@cause.Title</h4>
+            <hr />
+            <p>@cause.Description</p>
+            <hr />
+            <p>@cause.Funds</p>
+            <hr />
+            <p>Start of cause: @cause.StartOfPeriod.ToShortDateString()</p>
+            <hr />
+            <p>End of cause: @cause.EndOfPeriod.ToShortDateString()</p>
+        </div>
+    </div>
+    <a class="btn btn-primary" asp-controller="Causes" asp-action="ViewCauseInfo" asp-route-id="@cause.Id">View</a>
+    <hr />
+}
