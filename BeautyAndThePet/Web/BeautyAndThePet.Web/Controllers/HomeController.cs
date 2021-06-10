@@ -7,6 +7,7 @@
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Web.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     public class HomeController : BaseController
@@ -32,6 +33,18 @@
             var viewModel = this.homeService.Index();
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult Chat()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult ChatWithAdmin()
+        {
+            return this.View();
         }
 
         public IActionResult Privacy()

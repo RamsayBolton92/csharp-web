@@ -12,6 +12,7 @@
     using BeautyAndThePet.Services.Data;
     using BeautyAndThePet.Services.Mapping;
     using BeautyAndThePet.Services.Messaging;
+    using BeautyAndThePet.Web.Hubs;
     using BeautyAndThePet.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,12 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddMvc();
+            services.AddSignalR(
+                options => options.EnableDetailedErrors = true
+            );
+
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
@@ -119,6 +126,8 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
+                        endpoints.MapHub<ChatWithAdminHub>("/chatwithadmin");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
