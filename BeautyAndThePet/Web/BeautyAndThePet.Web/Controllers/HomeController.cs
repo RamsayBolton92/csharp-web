@@ -41,12 +41,6 @@
             return this.View();
         }
 
-        [Authorize]
-        public IActionResult ChatWithAdmin()
-        {
-            return this.View();
-        }
-
         public IActionResult Privacy()
         {
             return this.View();
