@@ -1,0 +1,8 @@
+﻿@if (this.User.Identity.IsAuthenticated)
+{
+    <div class="dropdown">
+        <input type="text" class="dropbtn" placeholder="Search user ..." id="myInput" onkeyup="filterFunction()">
+        <div id="myDropdown" class="dropdown-content">
+        </div>
+    </div>
+}

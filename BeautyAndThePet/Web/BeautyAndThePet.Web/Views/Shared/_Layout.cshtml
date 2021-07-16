@@ -59,6 +59,10 @@
                             <li><a asp-controller="Ads" asp-action="All">All messages</a></li>
                         </ul>
                     </li>
+                    @if (ViewBag.ShowSearchBar == true)
+                    {
+                        <partial name="_SearchUserPartial" />
+                    }
                 </ul>
                     }
                     else
@@ -95,27 +99,6 @@
                     </aside>
                 </div>
             }
-
-
-
-            @*<div class="container content">
-                    @if (this.ViewData.ContainsKey("SkipSidebar"))
-                    {
-                        @RenderBody()
-                    }
-                    else
-                    {
-                        <div class="row">
-                            <div class="col-md-9">
-                                @RenderBody()
-                            </div>
-
-                            <aside class="col-md-3 magazine-page">
-                                <vc:sidebar></vc:sidebar>
-                            </aside>
-                        </div>
-                    }
-                </div>*@
         </main>
     </div>
 
@@ -134,10 +117,3 @@
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-@*<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </li>*@

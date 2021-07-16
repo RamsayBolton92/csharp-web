@@ -81,6 +81,7 @@
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IAdsService, AdsService>();
             services.AddTransient<ICausesService, CausesService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -127,7 +128,6 @@
                 endpoints =>
                     {
                         endpoints.MapHub<ChatHub>("/chat");
-                        endpoints.MapHub<ChatWithAdminHub>("/chatwithadmin");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

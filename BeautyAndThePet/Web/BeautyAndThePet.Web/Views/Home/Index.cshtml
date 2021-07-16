@@ -22,10 +22,66 @@
     }
     else
     {
-            <h5>
-                To visit us, you must <a class="login-or-register" asp-area="Identity" asp-page="/Account/Register">register</a>
-                or <a class="login-or-register" asp-area="Identity" asp-page="/Account/Login">login</a> if you already have an account
-            </h5>
+        <h5>
+            To visit us, you must <a class="login-or-register" asp-area="Identity" asp-page="/Account/Register">register</a>
+            or <a class="login-or-register" asp-area="Identity" asp-page="/Account/Login">login</a> if you already have an account
+        </h5>
 
     }
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(
+            getAllUsers()
+        );
+
+        function getAllUsers() {
+            $("#myInput").on('click', function (e) {
+                e.preventDefault();
+                var that = $(this);
+                that.off('click');
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/WebService/GetUsers",
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        data.forEach(e => {
+                            var a = document.createElement('a');
+                            a.setAttribute('href', `/Users/ViewInfo/${e.Username}`);
+                            a.innerHTML = e.Username;
+                            var myDropdown = document.querySelector('#myDropdown');
+                            myDropdown.appendChild(a);
+                            a.style.display = "none";
+                        });
+                    },
+                    error: function (emp) {
+                        alert('error');
+                    }
+                }).always(function () {
+                    that.on('click', login); // add handler back after ajax
+                });
+
+                document.getElementById("myDropdown").classList.toggle("show");
+            });
+        }
+
+        function filterFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("myDropdown");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i < a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+}
