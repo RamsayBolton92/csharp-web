@@ -1,0 +1,62 @@
+﻿@model BeautyAndThePet.Web.ViewModels.Users.UserInfoViewModel
+@{
+    this.ViewData["Title"] = Model.Username;
+}
+
+<div class="col-md-12 text-center font">
+    <h2 class="mt-0">@Model.Username</h2>
+    <div>
+        @if (Model.City == null)
+        {
+            <div class="h5">
+                lives in <strong class="petsCount">@Model.Country</strong>,
+                owns <strong class="petsCount">@Model.PetsCount</strong> pets,
+                has <strong class="petsCount">@Model.AdsCount</strong> ads
+                and <strong class="petsCount">@Model.CausesCount</strong> causes
+            </div>
+        }
+        else if (Model.City == null && Model.Country == null)
+        {
+            <div class="h5">
+                owns <strong class="petsCount">@Model.PetsCount</strong> pets,
+                has <strong class="petsCount">@Model.AdsCount</strong> ads
+                and <strong class="petsCount">@Model.CausesCount</strong> causes
+            </div>
+        }
+        else
+        {
+            <div class="h5">
+                lives in <strong class="petsCount">@Model.City, @Model.Country, </strong>
+                owns <strong class="petsCount">@Model.PetsCount</strong> pets,
+                has <strong class="petsCount">@Model.AdsCount</strong> ads
+                and <strong class="petsCount">@Model.CausesCount</strong> causes
+            </div>
+        }
+        created on @Model.CreatedOn
+    </div>
+</div>
+@foreach (var pet in Model.PetsDictionary)
+{
+    <h3>Pets:</h3>
+    @foreach (var a in pet.Value)
+    {
+        <h5 class="row">
+            @a.Key - @a.Value
+            <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Key" id="viewUsersPet" class="btn btn-primary mr-auto ml-0">View</a>
+        </h5>
+    }
+    <hr />
+    <h3>Ads:</h3>
+    @foreach (var ad in Model.AdsDictionary)
+    {
+        <h5>@ad.Key - @ad.Value</h5>
+    }
+    <hr />
+    <h3>Causes:</h3>
+    @foreach (var cause in Model.CausesDictionary)
+    {
+        <h4 class="text-center">@cause.Key</h4>
+        <h5>@cause.Value</h5>
+        <hr />
+    }
+}

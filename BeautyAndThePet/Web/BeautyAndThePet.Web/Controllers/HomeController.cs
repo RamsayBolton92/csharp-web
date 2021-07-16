@@ -30,6 +30,8 @@
                 await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
             }
 
+            this.ViewBag.ShowSearchBar = true;
+
             var viewModel = this.homeService.Index();
 
             return this.View(viewModel);
