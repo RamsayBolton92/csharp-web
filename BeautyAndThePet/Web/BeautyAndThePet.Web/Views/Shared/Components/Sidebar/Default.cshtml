@@ -1,13 +1,19 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.SidebarViewModel
 
-<div class="posts margin-bottom-40">
-    @foreach (var ad in Model.Ads)
-    {
-    <div>
-        <p>@ad.Text</p>
-        <p>From: @ad.ApplicationUser</p>
-        <p>Sent On: @ad.SentOn</p>
-        <hr />
-    </div>
-    }
-</div>
+@if (this.Model.Ads.Any())
+{
+    <aside class="col-md-3 magazine-page">
+        <div class="posts margin-bottom-40">
+            @foreach (var ad in Model.Ads)
+            {
+                <div>
+                    <p>@ad.Text</p>
+                    <p>From: @ad.ApplicationUser</p>
+                    <p>Sent On: @ad.SentOn</p>
+                    <hr />
+                </div>
+            }
+        </div>
+    </aside>
+}
+
