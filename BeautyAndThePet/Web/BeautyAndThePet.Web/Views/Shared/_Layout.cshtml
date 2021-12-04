@@ -16,8 +16,7 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <i class="fas fa-paw h5"></i>
-                <i class="fas fa-paw"></i>
-                <a class="navbar-brand font-italic font-heading h5" asp-area="" asp-controller="Home" asp-action="Index">Beauty&ThePet</a>
+                <a class="navbar-brand font-italic font-heading h6" asp-area="" asp-controller="Home" asp-action="Index">Beauty&ThePet</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,94 +25,80 @@
                     <partial name="_LoginPartial" />
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                <ul class="navbar-nav flex-grow-1 font h5">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Pets</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Pets" asp-action="Create">New pet</a></li>
-                            <li><a asp-controller="Pets" asp-action="MyPets">My pets</a></li>
-                            <li><a asp-controller="Pets" asp-action="All">All pets</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Causes</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Causes" asp-action="Create">New cause</a></li>
-                            <li><a asp-controller="Causes" asp-action="MyCauses">My causes</a></li>
-                            <li><a asp-controller="Causes" asp-action="All">All causes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Chat</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Chat">Common chat</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Ads" asp-action="New">New message</a></li>
-                            <li><a asp-controller="Ads" asp-action="All">All messages</a></li>
-                        </ul>
-                    </li>
-                    @if (ViewBag.ShowSearchBar == true)
-                    {
-                        <partial name="_SearchUserPartial" />
-                    }
-                </ul>
-                    }
-                    else
-                    {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item font">
+                        <ul class="navbar-nav flex-grow-1 font h5">
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Pets</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Pets" asp-action="Create">New pet</a></li>
+                                    <li><a asp-controller="Pets" asp-action="MyPets">My pets</a></li>
+                                    <li><a asp-controller="Pets" asp-action="All">All pets</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Causes</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Causes" asp-action="Create">New cause</a></li>
+                                    <li><a asp-controller="Causes" asp-action="MyCauses">My causes</a></li>
+                                    <li><a asp-controller="Causes" asp-action="All">All causes</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Chat</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Chat">Common chat</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Ads" asp-action="New">New message</a></li>
+                                    <li><a asp-controller="Ads" asp-action="All">All messages</a></li>
+                                </ul>
+                            </li>
+                            <partial name="_SearchUserPartial" />
                         </ul>
                     }
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-
-
-            @if (this.ViewData["Title"] == "Home Page" || !this.User.Identity.IsAuthenticated)
-            {
-                @this.RenderBody()
-            }
-            else
-            {
-                <div class="row">
-                    <div class="col-md-9">
-                        @RenderBody()
                     </div>
-
-                    <aside class="col-md-3 magazine-page">
-                        <vc:sidebar></vc:sidebar>
-                    </aside>
                 </div>
-            }
-        </main>
-    </div>
+            </nav>
+        </header>
 
-    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
 
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    @await this.RenderSectionAsync("Scripts", required: false)
-</body>
+
+                @if ((string)this.ViewData["Title"] == "Home Page" || !this.User.Identity.IsAuthenticated)
+                {
+                    @this.RenderBody()
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-9">
+                            @RenderBody()
+                        </div>
+                            <vc:sidebar></vc:sidebar>
+                    </div>
+                }
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        @await this.RenderSectionAsync("Scripts", required: false)
+    </body>
 </html>

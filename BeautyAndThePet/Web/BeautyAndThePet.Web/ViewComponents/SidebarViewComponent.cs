@@ -21,12 +21,13 @@ namespace BeautyAndThePet.Web.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var model = new SidebarViewModel 
+            var model = new SidebarViewModel
             {
                 Ads = this.adRepo.All().OrderByDescending(x => x.CreatedOn).To<AdViewModel>().Take(5).ToList(),
             };
 
             return this.View(model);
         }
+
     }
 }

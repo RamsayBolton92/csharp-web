@@ -14,7 +14,6 @@
         [HttpGet]
         public string GetUsers()
         {
-
             List<UserViewModel> users = new List<UserViewModel>();
             string query = string.Format("SELECT * FROM AspNetUsers");
 
