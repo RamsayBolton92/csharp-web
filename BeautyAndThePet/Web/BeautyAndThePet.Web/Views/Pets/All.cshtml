@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Filter by
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Order by
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -31,13 +31,14 @@
         </div>
     </div>
 </div>
+<hr />
 
 @foreach (var pet in Model.AllPets)
 {
     <div class="media font">
         <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
         <div class="media-body">
-            <h4 class="mt-0">@pet.Name</h4>
+            <h4 class="mt-0"><a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" data-bs-toggle="tooltip" title="Birth: @pet.BirthDate.ToShortDateString() &#013;Available from: @pet.StartOfPeriod.ToShortDateString() &#013; To:@pet.EndOfPeriod.ToShortDateString()">@pet.Name</a></h4>
             <hr />
             <div class="h5">
                 <p>Specie: @pet.TypeOfPet</p>
@@ -47,21 +48,11 @@
                 <p>Sex: @pet.Sex</p>
                 <hr />
                 <p>Town: @pet.OwnerAddressTown</p>
-                <hr />
-                <p>Date of birth: @pet.BirthDate.ToShortDateString()</p>
-                <hr />
-                <p>Start of sexual activity: @pet.StartOfPeriod.ToShortDateString()</p>
-                <hr />
-                <p>End of sexual activity: @pet.EndOfPeriod.ToShortDateString()</p>
-                <hr />
-                <p>Description: @pet.Description</p>
             </div>
         </div>
     </div>
-    <a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" class="btn btn-primary">View</a>
     <hr />
 }
-<hr />
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
