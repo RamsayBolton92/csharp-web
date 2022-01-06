@@ -163,5 +163,69 @@
 
             return this.RedirectToAction(nameof(this.MyPets));
         }
+
+        [Authorize]
+        public IActionResult AllMaleDogs(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllMaleDogs(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult AllFemaleDogs(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllFemaleDogs(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult AllMaleCats(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllMaleCats(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult AllFemaleCats(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllFemaleCats(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
     }
 }

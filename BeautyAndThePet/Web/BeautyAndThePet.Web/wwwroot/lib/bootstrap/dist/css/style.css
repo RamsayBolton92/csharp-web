@@ -30,6 +30,12 @@
     border-bottom: 1px solid #ddd;
 }
 
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
     /* The search field when it gets focus/clicked on */
     #myInput:focus {
         outline: 3px solid #ddd;

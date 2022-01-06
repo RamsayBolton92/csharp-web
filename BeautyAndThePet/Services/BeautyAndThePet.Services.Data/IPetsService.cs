@@ -22,5 +22,13 @@
         T GetById<T>(int id);
 
         Task DeleteAsync(int id);
+
+        IEnumerable<PetViewModel> GetAllMaleDogs(int pageId, int petsPerPage = 10);
+
+        IEnumerable<PetViewModel> GetAllFemaleDogs(int pageId, int petsPerPage = 10);
+
+        IEnumerable<PetViewModel> GetAllMaleCats(int pageId, int petsPerPage = 10);
+
+        IEnumerable<PetViewModel> GetAllFemaleCats(int pageId, int petsPerPage = 10);
     }
 }
