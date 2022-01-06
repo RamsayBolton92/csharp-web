@@ -2,11 +2,13 @@
 {
     using System;
     using System.Globalization;
+    using System.Text;
     using System.Threading.Tasks;
 
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Data;
+    using BeautyAndThePet.Services.Messaging;
     using BeautyAndThePet.Web.ViewModels.Pets;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
@@ -18,14 +20,17 @@
         private readonly IPetsService petsService;
         private readonly IBreedsService breedsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEmailSender emailSender;
         private readonly IWebHostEnvironment environment;
 
-        public PetsController(IPetsService petsService, IBreedsService breedsService, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
+        public PetsController(IPetsService petsService, IBreedsService breedsService, 
+            IWebHostEnvironment environment, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             this.petsService = petsService;
             this.breedsService = breedsService;
             this.userManager = userManager;
             this.environment = environment;
+            this.emailSender = emailSender;
         }
 
         [Authorize]
@@ -258,6 +263,26 @@
             };
 
             return this.View(allPetsViewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> SendPetToEmail(int id)
+        {
+            var pet = this.petsService.GetById<PetViewModel>(id);
+
+            var html = new StringBuilder();
+            html.AppendLine($"<h1>{pet.Name}</h1>");
+            html.AppendLine($"<h3>{pet.TypeOfPet}</h3>");
+            html.AppendLine($"<h3>{pet.BreedName}</h3>");
+            html.AppendLine($"<h3>{pet.Sex}</h3>");
+            html.AppendLine($"<h3>Active from {pet.StartOfPeriod} until {pet.EndOfPeriod}</h3>");
+            html.AppendLine($"<h3>Owned by {pet.OwnerUserName}</h3>");
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.emailSender.SendEmailAsync("faustwfs@gmail.com", "Beauty&ThePet", user.Email, pet.Name, html.ToString());
+            
+            return this.RedirectToAction(nameof(this.ViewPetInfo), new { id });
         }
     }
 }

@@ -58,4 +58,7 @@ else
 {
     <a asp-controller="Pets" asp-action="All" class="btn btn-secondary">Back</a>
     <a asp-controller="Messages" asp-action="New" asp-route-id="@Model.Id" class="btn btn-primary">Message</a>
+    <form method="post" asp-controller="Pets" asp-action="SendPetToEmail" asp-route-id="@Model.Id">
+        <button class="btn btn-warning">Send to my email</button>
+    </form>
 }
