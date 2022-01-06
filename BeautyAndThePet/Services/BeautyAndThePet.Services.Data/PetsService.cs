@@ -10,6 +10,7 @@
     using BeautyAndThePet.Data.Models;
     using BeautyAndThePet.Services.Mapping;
     using BeautyAndThePet.Web.ViewModels.Pets;
+    using BeautyAndThePet.Data.Models.Enumerations;
 
     public class PetsService : IPetsService
     {
@@ -145,6 +146,46 @@
             pet.IsDeleted = true;
 
             await this.petsRepo.SaveChangesAsync();
+        }
+
+        public IEnumerable<PetViewModel> GetAllMaleDogs(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderByDescending(x => x.Id).Where(p => p.Sex == Sex.Male && p.TypeOfPet == TypeOfPet.Dog)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
+        }
+
+        public IEnumerable<PetViewModel> GetAllFemaleDogs(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderByDescending(x => x.Id).Where(p => p.Sex == Sex.Female && p.TypeOfPet == TypeOfPet.Dog)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
+        }
+
+        public IEnumerable<PetViewModel> GetAllMaleCats(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderByDescending(x => x.Id).Where(p => p.Sex == Sex.Male && p.TypeOfPet == TypeOfPet.Cat)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
+        }
+
+        public IEnumerable<PetViewModel> GetAllFemaleCats(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderByDescending(x => x.Id).Where(p => p.Sex == Sex.Female && p.TypeOfPet == TypeOfPet.Cat)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
         }
     }
 }
