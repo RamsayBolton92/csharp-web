@@ -7,4 +7,3 @@
         public IEnumerable<CauseViewModel> AllCauses { get; set; }
     }
 }
-

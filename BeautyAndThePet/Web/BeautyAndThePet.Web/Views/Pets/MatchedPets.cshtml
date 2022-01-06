@@ -1,6 +1,13 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.Pets.MatchedPetsListViewModel
 @{
-    this.ViewData["Title"] = "Matched pets";
+    if (Model.MatchedPets.Any())
+    {
+        this.ViewData["Title"] = "Matched pets";
+    }
+    else
+    {
+        this.ViewData["Title"] = "No matched pets :(";
+    }
 }
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>

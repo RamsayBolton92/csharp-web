@@ -1,6 +1,13 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.Pets.MyPetsListViewModel
 @{
-    this.ViewData["Title"] = "My pets";
+    if (Model.MyPets.Any())
+    {
+        this.ViewData["Title"] = "My pets";
+    }
+    else
+    {
+        this.ViewData["Title"] = "No pets :(";
+    }
 }
 
 @if (this.TempData.ContainsKey("Message"))

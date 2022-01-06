@@ -30,5 +30,9 @@
         IEnumerable<PetViewModel> GetAllMaleCats(int pageId, int petsPerPage = 10);
 
         IEnumerable<PetViewModel> GetAllFemaleCats(int pageId, int petsPerPage = 10);
+
+        IEnumerable<PetViewModel> GetAllPetsByCreationDateAscending(int pageId, int petsPerPage = 10);
+
+        IEnumerable<PetViewModel> GetAllPetsByCreationDateDescending(int pageId, int petsPerPage = 10);
     }
 }

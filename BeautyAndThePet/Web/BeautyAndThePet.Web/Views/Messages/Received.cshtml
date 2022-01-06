@@ -1,7 +1,14 @@
 ﻿@using BeautyAndThePet.Web.ViewModels.Messages
 @model MessagesListViewModel
 @{
-    this.ViewData["Title"] = "Received messages";
+    if (Model.Messages.Any())
+    {
+        this.ViewData["Title"] = "Received messages";
+    }
+    else
+    {
+        this.ViewData["Title"] = "You have no received messages yet";
+    }
 }
 
 @foreach (var message in Model.Messages)

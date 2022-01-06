@@ -1,6 +1,13 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.Causes.MyCausesListViewModel
 @{
-    this.ViewData["Title"] = "My causes";
+    if (Model.MyCauses.Any())
+    {
+        this.ViewData["Title"] = "My causes";
+    }
+    else
+    {
+        this.ViewData["Title"] = "No causes :(";
+    }
 }
 
 @if (this.TempData.ContainsKey("Message"))

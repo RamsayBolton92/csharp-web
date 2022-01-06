@@ -227,5 +227,37 @@
 
             return this.View(allPetsViewModel);
         }
+
+        [Authorize]
+        public IActionResult ByCreationDateAscending(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllPetsByCreationDateAscending(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
+
+        [Authorize]
+        public IActionResult ByCreationDateDescending(int id = 1)
+        {
+            const int PetsPerPage = 10;
+
+            var allPetsViewModel = new AllPetsListViewModel()
+            {
+                Page = id,
+                PetsCount = this.petsService.GetCount(),
+                PetsPerPage = PetsPerPage,
+                AllPets = this.petsService.GetAllPetsByCreationDateDescending(id, PetsPerPage),
+            };
+
+            return this.View(allPetsViewModel);
+        }
     }
 }
