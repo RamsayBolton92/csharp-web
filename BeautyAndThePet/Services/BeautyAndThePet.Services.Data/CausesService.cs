@@ -68,7 +68,7 @@
             var causes = this.causesRepo.AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .To<CauseViewModel>().ToList();
-
+            ;
             return causes;
         }
 

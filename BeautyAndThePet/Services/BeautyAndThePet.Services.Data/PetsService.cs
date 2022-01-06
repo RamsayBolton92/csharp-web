@@ -187,5 +187,25 @@
 
             return pets;
         }
+
+        public IEnumerable<PetViewModel> GetAllPetsByCreationDateAscending(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderBy(x => x.CreatedOn)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
+        }
+
+        public IEnumerable<PetViewModel> GetAllPetsByCreationDateDescending(int pageId, int petsPerPage = 10)
+        {
+            var pets = this.petsRepo.AllAsNoTracking()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((pageId - 1) * petsPerPage).Take(petsPerPage)
+                .To<PetViewModel>().ToList();
+
+            return pets;
+        }
     }
 }

@@ -1,6 +1,13 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.Causes.AllCausesListViewModel
 @{
-    this.ViewData["Title"] = "All causes";
+    if (Model.AllCauses.Any())
+    {
+        this.ViewData["Title"] = "All causes";
+    }
+    else
+    {
+        this.ViewData["Title"] = "No causes :(";
+    }
 }
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
