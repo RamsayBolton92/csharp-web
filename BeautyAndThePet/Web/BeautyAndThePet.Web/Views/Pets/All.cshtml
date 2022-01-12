@@ -1,79 +1,90 @@
 ﻿@model BeautyAndThePet.Web.ViewModels.Pets.AllPetsListViewModel
 @{
-    this.ViewData["Title"] = "All pets, page " + Model.Page;
+    if (Model.AllPets.Any())
+    {
+        this.ViewData["Title"] = "All pets, page " + Model.Page;
+    }
+    else
+    {
+        this.ViewData["Title"] = "No pets :(";
+    }
 }
-
-
 
 <h1 class="text-center">@this.ViewData["Title"]</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filter by
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" asp-controller="Pets" asp-action="AllMaleDogs">Male dogs only</a>
-                <a class="dropdown-item" asp-controller="Pets" asp-action="AllFemaleDogs">Female dogs only</a>
-                <a class="dropdown-item" asp-controller="Pets" asp-action="AllMaleCats">Male cats only</a>
-                <a class="dropdown-item" asp-controller="Pets" asp-action="AllFemaleCats">Female cats only</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Order by
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" asp-controller="Pets" asp-action="ByCreationDateAscending">Oldest</a>
-                <a class="dropdown-item" asp-controller="Pets" asp-action="ByCreationDateDescending">Newest</a>
-            </div>
-        </div>
-    </div>
-</div>
-<hr />
 
-@foreach (var pet in Model.AllPets)
+@if (Model.AllPets.Any())
 {
-    <div class="media font">
-        <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
-        <div class="media-body">
-            <h4 class="mt-0"><a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" data-bs-toggle="tooltip" title="Birth: @pet.BirthDate.ToShortDateString() &#013;Available from: @pet.StartOfPeriod.ToShortDateString() &#013; To:@pet.EndOfPeriod.ToShortDateString()">@pet.Name</a></h4>
-            <hr />
-            <div class="h5">
-                <p>Specie: @pet.TypeOfPet</p>
-                <hr />
-                <p>Breed: @pet.BreedName</p>
-                <hr />
-                <p>Sex: @pet.Sex</p>
-                <hr />
-                <p>Town: @pet.OwnerAddressTown</p>
+    <div class="container">
+        <div class="row">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="AllMaleDogs">Male dogs only</a>
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="AllFemaleDogs">Female dogs only</a>
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="AllMaleCats">Male cats only</a>
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="AllFemaleCats">Female cats only</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Order by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="ByCreationDateAscending">Oldest</a>
+                    <a class="dropdown-item" asp-controller="Pets" asp-action="ByCreationDateDescending">Newest</a>
+                </div>
             </div>
         </div>
     </div>
     <hr />
+
+    @foreach (var pet in Model.AllPets)
+    {
+        <div class="media font">
+            <img src="@pet.ImageUrl" width="200" class="mr-3 img-responsive">
+            <div class="media-body">
+                <h4 class="mt-0"><a asp-controller="Pets" asp-action="ViewPetInfo" asp-route-id="@pet.Id" data-bs-toggle="tooltip" title="Birth: @pet.BirthDate.ToShortDateString() &#013;Available from: @pet.StartOfPeriod.ToShortDateString() &#013; To:@pet.EndOfPeriod.ToShortDateString()">@pet.Name</a></h4>
+                <hr />
+                <div class="h5">
+                    <p>Specie: @pet.TypeOfPet</p>
+                    <hr />
+                    <p>Breed: @pet.BreedName</p>
+                    <hr />
+                    <p>Sex: @pet.Sex</p>
+                    <hr />
+                    <p>Town: @pet.OwnerAddressTown</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.HasPrevousPage)
+            { <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
+            </li>
+            @if (Model.HasPrevousPage)
+            {
+                <li class="page-item"><a class="page-link" href="#">@Model.PrevousPageNumber</a></li>
+            }
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    @Model.Page
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            @if (Model.HasNextPage)
+            {
+                <li class="page-item"><a class="page-link" href="#">@Model.NextPageNumber</a></li>
+            }
+            <li class="page-item @if (!Model.HasNextPage)
+            { <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
+            </li>
+        </ul>
+    </nav>
 }
-<nav aria-label="...">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @if (!Model.HasPrevousPage) { <text>disabled</text>}">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.PrevousPageNumber">Previous</a>
-        </li>
-        @if (Model.HasPrevousPage)
-        {
-            <li class="page-item"><a class="page-link" href="#">@Model.PrevousPageNumber</a></li>
-        }
-        <li class="page-item active" aria-current="page">
-            <span class="page-link">
-                @Model.Page
-                <span class="sr-only">(current)</span>
-            </span>
-        </li>
-        @if (Model.HasNextPage)
-        {
-            <li class="page-item"><a class="page-link" href="#">@Model.NextPageNumber</a></li>
-        }
-        <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text>}">
-            <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber">Next</a>
-        </li>
-    </ul>
-</nav>

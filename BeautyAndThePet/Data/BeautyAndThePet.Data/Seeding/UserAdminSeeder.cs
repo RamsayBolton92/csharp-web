@@ -35,7 +35,7 @@
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await userManager.CreateAsync(user, "fausts");
+            await userManager.CreateAsync(user, "fausts@abv.bg");
         }
     }
 }

@@ -25,42 +25,42 @@
                     <partial name="_LoginPartial" />
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                <ul class="navbar-nav flex-grow-1 font h5">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Pets</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Pets" asp-action="Create">New pet</a></li>
-                            <li><a asp-controller="Pets" asp-action="MyPets">My pets</a></li>
-                            <li><a asp-controller="Pets" asp-action="All">All pets</a></li>
+                        <ul class="navbar-nav flex-grow-1 font h5">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Pets</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Pets" asp-action="Create">New pet</a></li>
+                                    <li><a asp-controller="Pets" asp-action="MyPets">My pets</a></li>
+                                    <li><a asp-controller="Pets" asp-action="All">All pets</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Causes</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Causes" asp-action="Create">New cause</a></li>
+                                    <li><a asp-controller="Causes" asp-action="MyCauses">My causes</a></li>
+                                    <li><a asp-controller="Causes" asp-action="All">All causes</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Chat</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Chat">Common chat</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
+                                    <li><a asp-controller="Ads" asp-action="New">New message</a></li>
+                                    <li><a asp-controller="Ads" asp-action="All">All messages</a></li>
+                                </ul>
+                            </li>
+                            <li><partial name="_SearchUserPartial" /></li>
+
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Causes</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Causes" asp-action="Create">New cause</a></li>
-                            <li><a asp-controller="Causes" asp-action="MyCauses">My causes</a></li>
-                            <li><a asp-controller="Causes" asp-action="All">All causes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Chat</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Chat">Common chat</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown">Ads</button>
-                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownmenu">
-                            <li><a asp-controller="Ads" asp-action="New">New message</a></li>
-                            <li><a asp-controller="Ads" asp-action="All">All messages</a></li>
-                        </ul>
-                    </li>
-                    <li><partial name="_SearchUserPartial" /></li>
-                    
-                </ul>
                     }
                 </div>
             </div>
@@ -100,5 +100,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
