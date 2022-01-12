@@ -14,7 +14,7 @@
     <a asp-controller="" asp-action="" class="btn btn-danger"></a>
     <a asp-controller="" asp-action="" class="btn btn-primary"></a>
     <hr />
-    <p class="font h3">@Model.AboutUs</p>
+    <p class="font h5">@Model.AboutUs</p>
     @if (this.User.Identity.IsAuthenticated)
     {
         <a asp-controller="Pets" asp-action="Create" class="btn btn-warning">Create pet</a>
@@ -28,4 +28,6 @@
         </h5>
 
     }
+    <hr />
+    <p class="font h5">Used technologies: <h4 class="login-or-register">@GlobalConstants.UsedTechnologies</h4></p>
 </div>

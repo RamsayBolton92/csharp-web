@@ -115,7 +115,6 @@ h1, h2, h3, h5, p, li {
     background-color: #fff;
     border-color: #62d9d9;
     border-radius: 30px;
-    padding: 16px;
 }
 
 .btn-primary:hover {
@@ -123,7 +122,6 @@ h1, h2, h3, h5, p, li {
     background-color: #62d9d9;
     border-color: #62d9d9;
     border-radius: 30px;
-    padding: 16px;
 }
 
 .btn-danger {
@@ -131,7 +129,6 @@ h1, h2, h3, h5, p, li {
     background-color: #fff;
     border-color: #fb5454;
     border-radius: 30px;
-    padding: 16px;
 }
 
 .btn-secondary {
@@ -139,7 +136,6 @@ h1, h2, h3, h5, p, li {
     background-color: #fff;
     border-color: #6c757d;
     border-radius: 30px;
-    padding: 16px;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -165,8 +161,6 @@ a {
     background-color: #fff;
     border-color: #ffd043;
     border-radius: 30px;
-    padding: 16px;
-    
 }
 
 img {
