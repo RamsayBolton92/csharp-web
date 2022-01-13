@@ -8,9 +8,9 @@
 
     using BeautyAndThePet.Data.Common.Repositories;
     using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Data.Models.Enumerations;
     using BeautyAndThePet.Services.Mapping;
     using BeautyAndThePet.Web.ViewModels.Pets;
-    using BeautyAndThePet.Data.Models.Enumerations;
 
     public class PetsService : IPetsService
     {
@@ -45,11 +45,9 @@
                 Description = input.Description,
                 OwnerId = userId,
             };
-
-            
-                Directory.CreateDirectory($"{imagePath}/pets/");
-                foreach (var image in input.Images)
-                {
+            Directory.CreateDirectory($"{imagePath}/pets/");
+            foreach (var image in input.Images)
+            {
                     var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
                     if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
@@ -70,7 +68,6 @@
                     using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
                     await image.CopyToAsync(fileStream);
                 }
-            
 
             await this.petsRepo.AddAsync(pet);
             await this.petsRepo.SaveChangesAsync();

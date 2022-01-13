@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BeautyAndThePet.Common
+﻿namespace BeautyAndThePet.Common
 {
     public static class GlobalConstants
     {

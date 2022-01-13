@@ -16,7 +16,6 @@
                 return;
             }
 
-            
             await dbContext.Breeds.AddAsync(new Breed { Name = "Pincher Ninja", Characteristics = "Aggressive by default", TypeOfPet = TypeOfPet.Dog });
             await dbContext.Breeds.AddAsync(new Breed { Name = "Pitbull Terrier", Characteristics = "Dadan is king", TypeOfPet = TypeOfPet.Dog });
             await dbContext.Breeds.AddAsync(new Breed { Name = "Doggo Argentino", Characteristics = "Came from Argentina I think", TypeOfPet = TypeOfPet.Dog });

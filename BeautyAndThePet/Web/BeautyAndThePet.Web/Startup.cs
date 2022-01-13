@@ -39,7 +39,6 @@
                 options => options.EnableDetailedErrors = true
             );
 
-
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 

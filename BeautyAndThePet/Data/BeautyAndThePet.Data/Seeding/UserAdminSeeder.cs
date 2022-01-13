@@ -12,7 +12,6 @@
     {
         public UserAdminSeeder()
         {
-
         }
 
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)

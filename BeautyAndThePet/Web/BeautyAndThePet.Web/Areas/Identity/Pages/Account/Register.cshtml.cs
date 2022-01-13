@@ -66,10 +66,8 @@ namespace BeautyAndThePet.Web.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
-            //[Required]
             public string Country { get; set; }
 
-            //[Required]
             public string Town { get; set; }
         }
 

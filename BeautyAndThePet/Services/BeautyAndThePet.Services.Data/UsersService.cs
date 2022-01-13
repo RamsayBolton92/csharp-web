@@ -1,14 +1,12 @@
-﻿using BeautyAndThePet.Data.Common.Repositories;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Web.ViewModels.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Services.Data
+﻿namespace BeautyAndThePet.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BeautyAndThePet.Data.Common.Repositories;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Web.ViewModels.Users;
+
     public class UsersService : IUsersService
     {
         private readonly IDeletableEntityRepository<Pet> petsRepo;
@@ -29,7 +27,6 @@ namespace BeautyAndThePet.Services.Data
 
         public UserInfoViewModel GetUserInfo(ApplicationUser user)
         {
-
             var address = this.addressRepo.AllAsNoTracking().Where(x => x.Id == user.AddressId).FirstOrDefault();
 
             var pets = this.petsRepo.AllAsNoTracking().Where(x => x.OwnerId == user.Id);
@@ -80,4 +77,3 @@ namespace BeautyAndThePet.Services.Data
         }
     }
 }
-

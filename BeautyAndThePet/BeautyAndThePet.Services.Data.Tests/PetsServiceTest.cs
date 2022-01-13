@@ -1,14 +1,11 @@
-
 using BeautyAndThePet.Data.Common.Repositories;
 using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Data.Models.Enumerations;
 using BeautyAndThePet.Services.Data;
 using BeautyAndThePet.Services.Mapping;
 using BeautyAndThePet.Web.ViewModels;
 using BeautyAndThePet.Web.ViewModels.Pets;
 using Microsoft.AspNetCore.Http;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
