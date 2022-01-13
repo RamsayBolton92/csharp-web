@@ -29,11 +29,9 @@
 
         public string Creator { get; set; }
 
-
         [DataType(DataType.Date)]
         [Display(Name = "Start of campaign")]
         public DateTime StartOfPeriod { get; set; }
-
 
         [DataType(DataType.Date)]
         [Display(Name = "End of campaign")]

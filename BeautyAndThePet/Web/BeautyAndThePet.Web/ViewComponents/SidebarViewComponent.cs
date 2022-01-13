@@ -1,15 +1,13 @@
-﻿using BeautyAndThePet.Data.Common.Repositories;
-using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Mapping;
-using BeautyAndThePet.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.ViewComponents
+﻿namespace BeautyAndThePet.Web.ViewComponents
 {
+    using System.Linq;
+
+    using BeautyAndThePet.Data.Common.Repositories;
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Mapping;
+    using BeautyAndThePet.Web.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     public class SidebarViewComponent : ViewComponent
     {
         private readonly IDeletableEntityRepository<Ad> adRepo;
@@ -28,6 +26,5 @@ namespace BeautyAndThePet.Web.ViewComponents
 
             return this.View(model);
         }
-
     }
 }

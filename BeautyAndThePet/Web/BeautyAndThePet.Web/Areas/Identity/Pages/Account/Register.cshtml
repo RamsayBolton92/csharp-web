@@ -2,13 +2,9 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
-
-
 }
 
-
 <div class="row justify-content-md-center">
-    
     <div class="col-md-4 font">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -34,18 +30,6 @@
                 <input asp-for="Input.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
-
-            @*<div class="form-group">
-                <label asp-for="Input.Country"></label>
-                <input asp-for="Input.Country" class="form-control" />
-                <span asp-validation-for="Input.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Town"></label>
-                <input asp-for="Input.Town" class="form-control" />
-                <span asp-validation-for="Input.Town" class="text-danger"></span>
-            </div>*@
-
             Country: <select asp-for="Input.Country" name="subject" id="subject">
                 <option value="" selected="selected">Select subject</option>
             </select>
@@ -62,7 +46,6 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
     <script>
         var subjectObject = {
                 "Bulgaria": ["Sofia", "Plovdiv", "Varna", "Burgas"],

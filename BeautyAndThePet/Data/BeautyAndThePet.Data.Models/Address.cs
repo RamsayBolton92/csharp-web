@@ -1,7 +1,7 @@
 ﻿namespace BeautyAndThePet.Data.Models
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+
     using BeautyAndThePet.Data.Common.Models;
 
     public class Address : BaseDeletableModel<int>

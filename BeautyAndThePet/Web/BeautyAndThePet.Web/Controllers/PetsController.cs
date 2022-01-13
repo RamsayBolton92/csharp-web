@@ -163,7 +163,6 @@
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-
             await this.petsService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.MyPets));
@@ -281,7 +280,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
 
             await this.emailSender.SendEmailAsync("faustwfs@gmail.com", "Beauty&ThePet", user.Email, pet.Name, html.ToString());
-            
+
             return this.RedirectToAction(nameof(this.ViewPetInfo), new { id });
         }
     }

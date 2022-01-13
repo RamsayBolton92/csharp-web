@@ -1,17 +1,12 @@
-﻿using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.ViewModels
+﻿namespace BeautyAndThePet.Web.ViewModels
 {
+    using System;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Mapping;
+
     public class AdViewModel : IMapFrom<Ad>
     {
-
-
         public string ApplicationUser { get; set; }
 
         public string Text { get; set; }

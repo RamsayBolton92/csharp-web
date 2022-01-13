@@ -1,13 +1,9 @@
-﻿using BeautyAndThePet.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Data.Models
+﻿namespace BeautyAndThePet.Data.Models
 {
+    using System;
+
+    using BeautyAndThePet.Data.Common.Models;
+
     public class Ad : BaseDeletableModel<int>
     {
         public int Id { get; set; }

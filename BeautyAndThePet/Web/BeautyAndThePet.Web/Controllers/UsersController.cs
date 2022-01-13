@@ -1,16 +1,13 @@
-﻿using BeautyAndThePet.Data.Models;
-using BeautyAndThePet.Services.Data;
-using BeautyAndThePet.Web.ViewModels.Users;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.Controllers
+﻿namespace BeautyAndThePet.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using BeautyAndThePet.Data.Models;
+    using BeautyAndThePet.Services.Data;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

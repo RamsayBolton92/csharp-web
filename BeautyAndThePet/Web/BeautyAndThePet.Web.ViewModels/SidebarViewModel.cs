@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeautyAndThePet.Web.ViewModels
+﻿namespace BeautyAndThePet.Web.ViewModels
 {
+    using System.Collections.Generic;
+
     public class SidebarViewModel
     {
         public IEnumerable<AdViewModel> Ads { get; set; }
